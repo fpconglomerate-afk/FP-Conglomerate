@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { Link, useLocation } from "react-router-dom";
 import { useSiteContent } from "@/content/SiteContentContext";
 import MediaAsset from "@/components/MediaAsset";
+import BusinessUnitLogo from "@/components/BusinessUnitLogo";
 
 export default function BusinessUnitsPage() {
   const { content } = useSiteContent();
@@ -34,13 +35,7 @@ export default function BusinessUnitsPage() {
               >
                 <p className="eyebrow mb-3">{unit.shortLabel}</p>
                 <div className="flex items-center gap-3 mb-4">
-                  {unit.logo && (
-                    <img
-                      src={unit.logo}
-                      alt={`${unit.name} logo`}
-                      className="h-10 w-auto object-contain"
-                    />
-                  )}
+                  <BusinessUnitLogo unit={unit} className="h-10 w-auto object-contain" />
                   <h2 className="font-editorial text-3xl md:text-4xl">{unit.name}</h2>
                 </div>
                 <p className="text-foreground mb-3">{unit.statement}</p>

@@ -17,6 +17,8 @@ export type BusinessUnit = {
   id: string;
   name: string;
   logo?: string;
+  logoLight?: string;
+  logoDark?: string;
   shortLabel: string;
   focus: string;
   statement: string;
@@ -133,11 +135,12 @@ export const defaultSiteContent: SiteContent = {
     },
     {
       id: "ordained-believers",
-      name: "Ordained Believers Grand Assembly",
+      name: "Ordained Believers Army (OBA)",
+      logo: "/logos/oba-logo.png",
       shortLabel: "Church",
       focus: "Word, Worship, and the Raw Power of God",
       statement:
-        "Ordained Believers Grand Assembly (OBA) is a bold spiritual movement manifesting healing power, scriptural revelation, and believer identity.",
+        "Ordained Believers Army (OBA) is a bold spiritual movement manifesting healing power, scriptural revelation, and believer identity.",
       details:
         "Founded in 2026, OBA was established with an audacious conviction: power should not be delayed. The ministry emphasizes healing for all manner of diseases, deep scriptural insight, and practical discipleship that helps believers understand who they are in Christ.",
       heroImage:
@@ -170,13 +173,14 @@ export const defaultSiteContent: SiteContent = {
     },
     {
       id: "amgi",
-      name: "Anate Mpire Group International (AMGi)",
-      shortLabel: "Electronics and Appliances",
-      focus: "Trusted Electronics and Durable Home and Office Solutions",
+      name: "Anate Grand Empire Solutions (AGE)",
+      logo: "/logos/age-logo.png",
+      shortLabel: "Movie, Construction, Transport, Devices",
+      focus: "Multi-Sector Solutions Across Production, Infrastructure, Mobility, and Appliances",
       statement:
-        "AMGi delivers value-for-money electronics, appliances, and office essentials built around trust, durability, and customer satisfaction.",
+        "AGE delivers practical value across movie production, construction, transport, devices, and general appliances.",
       details:
-        "AMGi supplies home theater systems, air conditioners, televisions, gadgets, chairs, tables, and other home and office needs. The core problem it solves is customer uncertainty around durability and service reliability.",
+        "Anate Grand Empire Solutions (AGE) is positioned as a trust-first operating unit that combines creative, technical, and commercial execution. It helps clients access reliable production support, construction services, transport coordination, and durable appliances under one service umbrella.",
       heroImage:
         "https://images.unsplash.com/photo-1550009158-9ebf69173e03?w=1400&q=80",
       gallery: [
@@ -187,19 +191,19 @@ export const defaultSiteContent: SiteContent = {
       subPages: [
         {
           slug: "product-lines",
-          title: "Product Lines",
-          summary: "Everyday categories for homes and professional spaces.",
+          title: "Service Portfolio",
+          summary: "Core operating areas across media, construction, mobility, and appliances.",
           content:
-            "AMGi's product portfolio spans consumer electronics, cooling systems, media devices, furniture, and workplace essentials. The unit is designed to help customers source practical products in one trusted ecosystem.",
+            "AGE operates across movie production services, construction support, transport-linked execution, and technology and appliance supply. This blend allows clients to access both creative and practical delivery through one coordinated team.",
           image:
             "https://images.unsplash.com/photo-1498049794561-7780e7231661?w=1400&q=80",
         },
         {
           slug: "quality-assurance",
-          title: "Trust and Durability Standards",
-          summary: "How AMGi protects customer confidence from purchase to delivery.",
+          title: "Trust and Delivery Standards",
+          summary: "How AGE protects customer confidence across varied service lines.",
           content:
-            "AMGi is positioned around integrity and quality assurance. Products are selected for practical durability, and customer experience is measured by reliability, not hype.",
+            "AGE follows a service model built on integrity, responsiveness, and practical results. Whether the assignment is production, logistics, construction, or appliance delivery, the unit is measured by reliability and client confidence.",
           image:
             "https://images.unsplash.com/photo-1581092160607-ee22731a0f71?w=1400&q=80",
         },
@@ -208,13 +212,13 @@ export const defaultSiteContent: SiteContent = {
     {
       id: "boys-sterling",
       name: "Boys Sterling Company Limited",
-      logo: "/logos/boys-sterling-logo.png",
-      shortLabel: "Real Estate, Media, Hospitality",
-      focus: "Ingenuity-Driven Development and Entertainment",
+      logo: "/logos/bsc-logo.png",
+      shortLabel: "Real Estate, Hospitality, Counseling, Construction",
+      focus: "Built Environment and People-Centered Service Delivery",
       statement:
-        "Boys Sterling combines creativity and execution across real estate, movie production, media, hospitality, and general entertainment.",
+        "BSC delivers practical value across real estate, hospitality, counseling, construction, and building maintenance.",
       details:
-        "Established in 2020, the company exists to make clients and partners feel secure in every investment decision. Its operating creed is simple: whatever is worth doing is worth doing well.",
+        "Boys Sterling Company Limited (BSC) was established in 2020 with a service promise built on dependable execution. The unit is designed to help clients feel secure in every engagement by combining care, technical delivery, and maintenance discipline.",
       heroImage:
         "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1400&q=80",
       gallery: [
@@ -226,18 +230,18 @@ export const defaultSiteContent: SiteContent = {
         {
           slug: "real-estate",
           title: "Real Estate and Hospitality",
-          summary: "Property and hospitality solutions delivered with premium discipline.",
+          summary: "Property and hospitality services delivered with disciplined execution.",
           content:
-            "From property concepts to hospitality experiences, Boys Sterling applies design ingenuity and practical management to deliver value per investment.",
+            "BSC supports property and hospitality projects with a practical approach to planning, delivery, and client support. Every engagement is managed for long-term usability and service confidence.",
           image:
             "https://images.unsplash.com/photo-1479839672679-a46483c0e7c8?w=1400&q=80",
         },
         {
           slug: "media-entertainment",
-          title: "Media and Entertainment",
-          summary: "Film, content, and entertainment ventures with strong creative intent.",
+          title: "Counseling, Construction, and Maintenance",
+          summary: "People support and technical services for stable operations.",
           content:
-            "The media unit focuses on storytelling, production quality, and cultural relevance. It is built to turn ideas into professionally executed media experiences that audiences remember.",
+            "Beyond property and hospitality, BSC delivers counseling support, construction execution, and building maintenance services. This integrated model helps clients maintain both functional spaces and healthy service outcomes over time.",
           image:
             "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1400&q=80",
         },
@@ -245,11 +249,13 @@ export const defaultSiteContent: SiteContent = {
     },
     {
       id: "mogadishu-initiative",
-      name: "Mogadishu Initiative Response Africa",
+      name: "Mogadishu Initiative Response",
+      logoLight: "/logos/mia-logo-light.png",
+      logoDark: "/logos/mia-logo-dark.png",
       shortLabel: "NGO and Humanitarian",
       focus: "Humanitarian Relief, Dignity, and Social Justice",
       statement:
-        "Mogadishu Initiative Response Africa serves vulnerable communities through sincere aid, practical relief, and justice-focused support.",
+        "Mogadishu Initiative Response serves vulnerable communities through sincere aid, practical relief, and justice-focused support.",
       details:
         "Founded in 2026, the initiative was born from a careful desire to support humanity across Africa, with immediate concern for Nigeria. Programs include shelter, education, accommodation support, social justice advocacy, and community recognition initiatives.",
       heroImage:
@@ -274,7 +280,7 @@ export const defaultSiteContent: SiteContent = {
           title: "Social Justice and Advocacy",
           summary: "Advocacy that protects dignity and amplifies underserved voices.",
           content:
-            "Mogadishu Initiative Response Africa works with communities and partners to defend dignity, encourage social justice, and convert compassion into practical action.",
+            "Mogadishu Initiative Response works with communities and partners to defend dignity, encourage social justice, and convert compassion into practical action.",
           image:
             "https://images.unsplash.com/photo-1593113630400-ea4288922497?w=1400&q=80",
         },
@@ -283,30 +289,30 @@ export const defaultSiteContent: SiteContent = {
   ],
   serviceAreas: [
     {
-      title: "Electronics, Appliances, and Office Supply",
+      title: "AGE Multi-Sector Services",
       summary:
-        "Reliable sourcing and delivery of consumer electronics, home appliances, and office essentials through AMGi.",
+        "Movie production, construction, transport, devices, and general appliance services delivered through Anate Grand Empire Solutions (AGE).",
       image:
         "https://images.unsplash.com/photo-1498049794561-7780e7231661?w=1400&q=80",
     },
     {
-      title: "Real Estate, Hospitality, and Media",
+      title: "BSC Real Estate and Support Services",
       summary:
-        "Creative, execution-focused services in property, hospitality, movie production, and media through Boys Sterling.",
+        "Real estate, hospitality, counseling, construction, and building maintenance services delivered through Boys Sterling Company Limited (BSC).",
       image:
         "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1400&q=80",
     },
     {
       title: "Humanitarian and Justice Programs",
       summary:
-        "Shelter, education, accommodation support, and social justice interventions through Mogadishu Initiative Response Africa.",
+        "Shelter, education, accommodation support, and social justice interventions through Mogadishu Initiative Response.",
       image:
         "https://images.unsplash.com/photo-1529390079861-591de354faf5?w=1400&q=80",
     },
     {
       title: "Faith and Ministry Services",
       summary:
-        "Word-based teaching, worship gatherings, and healing-focused ministry through Ordained Believers Grand Assembly.",
+        "Word-based teaching, worship gatherings, and healing-focused ministry through Ordained Believers Army (OBA).",
       image:
         "https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=1400&q=80",
     },
@@ -375,9 +381,9 @@ export const defaultSiteContent: SiteContent = {
     },
     {
       date: "March 15, 2026",
-      title: "Trust and Durability in Electronics: The AMGi Approach",
+      title: "Service Integration in Action: The AGE Operating Approach",
       excerpt:
-        "Why product durability, value for money, and customer confidence remain central to AMGi's market promise.",
+        "How Anate Grand Empire Solutions (AGE) combines movie production, construction, transport, and appliance services under one trust-first model.",
       image:
         "https://images.unsplash.com/photo-1498049794561-7780e7231661?w=1400&q=80",
     },

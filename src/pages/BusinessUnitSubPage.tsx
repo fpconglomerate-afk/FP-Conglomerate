@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { useSiteContent } from "@/content/SiteContentContext";
 import MediaAsset from "@/components/MediaAsset";
 import PageBackButton from "@/components/PageBackButton";
+import BusinessUnitLogo from "@/components/BusinessUnitLogo";
 
 export default function BusinessUnitSubPage() {
   const { unitId, subPageSlug } = useParams();
@@ -33,13 +34,7 @@ export default function BusinessUnitSubPage() {
         <section className="section-shell">
           <PageBackButton fallbackTo={`/business-units/${unit.id}`} className="mb-10" />
           <div className="eyebrow mb-5 flex items-center gap-2">
-            {unit.logo && (
-              <img
-                src={unit.logo}
-                alt={`${unit.name} logo`}
-                className="h-7 w-auto object-contain"
-              />
-            )}
+            <BusinessUnitLogo unit={unit} className="h-7 w-auto object-contain" />
             <span>{unit.name}</span>
           </div>
           <h1 className="font-editorial text-5xl md:text-7xl max-w-4xl">{subPage.title}</h1>

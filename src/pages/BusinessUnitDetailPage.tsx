@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { useSiteContent } from "@/content/SiteContentContext";
 import MediaAsset from "@/components/MediaAsset";
 import PageBackButton from "@/components/PageBackButton";
+import BusinessUnitLogo from "@/components/BusinessUnitLogo";
 
 export default function BusinessUnitDetailPage() {
   const { unitId } = useParams();
@@ -34,13 +35,7 @@ export default function BusinessUnitDetailPage() {
           <PageBackButton fallbackTo="/business-units" className="mb-10" />
           <p className="eyebrow mb-5">{unit.shortLabel}</p>
           <div className="flex items-center gap-4 max-w-4xl">
-            {unit.logo && (
-              <img
-                src={unit.logo}
-                alt={`${unit.name} logo`}
-                className="h-14 md:h-16 w-auto object-contain"
-              />
-            )}
+            <BusinessUnitLogo unit={unit} className="h-14 md:h-16 w-auto object-contain" />
             <h1 className="font-editorial text-5xl md:text-7xl">{unit.name}</h1>
           </div>
           <MediaAsset

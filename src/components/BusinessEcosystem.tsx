@@ -2,6 +2,7 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { ArrowUpRight } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useSiteContent } from "@/content/SiteContentContext";
+import BusinessUnitLogo from "@/components/BusinessUnitLogo";
 
 export default function BusinessEcosystem() {
   const { ref, isVisible } = useScrollReveal(0.1);
@@ -51,13 +52,7 @@ export default function BusinessEcosystem() {
               >
                 <p className="eyebrow mb-2">{unit.shortLabel}</p>
                 <div className="flex items-center gap-2 mb-3">
-                  {unit.logo && (
-                    <img
-                      src={unit.logo}
-                      alt={`${unit.name} logo`}
-                      className="h-8 w-auto object-contain"
-                    />
-                  )}
+                  <BusinessUnitLogo unit={unit} className="h-8 w-auto object-contain" />
                   <h3 className="font-editorial text-2xl">{unit.name}</h3>
                 </div>
                 <p className="text-sm text-muted-foreground leading-relaxed">{unit.statement}</p>
