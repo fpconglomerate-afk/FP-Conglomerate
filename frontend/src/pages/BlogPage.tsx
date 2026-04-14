@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -36,6 +35,7 @@ export default function BlogPage() {
             src={featured.image || content.galleryItems[0]?.src}
             alt={featured.title}
             className="w-full h-[240px] md:h-[360px] object-cover border border-border mb-8 dark:brightness-75"
+            priority
           />
           <p className="text-xs text-muted-foreground tracking-wide mb-4">{featured.date}</p>
           <h2 className="font-editorial text-3xl md:text-5xl text-foreground mb-6 leading-tight max-w-4xl">

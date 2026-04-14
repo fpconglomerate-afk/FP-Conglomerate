@@ -1,0 +1,13 @@
+{
+  "name": "fp-backend",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/index.js",
+    "start": "node src/index.js"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FP Conglomerate — Trust, Integrity, Service Excellence</title>
+    <meta name="description" content="FP Conglomerate is a multi-sector African business group spanning ministry (OBA), multi-sector solutions (AGE), real estate and support services (BSC), and humanitarian programs (MIA). Trusted delivery across industries." />
+    <meta name="author" content="FP Conglomerate" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
+
+    <meta property="og:title" content="FP Conglomerate — Trust, Integrity, Service Excellence" />
+    <meta property="og:description" content="Multi-sector group: Ordained Believers Army (OBA), Anate Grand Empire Solutions (AGE), Boys Sterling Company Limited (BSC), and Mogadishu Initiative Response (MIA)." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="FP Conglomerate" />
+    <meta name="twitter:description" content="Trusted service delivery across ministry, commerce, construction, real estate, and humanitarian impact." />
+
+    <script>
+      (function () {
+        var k = "fp-conglomerate-ui-theme";
+        try {
+          var v = localStorage.getItem(k);
+          var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          var useDark = v === "dark" || (v !== "light" && prefersDark);
+          document.documentElement.classList.toggle("dark", useDark);
+        } catch (e) {}
+      })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

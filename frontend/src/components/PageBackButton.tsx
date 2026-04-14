@@ -29,6 +29,11 @@ export default function PageBackButton({
       return;
     }
 
+    if (/^https?:\/\//i.test(fallbackTo)) {
+      window.location.assign(fallbackTo);
+      return;
+    }
+
     navigate(fallbackTo);
   };
 

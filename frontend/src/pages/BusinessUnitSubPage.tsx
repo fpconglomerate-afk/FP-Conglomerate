@@ -43,6 +43,7 @@ export default function BusinessUnitSubPage() {
             src={subPage.image || content.galleryItems[0]?.src}
             alt={subPage.title}
             className="w-full h-[260px] md:h-[420px] object-cover mt-10 border border-border dark:brightness-75"
+            priority
           />
         </section>
 

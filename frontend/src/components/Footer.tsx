@@ -8,16 +8,20 @@ const sectors = [
   "NGO and Humanitarian Action",
 ];
 
+const adminUrl = import.meta.env.VITE_ADMIN_URL as string | undefined;
+
 const company = [
-  { label: "About", href: "/about" },
-  { label: "Business Units", href: "/business-units" },
-  { label: "Services", href: "/services" },
-  { label: "Gallery", href: "/gallery" },
-  { label: "Careers", href: "/careers" },
-  { label: "Blog", href: "/blog" },
-  { label: "FAQ", href: "/faq" },
-  { label: "Contact", href: "/contact" },
-  { label: "Admin", href: "/admin" },
+  { label: "About", href: "/about", external: false },
+  { label: "Business Units", href: "/business-units", external: false },
+  { label: "Services", href: "/services", external: false },
+  { label: "Gallery", href: "/gallery", external: false },
+  { label: "Careers", href: "/careers", external: false },
+  { label: "Blog", href: "/blog", external: false },
+  { label: "FAQ", href: "/faq", external: false },
+  { label: "Contact", href: "/contact", external: false },
+  ...(adminUrl
+    ? [{ label: "Admin" as const, href: adminUrl, external: true as const }]
+    : []),
 ];
 
 export default function Footer() {
@@ -55,12 +59,22 @@ export default function Footer() {
             <ul className="space-y-3">
               {company.map((c) => (
                 <li key={c.label}>
-                  <Link
-                    to={c.href}
-                    className="text-sm text-foreground/70 hover:text-foreground transition-colors duration-300"
-                  >
-                    {c.label}
-                  </Link>
+                  {c.external ? (
+                    <a
+                      href={c.href}
+                      className="text-sm text-foreground/70 hover:text-foreground transition-colors duration-300"
+                      rel="noopener noreferrer"
+                    >
+                      {c.label}
+                    </a>
+                  ) : (
+                    <Link
+                      to={c.href}
+                      className="text-sm text-foreground/70 hover:text-foreground transition-colors duration-300"
+                    >
+                      {c.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>

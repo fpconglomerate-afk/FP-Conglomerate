@@ -2,6 +2,8 @@ type MediaAssetProps = {
   src?: string;
   alt: string;
   className?: string;
+  /** Use for above-the-fold / LCP images only */
+  priority?: boolean;
 };
 
 function isVideoSource(src: string) {
@@ -11,7 +13,7 @@ function isVideoSource(src: string) {
   );
 }
 
-export default function MediaAsset({ src, alt, className }: MediaAssetProps) {
+export default function MediaAsset({ src, alt, className, priority }: MediaAssetProps) {
   if (!src) {
     return <div className={className} aria-label={alt} />;
   }
@@ -29,5 +31,14 @@ export default function MediaAsset({ src, alt, className }: MediaAssetProps) {
     );
   }
 
-  return <img src={src} alt={alt} className={className} />;
+  return (
+    <img
+      src={src}
+      alt={alt}
+      className={className}
+      loading={priority ? "eager" : "lazy"}
+      decoding={priority ? "sync" : "async"}
+      fetchPriority={priority ? "high" : "auto"}
+    />
+  );
 }

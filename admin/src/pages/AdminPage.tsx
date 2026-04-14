@@ -58,7 +58,12 @@ function MediaField({
   );
 }
 
-export default function AdminPage() {
+type AdminPageProps = {
+  /** Marketing site origin for “Back” when there is no in-app history */
+  publicSiteFallback?: string;
+};
+
+export default function AdminPage({ publicSiteFallback = "http://localhost:8080" }: AdminPageProps) {
   const { content, setContent, resetContent } = useSiteContent();
   const [draft, setDraft] = useState<SiteContent>(() => cloneContent(content));
   const [saved, setSaved] = useState(false);
@@ -83,7 +88,7 @@ export default function AdminPage() {
       <Navbar />
       <main className="min-h-screen bg-muted/35 pb-24">
         <div className="section-shell pt-28 md:pt-32">
-          <PageBackButton className="mb-6" />
+          <PageBackButton className="mb-6" fallbackTo={publicSiteFallback} />
         </div>
 
         <Tabs defaultValue="overview" className="w-full">
@@ -96,7 +101,8 @@ export default function AdminPage() {
                     Content dashboard
                   </h1>
                   <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-                    Edit copy and media. Save to publish to this browser; use Reset to restore defaults.
+                    Edit copy and media. Save to publish to this browser; use Reset to restore defaults. The admin app
+                    uses its own origin, so drafts are separate from the public site until you wire a shared backend.
                   </p>
                 </div>
                 <div className="flex shrink-0 flex-wrap gap-2">

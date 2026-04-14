@@ -42,6 +42,7 @@ export default function BusinessUnitDetailPage() {
             src={unit.heroImage || content.galleryItems[0]?.src}
             alt={`${unit.name} hero`}
             className="w-full h-[260px] md:h-[420px] object-cover mt-10 border border-border dark:brightness-75"
+            priority
           />
         </section>
 

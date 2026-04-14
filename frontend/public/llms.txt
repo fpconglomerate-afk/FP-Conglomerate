@@ -1,0 +1,26 @@
+# FP Conglomerate
+
+FP Conglomerate is a multi-sector parent group focused on trusted service delivery across Africa. The group coordinates independent business units under shared standards for integrity, excellence, and accountability.
+
+## Business units
+
+- Ordained Believers Army (OBA) — faith, ministry, and outreach
+- Anate Grand Empire Solutions (AGE) — movie production, construction, transport, devices, and general appliances
+- Boys Sterling Company Limited (BSC) — real estate, hospitality, counseling, construction, and building maintenance
+- Mogadishu Initiative Response (MIA) — humanitarian programs, shelter, education, and social justice support
+
+## Main site paths (same origin)
+
+- / — Home
+- /about — About the group
+- /business-units — All business units
+- /services — Service areas overview
+- /gallery — Gallery
+- /blog — Blog and news
+- /careers — Careers
+- /faq — Frequently asked questions
+- /contact — Contact
+
+## Admin (separate app)
+
+Content editing runs as a separate deployment (not on these public paths). Do not assume /admin exists on the marketing site.
