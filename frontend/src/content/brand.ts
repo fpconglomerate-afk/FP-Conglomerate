@@ -85,7 +85,7 @@ export const defaultSiteContent: SiteContent = {
     name: "FP Conglomerate",
     tagline: "Trust, Integrity, Service Excellence",
     contactEmail: "contactelgreen@gmail.com",
-    phone: "+234 800 000 0000",
+    phone: "+234 806 019 7012",
     location: "Lagos, Nigeria",
   },
   hero: {
