@@ -258,12 +258,11 @@ export const defaultSiteContent: SiteContent = {
         "Mogadishu Initiative Response serves vulnerable communities through sincere aid, practical relief, and justice-focused support.",
       details:
         "Founded in 2026, the initiative was born from a careful desire to support humanity across Africa, with immediate concern for Nigeria. Programs include shelter, education, accommodation support, social justice advocacy, and community recognition initiatives.",
-      heroImage:
-        "https://images.unsplash.com/photo-1469571486292-b53601020acb?w=1400&q=80",
+      heroImage: "/images/mia/humanitarian/hero.jpg",
       gallery: [
-        "https://images.unsplash.com/photo-1529390079861-591de354faf5?w=1400&q=80",
-        "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?w=1400&q=80",
-        "https://images.unsplash.com/photo-1518398046578-8cca57782e17?w=1400&q=80",
+        "/images/mia/humanitarian/idp-04.jpg",
+        "/images/mia/humanitarian/kogi-02.jpg",
+        "/images/mia/humanitarian/idp-06.jpg",
       ],
       subPages: [
         {
@@ -273,8 +272,7 @@ export const defaultSiteContent: SiteContent = {
             "Measured relief and community-first programs that restore dignity—field outreach, awareness, and accountable delivery.",
           content:
             "Programs are designed to meet urgent realities while restoring long-term hope through education, shelter support, and community-centered assistance.",
-          image:
-            "https://images.unsplash.com/photo-1529390079861-591de354faf5?w=1400&q=80",
+          image: "/images/mia/humanitarian/kogi-01.jpg",
         },
         {
           slug: "idp-camps",
@@ -283,8 +281,7 @@ export const defaultSiteContent: SiteContent = {
             "Factual context on displacement in camps and informal settlements—dignity-first awareness and support.",
           content:
             "Mogadishu Initiative Response documents realities responsibly and channels resources toward shelter, essentials, and stability for displaced communities.",
-          image:
-            "https://images.unsplash.com/photo-1518398046578-8cca57782e17?w=1400&q=80",
+          image: "/images/mia/humanitarian/idp-03.jpg",
         },
         {
           slug: "social-justice",
@@ -292,8 +289,7 @@ export const defaultSiteContent: SiteContent = {
           summary: "Advocacy that protects dignity and amplifies underserved voices.",
           content:
             "Mogadishu Initiative Response works with communities and partners to defend dignity, encourage social justice, and convert compassion into practical action.",
-          image:
-            "https://images.unsplash.com/photo-1593113630400-ea4288922497?w=1400&q=80",
+          image: "/images/mia/humanitarian/idp-07.jpg",
         },
       ],
     },
@@ -317,8 +313,7 @@ export const defaultSiteContent: SiteContent = {
       title: "Humanitarian and Justice Programs",
       summary:
         "Shelter, education, accommodation support, and social justice interventions through Mogadishu Initiative Response.",
-      image:
-        "https://images.unsplash.com/photo-1529390079861-591de354faf5?w=1400&q=80",
+      image: "/images/mia/humanitarian/hero.jpg",
     },
     {
       title: "Faith and Ministry Services",
