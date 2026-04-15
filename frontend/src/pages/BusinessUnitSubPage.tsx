@@ -5,6 +5,7 @@ import { useSiteContent } from "@/content/SiteContentContext";
 import MediaAsset from "@/components/MediaAsset";
 import PageBackButton from "@/components/PageBackButton";
 import BusinessUnitLogo from "@/components/BusinessUnitLogo";
+import { businessUnitSubPageHref } from "@/navigation/siteHierarchy";
 
 export default function BusinessUnitSubPage() {
   const { unitId, subPageSlug } = useParams();
@@ -57,8 +58,7 @@ export default function BusinessUnitSubPage() {
               {(unit.subPages ?? []).map((item) => (
                 <Link
                   key={item.slug}
-                  to={`/business-units/${unit.id}/${item.slug}`}
-                  state={{ from: `/business-units/${unit.id}` }}
+                  to={businessUnitSubPageHref(unit.id, item.slug)}
                   className="block text-sm text-foreground hover:text-accent"
                 >
                   {item.title}

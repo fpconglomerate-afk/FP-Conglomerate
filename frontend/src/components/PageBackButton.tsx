@@ -1,40 +1,29 @@
 import { ArrowLeft } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { getHierarchyParent } from "@/navigation/siteHierarchy";
 
 type PageBackButtonProps = {
+  /** Hierarchical parent route (preferred). If omitted, derived from the current path. */
   fallbackTo?: string;
   className?: string;
 };
 
-type NavState = {
-  from?: string;
-};
-
 export default function PageBackButton({
-  fallbackTo = "/",
+  fallbackTo,
   className = "",
 }: PageBackButtonProps) {
   const navigate = useNavigate();
   const location = useLocation();
-  const state = (location.state ?? {}) as NavState;
 
   const handleBack = () => {
-    if (state.from && state.from !== location.pathname) {
-      navigate(state.from);
+    const target = fallbackTo ?? getHierarchyParent(location.pathname);
+
+    if (/^https?:\/\//i.test(target)) {
+      window.location.assign(target);
       return;
     }
 
-    if (window.history.length > 1) {
-      navigate(-1);
-      return;
-    }
-
-    if (/^https?:\/\//i.test(fallbackTo)) {
-      window.location.assign(fallbackTo);
-      return;
-    }
-
-    navigate(fallbackTo);
+    navigate(target);
   };
 
   return (
