@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { ChevronDown, ChevronRight, Menu, X } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import { useSiteContent } from "@/content/SiteContentContext";
 import { businessUnitSubPageHref } from "@/navigation/siteHierarchy";
+import { cn } from "@/lib/utils";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
@@ -27,19 +27,30 @@ const tailLinks = [
 ];
 
 function linkClass(active: boolean) {
-  return `text-sm tracking-wide transition-colors duration-300 ${
-    active ? "text-foreground" : "text-muted-foreground hover:text-foreground"
-  }`;
+  return cn(
+    "text-sm tracking-wide transition-colors duration-300 ease-out",
+    active ? "text-foreground" : "text-muted-foreground hover:text-foreground",
+  );
+}
+
+/** Exclusive accordion: opening one id closes any other (desktop + mobile). */
+function toggleExclusive(
+  current: string | null,
+  id: string,
+): string | null {
+  return current === id ? null : id;
 }
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [buDropdownOpen, setBuDropdownOpen] = useState(false);
+  const [expandedBuId, setExpandedBuId] = useState<string | null>(null);
+  const [expandedMobileBuId, setExpandedMobileBuId] = useState<string | null>(null);
   const location = useLocation();
   const { content } = useSiteContent();
   const path = location.pathname;
 
-  const companyActive = companyLinks.some((l) => path === l.href);
   const buActive = path.startsWith("/business-units");
 
   useEffect(() => {
@@ -52,80 +63,107 @@ export default function Navbar() {
     setMobileOpen(false);
   }, [location]);
 
+  useEffect(() => {
+    if (!mobileOpen) setExpandedMobileBuId(null);
+  }, [mobileOpen]);
+
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-[background-color,backdrop-filter,border-color] duration-500 ease-out",
         scrolled
-          ? "bg-background/95 backdrop-blur-md border-b border-border"
-          : "bg-background/70"
-      }`}
+          ? "bg-background/95 backdrop-blur-md border-b border-border shadow-sm"
+          : "bg-background/70",
+      )}
     >
-      <div className="section-shell flex items-center justify-between h-20">
+      <div className="section-shell flex items-center justify-between min-h-[4.5rem] sm:min-h-20 py-2 sm:py-0">
         <Link
           to="/"
-          className="text-foreground text-lg md:text-xl tracking-[-0.04em] font-editorial flex items-center gap-2"
+          className="text-foreground text-base sm:text-lg md:text-xl tracking-[-0.04em] font-editorial flex items-center gap-2 min-w-0 transition-opacity duration-300 hover:opacity-90"
         >
-          {content.brand.name}
-          <span className="inline-flex items-center gap-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-            <span className="w-1.5 h-1.5 rounded-full bg-[hsl(var(--highlight))]" />
-            <span className="w-1.5 h-1.5 rounded-full bg-[hsl(var(--premium))]" />
+          <span className="truncate">{content.brand.name}</span>
+          <span className="inline-flex shrink-0 items-center gap-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent transition-transform duration-300 hover:scale-125" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[hsl(var(--highlight))] transition-transform duration-300 hover:scale-125" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[hsl(var(--premium))] transition-transform duration-300 hover:scale-125" />
           </span>
         </Link>
 
-        <div className="hidden lg:flex items-center gap-5 xl:gap-7">
-          <Link
-            to="/"
-            className={linkClass(path === "/" || path === "")}
-          >
+        <div className="hidden lg:flex flex-wrap items-center justify-end gap-x-3 xl:gap-x-5 2xl:gap-x-6 gap-y-2 max-w-[min(100%,52rem)]">
+          <Link to="/" className={linkClass(path === "/" || path === "")}>
             Home
           </Link>
 
-          <DropdownMenu>
-            <DropdownMenuTrigger
-              className={`inline-flex items-center gap-1 outline-none ${linkClass(companyActive)}`}
-            >
-              Company
-              <ChevronDown className="h-3.5 w-3.5 opacity-70" aria-hidden />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" className="z-[60] min-w-[12rem]">
-              {companyLinks.map((link) => (
-                <DropdownMenuItem key={link.href} asChild>
-                  <Link to={link.href}>{link.label}</Link>
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
+          {companyLinks.map((link) => (
+            <Link key={link.href} to={link.href} className={linkClass(path === link.href)}>
+              {link.label}
+            </Link>
+          ))}
 
-          <DropdownMenu>
+          <DropdownMenu
+            open={buDropdownOpen}
+            onOpenChange={(open) => {
+              setBuDropdownOpen(open);
+              setExpandedBuId(null);
+            }}
+          >
             <DropdownMenuTrigger
-              className={`inline-flex items-center gap-1 outline-none ${linkClass(buActive)}`}
+              className={cn(
+                "inline-flex items-center gap-1 rounded-sm outline-none ring-offset-background transition-transform duration-200 ease-out data-[state=open]:scale-[0.98] focus-visible:ring-2 focus-visible:ring-ring",
+                linkClass(buActive),
+              )}
             >
               Business Units
-              <ChevronDown className="h-3.5 w-3.5 opacity-70" aria-hidden />
+              <ChevronDown
+                className={cn(
+                  "h-3.5 w-3.5 opacity-70 transition-transform duration-300 ease-out",
+                  buDropdownOpen && "rotate-180",
+                )}
+                aria-hidden
+              />
             </DropdownMenuTrigger>
             <DropdownMenuContent
               align="start"
-              className="z-[60] max-h-[min(70vh,520px)] w-[min(100vw-2rem,22rem)] overflow-y-auto"
+              className="z-[60] w-[min(100vw-2rem,20rem)] max-h-[min(70vh,480px)] overflow-y-auto overscroll-contain p-1"
             >
               <DropdownMenuItem asChild>
                 <Link to="/business-units">All divisions</Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              {content.businessUnits.map((unit, unitIndex) => (
-                <div key={unit.id}>
-                  <DropdownMenuLabel className="text-xs font-normal text-muted-foreground">
-                    {unit.name}
-                  </DropdownMenuLabel>
-                  <DropdownMenuItem asChild>
-                    <Link to={`/business-units/${unit.id}`}>Unit overview</Link>
+              {content.businessUnits.map((unit) => (
+                <div key={unit.id} className="py-0.5">
+                  <DropdownMenuItem
+                    onSelect={(e) => {
+                      e.preventDefault();
+                      setExpandedBuId((cur) => toggleExclusive(cur, unit.id));
+                    }}
+                    className="flex cursor-pointer items-center justify-between gap-2 rounded-sm transition-colors duration-200"
+                  >
+                    <span className="truncate text-left">{unit.name}</span>
+                    <ChevronRight
+                      className={cn(
+                        "h-4 w-4 shrink-0 opacity-60 transition-transform duration-300 ease-out",
+                        expandedBuId === unit.id && "rotate-90",
+                      )}
+                      aria-hidden
+                    />
                   </DropdownMenuItem>
-                  {(unit.subPages ?? []).map((sp) => (
-                    <DropdownMenuItem key={`${unit.id}-${sp.slug}`} asChild>
-                      <Link to={businessUnitSubPageHref(unit.id, sp.slug)}>{sp.title}</Link>
-                    </DropdownMenuItem>
-                  ))}
-                  {unitIndex < content.businessUnits.length - 1 ? <DropdownMenuSeparator /> : null}
+                  {expandedBuId === unit.id ? (
+                    <div
+                      className="border-l border-border ml-2 pl-2 space-y-0.5 pb-1 mt-0.5 animate-in fade-in zoom-in-95 slide-in-from-top-1 duration-200 ease-out motion-reduce:animate-none"
+                      role="group"
+                      aria-label={`${unit.name} pages`}
+                    >
+                      <DropdownMenuItem asChild className="pl-2">
+                        <Link to={`/business-units/${unit.id}`}>Unit overview</Link>
+                      </DropdownMenuItem>
+                      {(unit.subPages ?? []).map((sp) => (
+                        <DropdownMenuItem key={sp.slug} asChild className="pl-2">
+                          <Link to={businessUnitSubPageHref(unit.id, sp.slug)}>{sp.title}</Link>
+                        </DropdownMenuItem>
+                      ))}
+                    </div>
+                  ) : null}
                 </div>
               ))}
             </DropdownMenuContent>
@@ -144,33 +182,47 @@ export default function Navbar() {
           <ThemeToggle />
         </div>
 
-        <div className="lg:hidden flex items-center gap-3">
+        <div className="lg:hidden flex items-center gap-2 sm:gap-3">
           <ThemeToggle />
           <button
             type="button"
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="text-foreground"
+            className="text-foreground p-2 -mr-2 rounded-sm transition-colors duration-200 hover:bg-secondary/80 active:scale-95 motion-reduce:active:scale-100"
             aria-expanded={mobileOpen}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
           >
-            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+            {mobileOpen ? <X size={24} className="transition-opacity duration-200" /> : <Menu size={24} />}
           </button>
         </div>
       </div>
 
-      {mobileOpen && (
-        <div className="lg:hidden bg-background border-t border-border px-6 py-8 space-y-8 max-h-[calc(100vh-5rem)] overflow-y-auto">
-          <div className="space-y-4">
+      {mobileOpen ? (
+        <div
+          className="lg:hidden border-t border-border bg-background/98 backdrop-blur-md max-h-[calc(100dvh-5rem)] overflow-y-auto overscroll-contain px-4 sm:px-6 py-6 sm:py-8 space-y-6 sm:space-y-8 pb-[max(1.5rem,env(safe-area-inset-bottom))] animate-in fade-in slide-in-from-top-2 duration-300 ease-out motion-reduce:duration-75 motion-reduce:animate-none"
+        >
+          <div className="space-y-3 sm:space-y-4">
             <p className="text-xs uppercase tracking-widest text-muted-foreground">Site</p>
-            <Link to="/" className="block text-lg text-foreground">
+            <Link
+              to="/"
+              className="block text-base sm:text-lg text-foreground py-1.5 transition-colors duration-200 hover:text-accent"
+            >
               Home
             </Link>
-          </div>
-
-          <div className="space-y-3">
-            <p className="text-xs uppercase tracking-widest text-muted-foreground">Company</p>
             {companyLinks.map((link) => (
-              <Link key={link.href} to={link.href} className="block text-lg text-foreground">
+              <Link
+                key={link.href}
+                to={link.href}
+                className="block text-base sm:text-lg text-foreground py-1.5 transition-colors duration-200 hover:text-accent"
+              >
+                {link.label}
+              </Link>
+            ))}
+            {tailLinks.map((link) => (
+              <Link
+                key={link.label}
+                to={link.href}
+                className="block text-base sm:text-lg text-foreground py-1.5 transition-colors duration-200 hover:text-accent"
+              >
                 {link.label}
               </Link>
             ))}
@@ -178,46 +230,67 @@ export default function Navbar() {
 
           <div className="space-y-3">
             <p className="text-xs uppercase tracking-widest text-muted-foreground">Business Units</p>
-            <Link to="/business-units" className="block text-lg text-foreground">
+            <Link
+              to="/business-units"
+              className="block text-base sm:text-lg text-foreground py-1 transition-colors duration-200 hover:text-accent"
+            >
               All divisions
             </Link>
-            {content.businessUnits.map((unit) => (
-              <details key={unit.id} className="group border border-border rounded-sm px-3 py-2">
-                <summary className="cursor-pointer list-none font-medium text-foreground flex items-center justify-between">
-                  {unit.name}
-                  <ChevronDown className="h-4 w-4 shrink-0 transition-transform group-open:rotate-180" />
-                </summary>
-                <div className="mt-3 pl-2 space-y-2 border-l border-border ml-1">
-                  <Link
-                    to={`/business-units/${unit.id}`}
-                    className="block text-base text-muted-foreground hover:text-foreground"
+            {content.businessUnits.map((unit) => {
+              const open = expandedMobileBuId === unit.id;
+              return (
+                <div
+                  key={unit.id}
+                  className="border border-border rounded-sm overflow-hidden bg-secondary/15 transition-shadow duration-300 hover:shadow-sm"
+                >
+                  <button
+                    type="button"
+                    aria-expanded={open}
+                    onClick={() => setExpandedMobileBuId((cur) => toggleExclusive(cur, unit.id))}
+                    className="w-full min-h-[48px] px-3 sm:px-4 py-3 flex justify-between items-center gap-2 text-left font-medium text-foreground bg-transparent hover:bg-secondary/40 transition-colors duration-200 ease-out"
                   >
-                    Unit overview
-                  </Link>
-                  {(unit.subPages ?? []).map((sp) => (
-                    <Link
-                      key={sp.slug}
-                      to={businessUnitSubPageHref(unit.id, sp.slug)}
-                      className="block text-base text-muted-foreground hover:text-foreground"
-                    >
-                      {sp.title}
-                    </Link>
-                  ))}
+                    <span className="text-sm sm:text-base leading-snug">{unit.name}</span>
+                    <ChevronDown
+                      className={cn(
+                        "h-4 w-4 shrink-0 transition-transform duration-300 ease-out",
+                        open && "rotate-180",
+                      )}
+                      aria-hidden
+                    />
+                  </button>
+                  <div
+                    className="nav-submenu-grid border-t border-border/80 bg-background/60"
+                    data-open={open ? "true" : "false"}
+                  >
+                    <div className="min-h-0 overflow-hidden">
+                      <div
+                        className="space-y-2 px-3 sm:px-4 py-3"
+                        aria-hidden={!open}
+                      >
+                        <Link
+                          to={`/business-units/${unit.id}`}
+                          className="block text-sm sm:text-base text-muted-foreground hover:text-foreground py-1 transition-colors duration-200"
+                        >
+                          Unit overview
+                        </Link>
+                        {(unit.subPages ?? []).map((sp) => (
+                          <Link
+                            key={sp.slug}
+                            to={businessUnitSubPageHref(unit.id, sp.slug)}
+                            className="block text-sm sm:text-base text-muted-foreground hover:text-foreground py-1 transition-colors duration-200"
+                          >
+                            {sp.title}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </details>
-            ))}
-          </div>
-
-          <div className="space-y-3">
-            <p className="text-xs uppercase tracking-widest text-muted-foreground">More</p>
-            {tailLinks.map((link) => (
-              <Link key={link.label} to={link.href} className="block text-lg text-foreground">
-                {link.label}
-              </Link>
-            ))}
+              );
+            })}
           </div>
         </div>
-      )}
+      ) : null}
     </nav>
   );
 }

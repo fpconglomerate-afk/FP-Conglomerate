@@ -47,6 +47,7 @@ const App = () => (
           <BrowserRouter>
             <ScrollToTop />
             <Suspense fallback={<RouteFallback />}>
+              <div className="min-h-screen page-enter">
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/about" element={<AboutPage />} />
@@ -70,6 +71,7 @@ const App = () => (
                 <Route path="/faq" element={<FAQPage />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
+              </div>
             </Suspense>
           </BrowserRouter>
         </TooltipProvider>

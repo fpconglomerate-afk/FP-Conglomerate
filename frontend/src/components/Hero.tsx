@@ -56,7 +56,7 @@ export default function Hero() {
             <div className="brand-divider w-28 mb-8" />
             <Link
               to="/contact"
-              className="inline-block bg-foreground text-background px-8 py-4 text-sm font-medium tracking-wide hover:bg-foreground/90 transition-colors duration-300"
+              className="inline-block bg-foreground text-background px-8 py-4 text-sm font-medium tracking-wide hover:bg-foreground/90 transition-all duration-300 ease-out hover:scale-[1.02] active:scale-[0.98] motion-reduce:hover:scale-100 motion-reduce:active:scale-100"
             >
               {content.hero.cta}
             </Link>

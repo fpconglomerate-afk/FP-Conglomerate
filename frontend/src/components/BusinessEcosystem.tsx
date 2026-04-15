@@ -1,13 +1,12 @@
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { ArrowUpRight } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSiteContent } from "@/content/SiteContentContext";
 import BusinessUnitLogo from "@/components/BusinessUnitLogo";
 
 export default function BusinessEcosystem() {
   const { ref, isVisible } = useScrollReveal(0.1);
   const { content } = useSiteContent();
-  const location = useLocation();
   const parentUnit = content.businessUnits[0];
   const operatingUnits = content.businessUnits.slice(1);
 
@@ -35,8 +34,11 @@ export default function BusinessEcosystem() {
           <h3 className="font-editorial text-3xl md:text-4xl mb-4">{parentUnit.name}</h3>
           <p className="text-foreground mb-4 leading-relaxed">{parentUnit.statement}</p>
           <p className="text-muted-foreground leading-relaxed">{parentUnit.details}</p>
-          <Link to="/business-units" className="inline-flex items-center gap-2 mt-10 text-sm text-accent">
-            Explore full business architecture <ArrowUpRight size={16} />
+          <Link
+            to="/business-units"
+            className="inline-flex items-center gap-2 mt-10 text-sm text-accent transition-colors duration-300 hover:gap-3"
+          >
+            Explore full business architecture <ArrowUpRight size={16} className="transition-transform duration-300" />
           </Link>
         </div>
 
@@ -45,7 +47,7 @@ export default function BusinessEcosystem() {
             {operatingUnits.map((unit, i) => (
               <article
                 key={unit.id}
-                className={`bg-background p-7 md:p-8 transition-all duration-500 ${
+                className={`bg-background p-7 md:p-8 transition-all duration-500 ease-out hover:shadow-md ${
                   i % 2 === 0 ? "md:translate-y-5" : ""
                 } ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}
                 style={{ transitionDelay: `${260 + i * 120}ms` }}
@@ -58,8 +60,7 @@ export default function BusinessEcosystem() {
                 <p className="text-sm text-muted-foreground leading-relaxed">{unit.statement}</p>
                 <Link
                   to={`/business-units/${unit.id}`}
-                  state={{ from: location.pathname }}
-                  className="inline-block text-xs mt-4 text-accent"
+                  className="inline-block text-xs mt-4 text-accent transition-colors duration-300 hover:underline underline-offset-4"
                 >
                   View unit page
                 </Link>
