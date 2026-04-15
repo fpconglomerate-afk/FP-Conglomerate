@@ -277,6 +277,16 @@ export const defaultSiteContent: SiteContent = {
             "https://images.unsplash.com/photo-1529390079861-591de354faf5?w=1400&q=80",
         },
         {
+          slug: "idp-camps",
+          title: "IDP Camp Awareness",
+          summary:
+            "Factual context on displacement in camps and informal settlements—dignity-first awareness and support.",
+          content:
+            "Mogadishu Initiative Response documents realities responsibly and channels resources toward shelter, essentials, and stability for displaced communities.",
+          image:
+            "https://images.unsplash.com/photo-1518398046578-8cca57782e17?w=1400&q=80",
+        },
+        {
           slug: "social-justice",
           title: "Social Justice and Advocacy",
           summary: "Advocacy that protects dignity and amplifies underserved voices.",

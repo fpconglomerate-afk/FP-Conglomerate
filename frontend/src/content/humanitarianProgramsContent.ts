@@ -37,6 +37,14 @@ export const humanitarianProgramsContent = {
       { title: "Uncertain future", description: "Households navigate resettlement questions while meeting immediate safety and health needs." },
     ],
   },
+  /** Teaser on Humanitarian Programs page linking to the standalone IDP camp page. */
+  idpTeaser: {
+    title: "IDP camp awareness",
+    body:
+      "Learn how we approach displacement in camps and informal settlements—factual context, dignity-first messaging, and practical support.",
+    href: "/business-units/mogadishu-initiative/idp-camps",
+    linkLabel: "Open the IDP camp page",
+  },
   kogi: {
     id: "kogi-outreach",
     title: "Kogi Special Arms Blanket Outreach",

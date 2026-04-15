@@ -19,6 +19,7 @@ const SITEMAP_PATHS: string[] = (() => {
     "/",
     "/about",
     "/business-units",
+    "/idp-camps",
     "/services",
     "/gallery",
     "/careers",
@@ -31,7 +32,7 @@ const SITEMAP_PATHS: string[] = (() => {
     { id: "ordained-believers", subs: ["ministry", "outreach"] },
     { id: "amgi", subs: ["product-lines", "quality-assurance"] },
     { id: "boys-sterling", subs: ["real-estate", "media-entertainment"] },
-    { id: "mogadishu-initiative", subs: ["humanitarian-programs", "social-justice"] },
+    { id: "mogadishu-initiative", subs: ["humanitarian-programs", "idp-camps", "social-justice"] },
   ];
   const dynamic: string[] = [];
   for (const u of units) {

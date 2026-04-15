@@ -20,6 +20,9 @@ FP Conglomerate is a multi-sector parent group focused on trusted service delive
 - /careers — Careers
 - /faq — Frequently asked questions
 - /contact — Contact
+- /idp-camps — Mogadishu Initiative: IDP camp awareness (standalone page)
+- /business-units/mogadishu-initiative/humanitarian-programs — Mogadishu Initiative: humanitarian programs hub
+- /business-units/mogadishu-initiative/idp-camps — Same IDP page under business-units URL
 
 ## Admin (separate app)
 

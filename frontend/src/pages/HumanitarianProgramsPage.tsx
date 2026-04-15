@@ -9,7 +9,7 @@ import { useSiteContent } from "@/content/SiteContentContext";
 import { humanitarianProgramsContent, MIA_UNIT_ID } from "@/content/humanitarianProgramsContent";
 import RevealOnScroll from "@/components/humanitarian/RevealOnScroll";
 
-const { hero, idp, kogi, impactPillars, moments, cta } = humanitarianProgramsContent;
+const { hero, idpTeaser, kogi, impactPillars, moments, cta } = humanitarianProgramsContent;
 
 export default function HumanitarianProgramsPage() {
   const { content } = useSiteContent();
@@ -54,46 +54,26 @@ export default function HumanitarianProgramsPage() {
           </div>
         </section>
 
-        {/* IDP camps — awareness layer (always visible; not wrapped in scroll-reveal) */}
+        {/* IDP camps — link to standalone page (id kept for old #idp-camps links) */}
         <section
           id="idp-camps"
-          aria-labelledby="idp-title"
+          aria-labelledby="idp-teaser-title"
           className="section-shell py-16 md:py-24 border-b border-border/60 scroll-mt-28"
         >
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 lg:items-center">
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 max-w-5xl">
             <div>
-              <p className="eyebrow mb-4">{idp.sectionEyebrow}</p>
-              <h2 id="idp-title" className="font-editorial text-3xl md:text-4xl lg:text-5xl max-w-xl">
-                {idp.title}
+              <p className="eyebrow mb-4">{idpTeaser.title}</p>
+              <h2 id="idp-teaser-title" className="font-editorial text-3xl md:text-4xl max-w-xl">
+                Displacement in Nigeria
               </h2>
-              <p className="mt-4 text-sm md:text-base text-muted-foreground max-w-prose leading-relaxed">
-                {idp.sectionIntro}
-              </p>
-                <div className="mt-8 space-y-5 text-muted-foreground leading-relaxed max-w-prose">
-                  {idp.paragraphs.map((p, i) => (
-                    <p key={i}>{p}</p>
-                  ))}
-                </div>
-                <ul className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  {idp.cards.map((card) => (
-                    <li
-                      key={card.title}
-                      className="border border-border rounded-sm p-5 bg-card/40 transition duration-300 hover:shadow-md hover:-translate-y-0.5"
-                    >
-                      <p className="text-sm font-semibold text-foreground">{card.title}</p>
-                      <p className="mt-2 text-xs text-muted-foreground leading-snug">{card.description}</p>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="relative rounded-sm overflow-hidden border border-border aspect-[4/5] lg:aspect-auto lg:min-h-[420px]">
-                <MediaAsset
-                  src={idp.featureImageSrc}
-                  alt={idp.featureImageAlt}
-                  className="w-full h-full object-cover"
-                />
-              </div>
+              <p className="mt-5 text-muted-foreground leading-relaxed max-w-prose">{idpTeaser.body}</p>
             </div>
+            <div className="shrink-0">
+              <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90" asChild>
+                <Link to={idpTeaser.href}>{idpTeaser.linkLabel}</Link>
+              </Button>
+            </div>
+          </div>
         </section>
 
         {/* Kogi project */}

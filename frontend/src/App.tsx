@@ -15,6 +15,7 @@ const BusinessUnitsPage = lazy(() => import("./pages/BusinessUnitsPage.tsx"));
 const BusinessUnitDetailPage = lazy(() => import("./pages/BusinessUnitDetailPage.tsx"));
 const BusinessUnitSubPage = lazy(() => import("./pages/BusinessUnitSubPage.tsx"));
 const HumanitarianProgramsPage = lazy(() => import("./pages/HumanitarianProgramsPage.tsx"));
+const IdpCampsPage = lazy(() => import("./pages/IdpCampsPage.tsx"));
 const ServicesPage = lazy(() => import("./pages/ServicesPage.tsx"));
 const GalleryPage = lazy(() => import("./pages/GalleryPage.tsx"));
 const CareersPage = lazy(() => import("./pages/CareersPage.tsx"));
@@ -50,6 +51,11 @@ const App = () => (
                 <Route path="/" element={<Index />} />
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/business-units" element={<BusinessUnitsPage />} />
+                <Route path="/idp-camps" element={<IdpCampsPage />} />
+                <Route
+                  path="/business-units/mogadishu-initiative/idp-camps"
+                  element={<IdpCampsPage />}
+                />
                 <Route
                   path="/business-units/mogadishu-initiative/humanitarian-programs"
                   element={<HumanitarianProgramsPage />}
