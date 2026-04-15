@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/theme-provider";
 import ScrollToTop from "@/components/ScrollToTop";
+import FloatingWhatsAppButton from "@/components/FloatingWhatsAppButton";
 import { SiteContentProvider } from "@/content/SiteContentContext";
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
@@ -46,6 +47,7 @@ const App = () => (
           <Sonner />
           <BrowserRouter>
             <ScrollToTop />
+            <FloatingWhatsAppButton />
             <Suspense fallback={<RouteFallback />}>
               <div className="min-h-screen page-enter">
               <Routes>

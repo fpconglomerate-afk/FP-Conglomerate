@@ -13,11 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-const companyLinks = [
-  { label: "About", href: "/about" },
-  { label: "FAQ", href: "/faq" },
-  { label: "Contact", href: "/contact" },
-];
+const companyLinks = [{ label: "About", href: "/about" }];
 
 const tailLinks = [
   { label: "Services", href: "/services" },
@@ -25,6 +21,8 @@ const tailLinks = [
   { label: "Careers", href: "/careers" },
   { label: "Blog", href: "/blog" },
 ];
+
+const endLinks = [{ label: "FAQ", href: "/faq" }];
 
 function linkClass(active: boolean) {
   return cn(
@@ -180,6 +178,23 @@ export default function Navbar() {
           ))}
 
           <ThemeToggle />
+
+          {endLinks.map((link) => (
+            <Link key={link.href} to={link.href} className={linkClass(path === link.href)}>
+              {link.label}
+            </Link>
+          ))}
+
+          <Link
+            to="/contact"
+            className={cn(
+              "inline-flex items-center rounded-sm border border-accent bg-accent px-3.5 py-2 text-sm font-medium text-accent-foreground",
+              "transition-all duration-300 hover:opacity-90 hover:-translate-y-0.5",
+              path === "/contact" && "ring-2 ring-accent/40 ring-offset-2 ring-offset-background",
+            )}
+          >
+            Start a Conversation
+          </Link>
         </div>
 
         <div className="lg:hidden flex items-center gap-2 sm:gap-3">
@@ -226,6 +241,24 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
+            {endLinks.map((link) => (
+              <Link
+                key={link.href}
+                to={link.href}
+                className="block text-base sm:text-lg text-foreground py-1.5 transition-colors duration-200 hover:text-accent"
+              >
+                {link.label}
+              </Link>
+            ))}
+            <Link
+              to="/contact"
+              className={cn(
+                "mt-2 inline-flex items-center rounded-sm border border-accent bg-accent px-4 py-2.5 text-base font-medium text-accent-foreground",
+                "transition-all duration-200 hover:opacity-90 active:scale-[0.99]",
+              )}
+            >
+              Start a Conversation
+            </Link>
           </div>
 
           <div className="space-y-3">
