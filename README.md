@@ -1,19 +1,23 @@
 # FP Conglomerate — marketing + admin
 
-Monorepo: **Vite + React** marketing site in [`frontend/`](frontend/), staff + local content tools in [`admin/`](admin/). Lead capture and org staff features use the **Elevate Central API** over HTTPS (no app database or JWT secrets in this repo).
+Monorepo: **Vite + React** marketing site in [`frontend/`](frontend/), staff + local content tools in [`admin/`](admin/). Lead capture and org staff features call the **Elevate Central API** over HTTPS. **This repo does not run the API** — only static/SPA clients.
 
-## Development
+**Deploying the site + wiring the API:** see **[`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md)** (env vars, Vercel/Netlify, CORS, where secrets live).
+
+## Quick start (local)
 
 ```bash
 npm install --prefix frontend
 npm install --prefix admin
 ```
 
-Copy [`.env.example`](.env.example) to `frontend/.env` and `admin/.env` and set `VITE_*` values for each app.
+1. Copy [`frontend/.env.example`](frontend/.env.example) → `frontend/.env` and [`admin/.env.example`](admin/.env.example) → `admin/.env`.
+2. Set `VITE_PUBLIC_API_BASE_URL` and `VITE_PUBLIC_SITE_KEY` (see deployment doc for where those values come from).
+3. Run:
 
 ```bash
-npm run dev              # marketing site (default http://localhost:8080)
-npm run dev --prefix admin   # admin (default http://localhost:5174)
+npm run dev              # marketing → http://localhost:8080
+npm run dev --prefix admin   # admin → http://localhost:5174
 ```
 
 ## Build
@@ -24,33 +28,39 @@ npm run build:admin      # admin `admin/dist`
 npm run build:all        # both
 ```
 
-Production bundles read **`VITE_PUBLIC_API_BASE_URL`** (and other `VITE_*` vars) at **build time**. Set them in your host’s environment (e.g. Vercel/Netlify) before building.
+Production: set `VITE_*` in the **hosting provider** for each app, then build — Vite inlines them at **build time**.
 
-## Elevate API environment
+## What goes where (short)
+
+| Kind | Where it lives |
+|------|----------------|
+| Database, JWT secrets, `SITE_KEY_PEPPER`, API `CORS_ORIGINS` | **Elevate API server only** (not in this repo) |
+| `VITE_PUBLIC_API_BASE_URL`, `VITE_PUBLIC_SITE_KEY`, lead metadata | **This repo’s** `frontend/.env` + hosting env for builds |
+| Staff passwords | Typed in the admin login form; not stored in repo |
+
+## Elevate API variables (this repo)
 
 | Variable | App | Purpose |
 |----------|-----|---------|
-| `VITE_PUBLIC_API_BASE_URL` | frontend, admin | API origin, no trailing slash (e.g. `https://api.example.com`) |
+| `VITE_PUBLIC_API_BASE_URL` | frontend, admin | API origin, no trailing slash |
 | `VITE_PUBLIC_SITE_KEY` | frontend | Publishable key → `X-Site-Key` on `POST /v1/public/leads` |
-| `VITE_PUBLIC_LEAD_INDUSTRY_VERTICAL` etc. | frontend | Lead metadata; must match API / OpenAPI |
+| `VITE_PUBLIC_LEAD_INDUSTRY_VERTICAL` | frontend | One of: `construction`, `real_estate`, `ngo`, `hospital`, `marketing`, `other` |
 | `VITE_PUBLIC_ORGANIZATION_SLUG` | admin | Optional default on staff login |
-| `VITE_PUBLIC_SITE_URL` | admin | “Back to site” fallback URL |
-| `VITE_SITE_URL` | frontend | Canonical URL for SEO (optional) |
+| `VITE_PUBLIC_SITE_URL` | admin | Optional “back to site” URL |
+| `VITE_SITE_URL` | frontend | Optional canonical URL for SEO |
 
-**Secrets** (database, JWT signing, peppers, Cloudinary secrets, etc.) live **only on the Elevate API host**. This repo should only store publishable keys and end-user passwords in the browser where appropriate.
+## CORS
 
-## CORS and origins
+The API must list your **exact** marketing and admin **origins** in `CORS_ORIGINS`. Per-site `allowed_origins` may also apply to public lead posts. Configure that on the **API**, not only in this frontend. Details: [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
 
-The Elevate API must allow your apps’ **exact browser origins** (scheme + host + port), e.g. `https://www.example.com` and `https://admin.example.com`, in its `CORS_ORIGINS` setting. If the API uses per-site `allowed_origins` for public lead posts, those must include the marketing origin as well. **This is configured on the API**, not something you fix only inside this frontend repo.
-
-## Major flows (Elevate)
+## Major API flows
 
 | UI | HTTP | Auth |
 |----|------|------|
-| Contact form | `POST /v1/public/leads` | `X-Site-Key: <publishable site key>` |
-| Staff login | `POST /v1/auth/login` | Body: `email`, `password`, `organizationSlug` |
+| Contact form | `POST /v1/public/leads` | `X-Site-Key` |
+| Staff login | `POST /v1/auth/login` | `email`, `password`, `organizationSlug` |
 | Leads list | `GET /v1/leads` | `Authorization: Bearer <access_token>` |
 
-The **content dashboard** at `/content` in the admin app still saves to **browser localStorage** only; it does not call the Elevate API.
+The **content dashboard** at `/content` uses **localStorage** only; it does not call the API.
 
-OpenAPI: `GET {BASE}/v1/openapi.json` — align request bodies with the live contract.
+OpenAPI (when exposed): `GET {BASE}/v1/openapi.json`.

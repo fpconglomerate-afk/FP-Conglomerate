@@ -66,7 +66,7 @@ function telHref(phone: string) {
 
 function buildLeadPayload(values: ContactFormValues): Record<string, unknown> {
   const industryVertical =
-    import.meta.env.VITE_PUBLIC_LEAD_INDUSTRY_VERTICAL?.trim() || "construction";
+    import.meta.env.VITE_PUBLIC_LEAD_INDUSTRY_VERTICAL?.trim() || "marketing";
   const sourceSystem = import.meta.env.VITE_PUBLIC_LEAD_SOURCE_SYSTEM?.trim() || "marketing-site";
   const formId = import.meta.env.VITE_PUBLIC_LEAD_FORM_ID?.trim() || "contact-main";
 
