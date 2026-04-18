@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -169,6 +170,9 @@ export default function LeadsPage() {
             <DialogTitle className="font-editorial text-left text-2xl pr-8">
               {selected ? leadDisplayName(selected) : ""}
             </DialogTitle>
+            <DialogDescription className="sr-only">
+              Full details of this contact form inquiry.
+            </DialogDescription>
             {receivedLine ? (
               <p className="text-left text-sm text-muted-foreground">{receivedLine.value}</p>
             ) : null}

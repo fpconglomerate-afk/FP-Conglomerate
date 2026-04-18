@@ -135,15 +135,17 @@ export async function staffFetch(path: string, init?: RequestInit): Promise<Resp
   if (!token) {
     throw new Error("Not authenticated");
   }
+  const headers = new Headers(init?.headers);
+  headers.set("Authorization", `Bearer ${token}`);
+  const body = init?.body;
+  if (typeof body === "string" && body.length > 0 && !headers.has("Content-Type")) {
+    headers.set("Content-Type", "application/json");
+  }
   let res: Response;
   try {
     res = await fetch(apiUrl(path), {
       ...init,
-      headers: {
-        "Content-Type": "application/json",
-        ...init?.headers,
-        Authorization: `Bearer ${token}`,
-      },
+      headers,
     });
   } catch (e) {
     throw new Error(describeFetchFailure(e));
