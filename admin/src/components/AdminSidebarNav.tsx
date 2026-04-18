@@ -2,8 +2,8 @@ import { NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
 const groups: { heading: string; items: { to: string; label: string }[] }[] = [
-  { heading: "Overview", items: [{ to: "/leads", label: "Leads" }] },
-  { heading: "Configuration", items: [{ to: "/settings", label: "Settings" }] },
+  { heading: "Overview", items: [{ to: "/leads", label: "Inquiries" }] },
+  { heading: "Configuration", items: [{ to: "/settings", label: "Notifications" }] },
   {
     heading: "CMS",
     items: [

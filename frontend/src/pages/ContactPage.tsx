@@ -110,9 +110,8 @@ export default function ContactPage() {
 
   const onSubmit = async (values: ContactFormValues) => {
     if (!isElevateConfigured()) {
-      toast.error("Contact form is not configured", {
-        description:
-          "Set VITE_PUBLIC_SITE_KEY. Use VITE_PUBLIC_API_BASE_URL (direct API) or VITE_PUBLIC_API_RELATIVE=true with a /v1 proxy — see frontend/.env.example.",
+      toast.error("The contact form isn’t available right now", {
+        description: "Please try again later or reach us using the phone or email on this page.",
       });
       return;
     }

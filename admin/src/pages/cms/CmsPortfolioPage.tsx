@@ -21,6 +21,7 @@ import {
   staffPost,
 } from "@/lib/elevateApi";
 import type { PortfolioProjectAdmin } from "@/lib/elevateApiTypes";
+import { toastRequestFailed } from "../../lib/toastMessages.ts";
 import { toast } from "sonner";
 
 const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -67,7 +68,9 @@ export default function CmsPortfolioPage() {
     if (!canWrite) return;
     const s = slug.trim();
     if (!SLUG_RE.test(s)) {
-      toast.error("Invalid slug");
+      toast.error("Check the web address (slug)", {
+        description: "Use only lowercase letters, numbers, and hyphens.",
+      });
       return;
     }
     const payload: Record<string, unknown> = {
@@ -89,7 +92,7 @@ export default function CmsPortfolioPage() {
       reset();
       await qc.invalidateQueries({ queryKey: ["admin", "portfolio-projects"] });
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : "Save failed");
+      toastRequestFailed("Couldn’t save this project", e);
     }
   };
 
@@ -101,7 +104,7 @@ export default function CmsPortfolioPage() {
       toast.success("Deleted");
       await qc.invalidateQueries({ queryKey: ["admin", "portfolio-projects"] });
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : "Delete failed");
+      toastRequestFailed("Couldn’t delete this project", e);
     }
   };
 

@@ -21,8 +21,7 @@ export default function PortfolioPage() {
         <main className="section-shell pt-32 pb-24">
           <p className="eyebrow mb-4">Portfolio</p>
           <p className="text-muted-foreground max-w-2xl">
-            Set <code className="text-xs">VITE_PUBLIC_ORGANIZATION_SLUG</code> and connect the API to load portfolio
-            projects from Elevate.
+            Portfolio projects will appear here once your team connects this page to your content system.
           </p>
         </main>
         <Footer />

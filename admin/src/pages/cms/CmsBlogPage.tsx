@@ -28,6 +28,7 @@ import {
   staffPost,
 } from "@/lib/elevateApi";
 import type { BlogPostAdmin } from "@/lib/elevateApiTypes";
+import { toastRequestFailed } from "../../lib/toastMessages.ts";
 import { toast } from "sonner";
 
 const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -82,7 +83,9 @@ export default function CmsBlogPage() {
     if (!canWrite) return;
     const s = slug.trim();
     if (!SLUG_RE.test(s)) {
-      toast.error("Slug must be lowercase letters, numbers, and hyphens only.");
+      toast.error("Check the web address (slug)", {
+        description: "Use only lowercase letters, numbers, and hyphens.",
+      });
       return;
     }
     const payload: Record<string, unknown> = {
@@ -105,7 +108,7 @@ export default function CmsBlogPage() {
       resetForm();
       await qc.invalidateQueries({ queryKey: ["admin", "blog-posts"] });
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : "Save failed");
+      toastRequestFailed("Couldn’t save this post", e);
     }
   };
 
@@ -117,7 +120,7 @@ export default function CmsBlogPage() {
       toast.success("Deleted");
       await qc.invalidateQueries({ queryKey: ["admin", "blog-posts"] });
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : "Delete failed");
+      toastRequestFailed("Couldn’t delete this post", e);
     }
   };
 
@@ -129,7 +132,9 @@ export default function CmsBlogPage() {
             <div>
               <p className="eyebrow mb-1">CMS</p>
               <h2 className="font-editorial text-3xl text-foreground">Blog posts</h2>
-              <p className="text-sm text-muted-foreground mt-1">/v1/admin/blog-posts — org_admin required for writes.</p>
+              <p className="text-sm text-muted-foreground mt-1">
+                Only team members with editor access can add or change posts.
+              </p>
             </div>
             {canWrite ? (
               <Button type="button" onClick={openNew}>

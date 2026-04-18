@@ -16,7 +16,10 @@ export default function BlogPostPage() {
       <>
         <Navbar />
         <main className="section-shell pt-32 pb-24">
-          <p className="text-muted-foreground">Blog posts from the API require VITE_PUBLIC_ORGANIZATION_SLUG and API base.</p>
+          <p className="text-muted-foreground">
+            Online stories aren’t available in preview here. Open the live site or ask your team to finish connecting the
+            blog.
+          </p>
           <Button asChild variant="outline" className="mt-4">
             <Link to="/blog">Back to blog</Link>
           </Button>

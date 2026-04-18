@@ -9,8 +9,8 @@ import AdminSidebarNav from "./AdminSidebarNav.tsx";
 import { toast } from "sonner";
 
 const routeTitles: Record<string, string> = {
-  "/leads": "Leads",
-  "/settings": "Settings",
+  "/leads": "Inquiries",
+  "/settings": "Notifications",
   "/cms/blog": "Blog",
   "/cms/hiring": "Hiring",
   "/cms/portfolio": "Portfolio",

@@ -21,6 +21,7 @@ import {
   staffPost,
 } from "@/lib/elevateApi";
 import type { HiringPositionAdmin } from "@/lib/elevateApiTypes";
+import { toastRequestFailed } from "../../lib/toastMessages.ts";
 import { toast } from "sonner";
 
 export default function CmsHiringPage() {
@@ -94,7 +95,7 @@ export default function CmsHiringPage() {
       toast.success("Deleted");
       await qc.invalidateQueries({ queryKey: ["admin", "hiring-positions"] });
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : "Delete failed");
+      toastRequestFailed("Couldn’t delete this role", e);
     }
   };
 

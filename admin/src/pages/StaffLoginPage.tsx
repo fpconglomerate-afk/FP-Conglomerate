@@ -28,8 +28,8 @@ export default function StaffLoginPage() {
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!apiConfigured) {
-      toast.error("API not configured", {
-        description: "Set VITE_PUBLIC_API_BASE_URL in admin environment.",
+      toast.error("Can’t reach the server", {
+        description: "This admin app needs its API connection configured. Ask whoever manages your website hosting.",
       });
       return;
     }
@@ -40,8 +40,11 @@ export default function StaffLoginPage() {
       toast.success("Signed in");
       navigate("/leads", { replace: true });
     } catch (err) {
-      toast.error("Sign-in failed", {
-        description: err instanceof Error ? err.message : "Check your credentials.",
+      toast.error("Sign-in didn’t work", {
+        description:
+          err instanceof Error
+            ? err.message
+            : "Check your email, password, and organization name, or ask your administrator for access.",
       });
     } finally {
       setSubmitting(false);
@@ -61,19 +64,20 @@ export default function StaffLoginPage() {
             <CardHeader>
               <CardTitle className="font-editorial text-2xl">Staff sign in</CardTitle>
               <CardDescription>
-                Elevate org admin — uses <code className="text-xs">POST /v1/auth/login</code>. JWT is stored in
-                session storage for this tab only.
+                Sign in with the email, password, and organization name your administrator provided. Staying signed in
+                applies to this browser tab only.
               </CardDescription>
             </CardHeader>
             <CardContent>
               {!apiConfigured && (
                 <p className="mb-4 text-sm text-destructive">
-                  Set <code className="text-xs">VITE_PUBLIC_API_BASE_URL</code> in <code className="text-xs">admin/.env</code>.
+                  The connection to your server isn’t configured yet. Ask your website or hosting administrator to finish
+                  setup.
                 </p>
               )}
               <form onSubmit={onSubmit} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="org-slug">Organization slug</Label>
+                  <Label htmlFor="org-slug">Organization</Label>
                   <Input
                     id="org-slug"
                     value={organizationSlug}
