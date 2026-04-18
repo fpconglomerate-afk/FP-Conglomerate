@@ -153,6 +153,12 @@ Staff JWT (`POST /v1/auth/login`) and `org_admin` are required for destructive C
 
 Public marketing reads use `GET /v1/public/org/:slug/...` when `VITE_PUBLIC_ORGANIZATION_SLUG` and API base are configured.
 
+**CMS troubleshooting (blog save / Cloudinary upload):**
+
+1. **Role:** Destructive CMS actions require JWT **`role: org_admin`**. Other staff roles may see lists but not save.
+2. **Cloudinary on the API:** Set your provider’s credentials on the Elevate service (often `CLOUDINARY_*`), redeploy, then retry `POST /v1/admin/cloudinary/upload-signature` — it must return **200**. Without this, cover and portfolio image uploads fail in the admin UI.
+3. **Network:** In DevTools, inspect failing requests (signature, `blog-posts`, `cloudinary/assets`). **401** → sign in again; **403** → role or route permissions; **CORS** → add the admin origin to **`CORS_ORIGINS`** on the API when using a direct API URL.
+
 ---
 
 ## Reference code

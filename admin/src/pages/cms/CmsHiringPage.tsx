@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -211,6 +212,9 @@ export default function CmsHiringPage() {
         <DialogContent>
           <DialogHeader>
             <DialogTitle>{editing ? "Edit position" : "New position"}</DialogTitle>
+            <DialogDescription className="sr-only">
+              Form to create or edit a hiring position for the Elevate API.
+            </DialogDescription>
           </DialogHeader>
           <div className="space-y-3 py-2">
             <div className="space-y-1">

@@ -21,7 +21,10 @@ export default function CloudinaryImageField({ onAssetId, context, label = "Uplo
       onAssetId(mediaAssetId);
       toast.success("Image registered");
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Upload failed (is Cloudinary configured on the API?)");
+      const detail = err instanceof Error ? err.message : "Upload failed";
+      toast.error("Image upload failed", {
+        description: `${detail} Ensure the Elevate API has Cloudinary env vars and your account is org_admin. See docs/DEPLOYMENT.md (CMS troubleshooting).`,
+      });
     } finally {
       setUploading(false);
       e.target.value = "";
