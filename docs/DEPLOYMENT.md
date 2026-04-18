@@ -48,7 +48,7 @@ For **`admin/`**, set at least:
 
 | Variable | Required | Meaning |
 |----------|----------|---------|
-| `VITE_PUBLIC_API_BASE_URL` | Yes | Same as marketing. |
+| `VITE_PUBLIC_API_BASE_URL` | **Recommended: empty** | Empty = browser calls **`/v1` on the admin host only** (Vercel [`admin/vercel.json`](../admin/vercel.json) proxies to Render). **No CORS** to the API. Set a full API URL only if you intentionally use direct cross-origin calls **and** `CORS_ORIGINS` on the API lists this admin origin. |
 | `VITE_PUBLIC_ORGANIZATION_SLUG` | Optional | Default org slug on the staff login form (same value as marketing if you use hybrid CMS). |
 | `VITE_PUBLIC_SITE_URL` | Optional | Public site URL for “back” navigation. |
 
@@ -78,18 +78,20 @@ If the contact form shows **“No response from the API”** on **https://www.fp
 
 Keep `VITE_PUBLIC_API_BASE_URL=https://elevate-backend-vpo3.onrender.com` and on **Render** set **`CORS_ORIGINS`** to include **`https://www.fpconglomerate.com`** (and preview URLs if needed). No trailing slashes; exact match to the browser `Origin`.
 
-**Admin** usually keeps a **direct** `VITE_PUBLIC_API_BASE_URL` and relies on **CORS** for the admin origin, unless you add a `/v1` proxy on the admin host too.
+**Admin (recommended):** leave **`VITE_PUBLIC_API_BASE_URL` empty** so the built app uses same-origin **`/v1`** on your admin domain; [`admin/vercel.json`](../admin/vercel.json) already proxies `/v1/*` to Render. You do **not** need CORS from the browser to Render for admin in that setup. Only use a **direct** API URL if you accept maintaining **CORS** for every admin origin (local dev, previews, production).
 
 ---
 
 ## Local development
 
 1. Run the **Elevate API** (from your API project) with Postgres and env configured; default listen is often port **3000**.
-2. Copy `frontend/.env.example` → `frontend/.env` and `admin/.env.example` → `admin/.env`; set `VITE_PUBLIC_API_BASE_URL=http://localhost:3000` and your seed `VITE_PUBLIC_SITE_KEY`.
+2. Copy `frontend/.env.example` → `frontend/.env` and `admin/.env.example` → `admin/.env`.
+   - **Marketing:** set `VITE_PUBLIC_SITE_KEY` and either point `VITE_PUBLIC_API_BASE_URL` at `http://localhost:3000` **or** leave it empty and rely on the [frontend Vite proxy](../frontend/vite.config.ts) for `/v1`.
+   - **Admin (recommended):** leave **`VITE_PUBLIC_API_BASE_URL` empty** so requests go to `http://localhost:5174/v1/...` and the [admin Vite proxy](../admin/vite.config.ts) forwards to the API (default: Render URL, override with `VITE_ELEVATE_DEV_PROXY_URL`). This avoids CORS issues when testing against a remote API. To hit a **local** API instead, set `VITE_ELEVATE_DEV_PROXY_URL=http://localhost:3000`.
 3. `npm install --prefix frontend && npm install --prefix admin`
 4. `npm run dev` (marketing) and `npm run dev --prefix admin` (admin).
 
-Verify: `GET http://localhost:3000/v1/health` returns JSON with `"status":"ok"`.
+Verify: `GET http://localhost:3000/v1/health` (or your proxy target) returns JSON with `"status":"ok"`.
 
 ---
 
@@ -115,7 +117,7 @@ Create **two** Vercel projects from the same Git repo with different **Root Dire
 | Root Directory | `admin` |
 | Build Command | `npm run build` |
 | Output | `dist` |
-| Environment Variables | `VITE_PUBLIC_API_BASE_URL`, optional `VITE_PUBLIC_ORGANIZATION_SLUG`, `VITE_PUBLIC_SITE_URL` |
+| Environment Variables | Prefer **empty** `VITE_PUBLIC_API_BASE_URL` (same-origin `/v1` proxy). Optional `VITE_PUBLIC_ORGANIZATION_SLUG`, `VITE_PUBLIC_SITE_URL` |
 
 [`admin/vercel.json`](../admin/vercel.json) configures SPA rewrites so client routes work (`/login`, `/leads`, `/settings`, `/cms/*`, `/content`, etc.).
 

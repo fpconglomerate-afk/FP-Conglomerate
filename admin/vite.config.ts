@@ -9,6 +9,11 @@ const frontendSrc = path.resolve(__dirname, "../frontend/src");
 const adminPackageJson = path.join(__dirname, "package.json");
 const requireFromAdmin = createRequire(adminPackageJson);
 
+/** Dev-only: proxy /v1 → Elevate API so the browser uses same-origin http://localhost:5174/v1 (no CORS to Render). */
+const elevateDevProxyTarget =
+  process.env.VITE_ELEVATE_DEV_PROXY_URL?.trim().replace(/\/$/, "") ||
+  "https://elevate-backend-vpo3.onrender.com";
+
 /** Files under ../frontend/src resolve bare imports from admin/node_modules (admin is the build root). */
 function resolveFrontendBareImportsFromAdmin(): Plugin {
   return {
@@ -36,6 +41,13 @@ export default defineConfig({
     host: "::",
     port: 5174,
     hmr: { overlay: false },
+    proxy: {
+      "/v1": {
+        target: elevateDevProxyTarget,
+        changeOrigin: true,
+        secure: true,
+      },
+    },
   },
   plugins: [resolveFrontendBareImportsFromAdmin(), react()],
   resolve: {
