@@ -88,14 +88,27 @@ export default function CmsBlogPage() {
       });
       return;
     }
+    const bodyText = body.trim();
+    if (bodyText.length < 1) {
+      toast.error("Body is required", {
+        description: "The API requires at least one character in the post body.",
+      });
+      return;
+    }
     const payload: Record<string, unknown> = {
       title: title.trim(),
       slug: s,
       excerpt: excerpt.trim() || null,
-      body: body.trim() || null,
+      body: bodyText,
       status,
       coverMediaAssetId: coverMediaAssetId ?? null,
     };
+    if (status === "published") {
+      payload.publishedAt =
+        (typeof editing?.publishedAt === "string" && editing.publishedAt) || new Date().toISOString();
+    } else {
+      payload.publishedAt = null;
+    }
     try {
       if (editing?.id) {
         await staffPatch(`/v1/admin/blog-posts/${editing.id}`, payload);
@@ -200,8 +213,9 @@ export default function CmsBlogPage() {
               <Textarea id="excerpt" value={excerpt} onChange={(e) => setExcerpt(e.target.value)} rows={3} />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="body">Body</Label>
+              <Label htmlFor="body">Body (required)</Label>
               <Textarea id="body" value={body} onChange={(e) => setBody(e.target.value)} rows={8} />
+              <p className="text-xs text-muted-foreground">The API requires at least one character. Empty posts cannot be saved.</p>
             </div>
             <div className="space-y-2">
               <Label>Status</Label>

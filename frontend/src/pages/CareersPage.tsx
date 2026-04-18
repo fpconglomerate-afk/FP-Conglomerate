@@ -35,7 +35,11 @@ export default function CareersPage() {
         <section className="section-shell py-20 md:py-24">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
             {useApi
-              ? apiRoles!.map((role: HiringPositionPublic, index: number) => (
+              ? apiRoles!.map((role: HiringPositionPublic, index: number) => {
+                  const raw = role as Record<string, unknown>;
+                  const applyUrl =
+                    typeof raw.application_url === "string" ? raw.application_url : role.applicationUrl;
+                  return (
                   <article
                     key={role.id ?? `${role.title}-${index}`}
                     className={`border border-border p-7 md:p-8 ${
@@ -43,14 +47,26 @@ export default function CareersPage() {
                     }`}
                   >
                     <h2 className="font-editorial text-3xl">{role.title}</h2>
-                    <p className="text-sm text-muted-foreground mt-3">
-                      {role.location ?? "—"} · {role.type ?? "—"}
-                    </p>
+                    <p className="text-sm text-muted-foreground mt-3">{role.location ?? "—"}</p>
                     {role.description ? (
                       <p className="text-sm text-muted-foreground mt-6 whitespace-pre-wrap">{role.description}</p>
                     ) : null}
+                    {applyUrl ? (
+                      <p className="mt-6">
+                        <a
+                          href={applyUrl}
+                          className="text-sm font-medium text-accent underline-offset-4 hover:underline"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Apply for this role
+                        </a>
+                      </p>
+                    ) : null}
                     <p className="text-sm text-muted-foreground mt-6">
-                      To apply, send your CV and a short statement of fit to {content.brand.contactEmail}.
+                      {applyUrl
+                        ? `For questions, contact ${content.brand.contactEmail}.`
+                        : `To apply, send your CV and a short statement of fit to ${content.brand.contactEmail}.`}
                     </p>
                     {role.imageUrl ? (
                       <MediaAsset
@@ -66,7 +82,8 @@ export default function CareersPage() {
                       />
                     )}
                   </article>
-                ))
+                  );
+                })
               : staticRoles.map((role, index) => (
                   <article
                     key={`${role.title}-${index}`}

@@ -97,8 +97,9 @@ export default function AdminPage({ publicSiteFallback = "http://localhost:8080"
                     Content dashboard
                   </h2>
                   <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-                    Edit copy and media. Save to publish to this browser; use Reset to restore defaults. The admin app
-                    uses its own origin, so drafts are separate from the public site until you wire a shared backend.
+                    Edit copy and media. Save to publish to this browser; use Reset to restore defaults. This dashboard
+                    is not stored in the Elevate API — only Blog, Hiring, Portfolio, Settings, and Leads use the server.
+                    To persist this JSON across browsers or deploy it, add a backend or host the file elsewhere.
                   </p>
                 </div>
                 <div className="flex shrink-0 flex-wrap gap-2">

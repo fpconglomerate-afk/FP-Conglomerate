@@ -36,24 +36,32 @@ export type BlogPostPublic = {
   createdAt?: string;
 };
 
+/** Fields returned by Elevate public + admin hiring routes (see OpenAPI). */
 export type HiringPositionPublic = {
   id?: string;
   title: string;
-  location?: string | null;
-  type?: string | null;
   description?: string | null;
+  location?: string | null;
+  applicationUrl?: string | null;
+  isPublished?: boolean;
+  sortOrder?: number;
+  /** Not stored by current Elevate API — may appear in older payloads. */
+  type?: string | null;
   imageMediaAssetId?: string | null;
   imageUrl?: string | null;
 };
 
+/** Elevate does not persist per-project slug; marketing lists by org. Optional slug may appear from older data. */
 export type PortfolioProjectPublic = {
   id?: string;
-  slug: string;
+  slug?: string;
   title: string;
   summary?: string | null;
   body?: string | null;
   imageMediaAssetId?: string | null;
   imageUrl?: string | null;
+  isPublished?: boolean;
+  sortOrder?: number;
 };
 
 export type BlogPostAdmin = BlogPostPublic & Record<string, unknown>;

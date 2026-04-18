@@ -140,6 +140,21 @@ If you see **CORS** errors, fix **`CORS_ORIGINS`** on the API. If **403** on lea
 
 ---
 
+## Admin CMS vs Elevate API (field alignment)
+
+Staff JWT (`POST /v1/auth/login`) and `org_admin` are required for destructive CMS writes. Paths use `/v1/admin/...`.
+
+| Area | Elevate endpoints | Notes |
+|------|-------------------|--------|
+| **Blog** | `GET/POST /v1/admin/blog-posts`, `PATCH/DELETE …/:id` | Body must be **non-empty** (min 1 character). Send `publishedAt` when status is `published` (ISO string); use `null` when draft. |
+| **Hiring** | `GET/POST /v1/admin/hiring-positions`, `PATCH/DELETE …/:id` | Supported: `title`, `description` (required), `location`, `applicationUrl` (optional URL), `isPublished`, `sortOrder`. No `type` or hero image field in the API schema. |
+| **Portfolio** | `GET/POST /v1/admin/portfolio-projects`, `PATCH/DELETE …/:id` | Supported: `title`, `summary`, `body`, `imageMediaAssetId`, `isPublished`, `sortOrder`. **No per-project slug** in the API — public listing is by org. |
+| **Content dashboard** (`/content`) | — | Brand/hero/units/gallery JSON is **browser-only** (`SiteContentContext`), not persisted by Elevate. |
+
+Public marketing reads use `GET /v1/public/org/:slug/...` when `VITE_PUBLIC_ORGANIZATION_SLUG` and API base are configured.
+
+---
+
 ## Reference code
 
 The `elevate-backend/` folder in this workspace documents the API behavior (routes, enums, env). Do not deploy production secrets from this monorepo; deploy the API from its dedicated repo/host.

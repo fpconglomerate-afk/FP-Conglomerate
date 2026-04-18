@@ -61,7 +61,8 @@ The API must list your **exact** marketing and admin **origins** in `CORS_ORIGIN
 | Staff login | `POST /v1/auth/login` | `email`, `password`, `organizationSlug` |
 | Leads list | `GET /v1/leads` | `Authorization: Bearer <access_token>` |
 | Delete lead | `DELETE /v1/leads/:id` | Same JWT (**must exist on the API** — if missing, the admin UI gets **404**) |
+| Blog / hiring / portfolio (admin CMS) | `/v1/admin/blog-posts`, `…/hiring-positions`, `…/portfolio-projects` | Bearer JWT; field lists must match OpenAPI (blog **body** min 1 char; hiring has **no** type/image columns; portfolio **no** stored slug). |
 
-The **content dashboard** at `/content` uses **localStorage** only; it does not call the API.
+The **content dashboard** at `/content` uses **localStorage** only — not Elevate. Blog, hiring, portfolio under `/cms/*` and settings/leads use the API.
 
 OpenAPI (when exposed): `GET {BASE}/v1/openapi.json`.

@@ -2,6 +2,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import CloudinaryImageField from "../../components/CloudinaryImageField.tsx";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -22,9 +23,6 @@ import {
 } from "@/lib/elevateApi";
 import type { PortfolioProjectAdmin } from "@/lib/elevateApiTypes";
 import { toastRequestFailed } from "../../lib/toastMessages.ts";
-import { toast } from "sonner";
-
-const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
 export default function CmsPortfolioPage() {
   const qc = useQueryClient();
@@ -40,45 +38,44 @@ export default function CmsPortfolioPage() {
   const [open, setOpen] = useState(false);
   const [editing, setEditing] = useState<PortfolioProjectAdmin | null>(null);
   const [title, setTitle] = useState("");
-  const [slug, setSlug] = useState("");
   const [summary, setSummary] = useState("");
   const [body, setBody] = useState("");
   const [imageMediaAssetId, setImageMediaAssetId] = useState<string | undefined>();
+  const [isPublished, setIsPublished] = useState(true);
+  const [sortOrder, setSortOrder] = useState(0);
 
   const reset = () => {
     setEditing(null);
     setTitle("");
-    setSlug("");
     setSummary("");
     setBody("");
     setImageMediaAssetId(undefined);
+    setIsPublished(true);
+    setSortOrder(0);
   };
 
   const openEdit = (r: PortfolioProjectAdmin) => {
     setEditing(r);
     setTitle(String(r.title ?? ""));
-    setSlug(String(r.slug ?? ""));
     setSummary(String(r.summary ?? ""));
     setBody(String(r.body ?? ""));
     setImageMediaAssetId(typeof r.imageMediaAssetId === "string" ? r.imageMediaAssetId : undefined);
+    const raw = r as Record<string, unknown>;
+    setIsPublished(Boolean(r.isPublished ?? raw.is_published ?? true));
+    const so = r.sortOrder ?? raw.sort_order;
+    setSortOrder(typeof so === "number" && !Number.isNaN(so) ? so : 0);
     setOpen(true);
   };
 
   const save = async () => {
     if (!canWrite) return;
-    const s = slug.trim();
-    if (!SLUG_RE.test(s)) {
-      toast.error("Check the web address (slug)", {
-        description: "Use only lowercase letters, numbers, and hyphens.",
-      });
-      return;
-    }
     const payload: Record<string, unknown> = {
       title: title.trim(),
-      slug: s,
       summary: summary.trim() || null,
       body: body.trim() || null,
       imageMediaAssetId: imageMediaAssetId ?? null,
+      isPublished,
+      sortOrder,
     };
     try {
       if (editing?.id) {
@@ -116,6 +113,10 @@ export default function CmsPortfolioPage() {
             <div>
               <p className="eyebrow mb-1">CMS</p>
               <h2 className="font-editorial text-3xl text-foreground">Portfolio projects</h2>
+              <p className="text-sm text-muted-foreground mt-1 max-w-2xl">
+                Elevate stores title, summary, body, image, published, and sort order. Per-project URL slugs are not
+                persisted by the API — the public site lists projects by organization.
+              </p>
             </div>
             {canWrite ? (
               <Button
@@ -137,7 +138,7 @@ export default function CmsPortfolioPage() {
                 <thead>
                   <tr className="border-b border-border bg-muted/40 text-left">
                     <th className="p-3">Title</th>
-                    <th className="p-3">Slug</th>
+                    <th className="p-3 font-mono text-xs">Id</th>
                     <th className="p-3 w-40">Actions</th>
                   </tr>
                 </thead>
@@ -145,7 +146,9 @@ export default function CmsPortfolioPage() {
                   {(rows ?? []).map((r) => (
                     <tr key={String(r.id)} className="border-b border-border/70">
                       <td className="p-3">{r.title}</td>
-                      <td className="p-3 font-mono text-xs">{r.slug}</td>
+                      <td className="p-3 font-mono text-xs max-w-[10rem] truncate" title={r.id}>
+                        {r.id ?? "—"}
+                      </td>
                       <td className="p-3 flex gap-2">
                         <Button type="button" variant="outline" size="sm" onClick={() => openEdit(r)}>
                           Edit
@@ -176,10 +179,6 @@ export default function CmsPortfolioPage() {
               <Input value={title} onChange={(e) => setTitle(e.target.value)} />
             </div>
             <div className="space-y-1">
-              <Label>Slug</Label>
-              <Input value={slug} onChange={(e) => setSlug(e.target.value)} />
-            </div>
-            <div className="space-y-1">
               <Label>Summary</Label>
               <Textarea value={summary} onChange={(e) => setSummary(e.target.value)} rows={3} />
             </div>
@@ -187,7 +186,31 @@ export default function CmsPortfolioPage() {
               <Label>Body</Label>
               <Textarea value={body} onChange={(e) => setBody(e.target.value)} rows={6} />
             </div>
-            <CloudinaryImageField onAssetId={setImageMediaAssetId} context="portfolio" />
+            <div className="space-y-1">
+              <Label>Image</Label>
+              <CloudinaryImageField onAssetId={setImageMediaAssetId} context="portfolio" />
+            </div>
+            <div className="flex items-center gap-2">
+              <Checkbox
+                id="port-pub"
+                checked={isPublished}
+                onCheckedChange={(v) => setIsPublished(v === true)}
+              />
+              <Label htmlFor="port-pub" className="text-sm font-normal cursor-pointer">
+                Published
+              </Label>
+            </div>
+            <div className="space-y-1">
+              <Label htmlFor="port-sort">Sort order</Label>
+              <Input
+                id="port-sort"
+                type="number"
+                min={0}
+                step={1}
+                value={Number.isNaN(sortOrder) ? "" : sortOrder}
+                onChange={(e) => setSortOrder(parseInt(e.target.value, 10) || 0)}
+              />
+            </div>
           </div>
           <DialogFooter>
             <Button type="button" variant="outline" onClick={() => setOpen(false)}>

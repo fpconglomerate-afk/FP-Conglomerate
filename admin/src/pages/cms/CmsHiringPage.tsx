@@ -1,7 +1,7 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import CloudinaryImageField from "../../components/CloudinaryImageField.tsx";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -39,37 +39,61 @@ export default function CmsHiringPage() {
   const [editing, setEditing] = useState<HiringPositionAdmin | null>(null);
   const [title, setTitle] = useState("");
   const [location, setLocation] = useState("");
-  const [type, setType] = useState("");
   const [description, setDescription] = useState("");
-  const [imageMediaAssetId, setImageMediaAssetId] = useState<string | undefined>();
+  const [applicationUrl, setApplicationUrl] = useState("");
+  const [isPublished, setIsPublished] = useState(true);
+  const [sortOrder, setSortOrder] = useState(0);
 
   const reset = () => {
     setEditing(null);
     setTitle("");
     setLocation("");
-    setType("");
     setDescription("");
-    setImageMediaAssetId(undefined);
+    setApplicationUrl("");
+    setIsPublished(true);
+    setSortOrder(0);
   };
 
   const openEdit = (r: HiringPositionAdmin) => {
     setEditing(r);
     setTitle(String(r.title ?? ""));
     setLocation(String(r.location ?? ""));
-    setType(String(r.type ?? ""));
     setDescription(String(r.description ?? ""));
-    setImageMediaAssetId(typeof r.imageMediaAssetId === "string" ? r.imageMediaAssetId : undefined);
+    const raw = r as Record<string, unknown>;
+    setApplicationUrl(String(r.applicationUrl ?? raw.application_url ?? ""));
+    setIsPublished(Boolean(r.isPublished ?? raw.is_published ?? true));
+    const so = r.sortOrder ?? raw.sort_order;
+    setSortOrder(typeof so === "number" && !Number.isNaN(so) ? so : 0);
     setOpen(true);
   };
 
   const save = async () => {
     if (!canWrite) return;
+    const desc = description.trim();
+    if (desc.length < 1) {
+      toast.error("Description is required", {
+        description: "The API requires a non-empty description for each role.",
+      });
+      return;
+    }
+    const app = applicationUrl.trim();
+    if (app) {
+      try {
+        void new URL(app);
+      } catch {
+        toast.error("Invalid application URL", {
+          description: "Enter a full URL (https://…) or leave the field empty.",
+        });
+        return;
+      }
+    }
     const payload: Record<string, unknown> = {
       title: title.trim(),
+      description: desc,
       location: location.trim() || null,
-      type: type.trim() || null,
-      description: description.trim() || null,
-      imageMediaAssetId: imageMediaAssetId ?? null,
+      applicationUrl: app || null,
+      isPublished,
+      sortOrder,
     };
     try {
       if (editing?.id) {
@@ -83,7 +107,7 @@ export default function CmsHiringPage() {
       reset();
       await qc.invalidateQueries({ queryKey: ["admin", "hiring-positions"] });
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : "Save failed");
+      toastRequestFailed("Couldn’t save this role", e);
     }
   };
 
@@ -107,6 +131,9 @@ export default function CmsHiringPage() {
             <div>
               <p className="eyebrow mb-1">CMS</p>
               <h2 className="font-editorial text-3xl text-foreground">Hiring positions</h2>
+              <p className="text-sm text-muted-foreground mt-1 max-w-2xl">
+                Matches Elevate: title, description, location, application URL, published, sort order.
+              </p>
             </div>
             {canWrite ? (
               <Button
@@ -129,16 +156,37 @@ export default function CmsHiringPage() {
                   <tr className="border-b border-border bg-muted/40 text-left">
                     <th className="p-3">Title</th>
                     <th className="p-3">Location</th>
-                    <th className="p-3">Type</th>
+                    <th className="p-3">Published</th>
+                    <th className="p-3 min-w-[7rem]">Apply</th>
                     <th className="p-3 w-40">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {(rows ?? []).map((r) => (
+                  {(rows ?? []).map((r) => {
+                    const raw = r as Record<string, unknown>;
+                    const applyUrl =
+                      typeof raw.application_url === "string" ? raw.application_url : r.applicationUrl;
+                    return (
                     <tr key={String(r.id)} className="border-b border-border/70">
                       <td className="p-3">{r.title}</td>
-                      <td className="p-3">{r.location}</td>
-                      <td className="p-3">{r.type}</td>
+                      <td className="p-3">{r.location ?? "—"}</td>
+                      <td className="p-3">
+                        {raw.is_published === false || r.isPublished === false ? "No" : "Yes"}
+                      </td>
+                      <td className="p-3 max-w-[12rem] truncate">
+                        {applyUrl ? (
+                          <a
+                            href={applyUrl}
+                            className="text-accent underline-offset-2 hover:underline"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Link
+                          </a>
+                        ) : (
+                          "—"
+                        )}
+                      </td>
                       <td className="p-3 flex gap-2">
                         <Button type="button" variant="outline" size="sm" onClick={() => openEdit(r)}>
                           Edit
@@ -150,7 +198,8 @@ export default function CmsHiringPage() {
                         ) : null}
                       </td>
                     </tr>
-                  ))}
+                    );
+                  })}
                 </tbody>
               </table>
             </div>
@@ -165,24 +214,54 @@ export default function CmsHiringPage() {
           </DialogHeader>
           <div className="space-y-3 py-2">
             <div className="space-y-1">
-              <Label>Title</Label>
-              <Input value={title} onChange={(e) => setTitle(e.target.value)} />
+              <Label htmlFor="hire-title">Title</Label>
+              <Input id="hire-title" value={title} onChange={(e) => setTitle(e.target.value)} />
             </div>
             <div className="space-y-1">
-              <Label>Location</Label>
-              <Input value={location} onChange={(e) => setLocation(e.target.value)} />
+              <Label htmlFor="hire-desc">Description</Label>
+              <Textarea
+                id="hire-desc"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                rows={5}
+                required
+              />
             </div>
             <div className="space-y-1">
-              <Label>Type</Label>
-              <Input value={type} onChange={(e) => setType(e.target.value)} />
+              <Label htmlFor="hire-loc">Location</Label>
+              <Input id="hire-loc" value={location} onChange={(e) => setLocation(e.target.value)} />
             </div>
             <div className="space-y-1">
-              <Label>Description</Label>
-              <Textarea value={description} onChange={(e) => setDescription(e.target.value)} rows={5} />
+              <Label htmlFor="hire-app">Application URL</Label>
+              <Input
+                id="hire-app"
+                type="url"
+                inputMode="url"
+                placeholder="https://…"
+                value={applicationUrl}
+                onChange={(e) => setApplicationUrl(e.target.value)}
+              />
+            </div>
+            <div className="flex items-center gap-2">
+              <Checkbox
+                id="hire-pub"
+                checked={isPublished}
+                onCheckedChange={(v) => setIsPublished(v === true)}
+              />
+              <Label htmlFor="hire-pub" className="text-sm font-normal cursor-pointer">
+                Published
+              </Label>
             </div>
             <div className="space-y-1">
-              <Label>Image</Label>
-              <CloudinaryImageField onAssetId={setImageMediaAssetId} context="hiring" />
+              <Label htmlFor="hire-sort">Sort order</Label>
+              <Input
+                id="hire-sort"
+                type="number"
+                min={0}
+                step={1}
+                value={Number.isNaN(sortOrder) ? "" : sortOrder}
+                onChange={(e) => setSortOrder(parseInt(e.target.value, 10) || 0)}
+              />
             </div>
           </div>
           <DialogFooter>
