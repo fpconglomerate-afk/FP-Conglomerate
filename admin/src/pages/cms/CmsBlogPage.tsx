@@ -34,7 +34,12 @@ import { toast } from "sonner";
 
 const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
-export default function CmsBlogPage() {
+type CmsBlogPageProps = {
+  /** When true, skip outer `<main>` padding (used inside Marketing CMS tabs). */
+  embedded?: boolean;
+};
+
+export default function CmsBlogPage({ embedded = false }: CmsBlogPageProps) {
   const qc = useQueryClient();
   const canWrite = staffCanWrite();
   const { data: posts, isLoading } = useQuery({
@@ -149,13 +154,12 @@ export default function CmsBlogPage() {
     }
   };
 
-  return (
+  const blogSection = (
     <>
-      <main className="p-4 sm:p-6">
-        <div className="mx-auto max-w-6xl space-y-6">
+      <div className="mx-auto max-w-6xl space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <p className="eyebrow mb-1">CMS</p>
+              {!embedded ? <p className="eyebrow mb-1">CMS</p> : null}
               <h2 className="font-editorial text-3xl text-foreground">Blog posts</h2>
               <p className="text-sm text-muted-foreground mt-1">
                 Only team members with editor access can add or change posts.
@@ -204,7 +208,6 @@ export default function CmsBlogPage() {
             </div>
           )}
         </div>
-      </main>
 
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
@@ -265,5 +268,15 @@ export default function CmsBlogPage() {
         </DialogContent>
       </Dialog>
     </>
+  );
+
+  if (embedded) {
+    return blogSection;
+  }
+
+  return (
+    <main className="p-4 sm:p-6">
+      {blogSection}
+    </main>
   );
 }

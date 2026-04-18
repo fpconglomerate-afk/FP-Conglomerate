@@ -11,8 +11,7 @@ import { toast } from "sonner";
 const routeTitles: Record<string, string> = {
   "/leads": "Inquiries",
   "/settings": "Notifications",
-  "/cms/blog": "Blog",
-  "/cms/hiring": "Hiring",
+  "/cms/marketing": "Marketing content",
   "/cms/portfolio": "Portfolio",
   "/content": "Site content",
 };

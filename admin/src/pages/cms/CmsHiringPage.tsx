@@ -25,7 +25,11 @@ import type { HiringPositionAdmin } from "@/lib/elevateApiTypes";
 import { toastRequestFailed } from "../../lib/toastMessages.ts";
 import { toast } from "sonner";
 
-export default function CmsHiringPage() {
+type CmsHiringPageProps = {
+  embedded?: boolean;
+};
+
+export default function CmsHiringPage({ embedded = false }: CmsHiringPageProps) {
   const qc = useQueryClient();
   const canWrite = staffCanWrite();
   const { data: rows, isLoading } = useQuery({
@@ -124,13 +128,12 @@ export default function CmsHiringPage() {
     }
   };
 
-  return (
+  const hiringSection = (
     <>
-      <main className="p-4 sm:p-6">
-        <div className="mx-auto max-w-6xl space-y-6">
+      <div className="mx-auto max-w-6xl space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <p className="eyebrow mb-1">CMS</p>
+              {!embedded ? <p className="eyebrow mb-1">CMS</p> : null}
               <h2 className="font-editorial text-3xl text-foreground">Hiring positions</h2>
               <p className="text-sm text-muted-foreground mt-1 max-w-2xl">
                 Matches Elevate: title, description, location, application URL, published, sort order.
@@ -206,7 +209,6 @@ export default function CmsHiringPage() {
             </div>
           )}
         </div>
-      </main>
 
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent>
@@ -281,5 +283,15 @@ export default function CmsHiringPage() {
         </DialogContent>
       </Dialog>
     </>
+  );
+
+  if (embedded) {
+    return hiringSection;
+  }
+
+  return (
+    <main className="p-4 sm:p-6">
+      {hiringSection}
+    </main>
   );
 }
