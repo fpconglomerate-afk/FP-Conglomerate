@@ -89,11 +89,13 @@ export async function publicOrgJson<T>(path: string): Promise<T> {
   return res.json() as Promise<T>;
 }
 
-/** Normalize list endpoints that return either `T[]` or `{ items: T[] }`. */
+/** Normalize list endpoints: bare array, or `{ items }`, `{ data }`, `{ sites }`, etc. */
 export function normalizeItems<T>(data: unknown): T[] {
   if (Array.isArray(data)) return data as T[];
-  if (data && typeof data === "object" && "items" in data && Array.isArray((data as { items: unknown }).items)) {
-    return (data as { items: T[] }).items;
+  if (data && typeof data === "object") {
+    const o = data as Record<string, unknown>;
+    const list = o.items ?? o.data ?? o.sites ?? o.results;
+    if (Array.isArray(list)) return list as T[];
   }
   return [];
 }
@@ -241,8 +243,14 @@ export async function postStaffLogin(body: StaffLoginBody): Promise<StaffLoginRe
 export async function staffJson<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await staffFetch(path, init);
   if (!res.ok) throw new Error(await readJsonError(res));
-  if (res.status === 204) return undefined as T;
-  return res.json() as Promise<T>;
+  if (res.status === 204 || res.status === 205) return undefined as T;
+  const text = await res.text();
+  if (!text.trim()) return undefined as T;
+  try {
+    return JSON.parse(text) as T;
+  } catch {
+    throw new Error("Invalid JSON from API");
+  }
 }
 
 export async function staffGet<T>(path: string): Promise<T> {

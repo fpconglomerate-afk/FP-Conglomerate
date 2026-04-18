@@ -4,8 +4,37 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { normalizeItems, staffGet, staffPatch } from "@/lib/elevateApi";
-import type { OrganizationAdmin, SiteAdmin } from "@/lib/elevateApiTypes";
+import type { SiteAdmin } from "@/lib/elevateApiTypes";
 import { toast } from "sonner";
+
+function orgEmailFromResponse(raw: unknown): string {
+  if (!raw || typeof raw !== "object") return "";
+  const o = raw as Record<string, unknown>;
+  const v = o.leadsNotificationEmail ?? o.leads_notification_email;
+  return typeof v === "string" ? v : "";
+}
+
+function normalizeSiteRow(raw: unknown): SiteAdmin | null {
+  if (!raw || typeof raw !== "object") return null;
+  const o = raw as Record<string, unknown>;
+  const rawId = o.id ?? o.siteId ?? o.site_id;
+  const id = typeof rawId === "string" ? rawId : typeof rawId === "number" ? String(rawId) : "";
+  if (!id) return null;
+  const email = o.leadsNotificationEmail ?? o.leads_notification_email;
+  return {
+    id,
+    organizationId: typeof o.organizationId === "string" ? o.organizationId : undefined,
+    label:
+      typeof o.label === "string"
+        ? o.label
+        : typeof o.name === "string"
+          ? o.name
+          : typeof o.slug === "string"
+            ? o.slug
+            : undefined,
+    leadsNotificationEmail: typeof email === "string" || email === null ? (email as string | null) : undefined,
+  };
+}
 
 export default function SettingsPage() {
   const [orgEmail, setOrgEmail] = useState("");
@@ -17,12 +46,15 @@ export default function SettingsPage() {
     let cancelled = false;
     void (async () => {
       try {
-        const org = await staffGet<OrganizationAdmin>("/v1/admin/organization");
+        const orgRaw = await staffGet<unknown>("/v1/admin/organization");
         if (cancelled) return;
-        setOrgEmail(org.leadsNotificationEmail ?? "");
-        const raw = await staffGet<unknown>("/v1/admin/sites");
+        setOrgEmail(orgEmailFromResponse(orgRaw));
+
+        const rawSites = await staffGet<unknown>("/v1/admin/sites");
         if (cancelled) return;
-        setSites(normalizeItems<SiteAdmin>(raw));
+        const list = normalizeItems<unknown>(rawSites);
+        const mapped = list.map(normalizeSiteRow).filter((s): s is SiteAdmin => s != null);
+        setSites(mapped);
       } catch (e) {
         toast.error("Failed to load settings", {
           description: e instanceof Error ? e.message : String(e),
@@ -105,7 +137,11 @@ export default function SettingsPage() {
                 </CardHeader>
                 <CardContent className="space-y-6">
                   {sites.length === 0 ? (
-                    <p className="text-sm text-muted-foreground">No sites returned.</p>
+                    <p className="text-sm text-muted-foreground">
+                      No sites returned for this organization. Seed or create sites in the Elevate API (publishable site
+                      keys are tied to sites). Organization email above still applies as the fallback when no site
+                      override exists.
+                    </p>
                   ) : (
                     sites.map((site) => (
                       <SiteEmailRow
