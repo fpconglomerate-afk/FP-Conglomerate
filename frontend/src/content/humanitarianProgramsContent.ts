@@ -1,6 +1,6 @@
 /**
  * Copy and image paths for the Mogadishu Initiative Humanitarian Programs page.
- * Replace `/images/mia/humanitarian/*.jpg` files in public/ with owner-provided photos anytime.
+ * Replace `/images/mia/humanitarian/*` media in public/ with owner-provided photos anytime.
  */
 
 export const MIA_UNIT_ID = "mogadishu-initiative" as const;
@@ -22,15 +22,15 @@ export const humanitarianProgramsContent = {
     sectionEyebrow: "IDP camp awareness",
     title: "Supporting displaced communities across Nigeria",
     sectionIntro:
-      "We focus on people in IDP camps and informal settlements: clear information, practical help, and no sensational headlines.",
+      "We talk about life in IDP camps and informal settlements with accuracy and restraint—context first, people at the center, and no sensational headlines.",
     paragraphs: [
-      "Millions of Nigerians live with displacement. That often means fragile infrastructure, interrupted school, and daily uncertainty. Mogadishu Initiative Response meets people with awareness and practical support that respects dignity.",
-      "We are not here for shock value. We document what is real, partner where it helps, and put resources toward shelter, essentials, and steps toward stability.",
+      "Displacement affects households across Nigeria: strained infrastructure, interrupted schooling, and day-to-day uncertainty. Mogadishu Initiative Response focuses on awareness and practical support that keeps dignity intact.",
+      "We document conditions carefully, collaborate where it strengthens outcomes, and channel attention toward shelter, essentials, and steadier footing—not performative crisis imagery.",
     ],
     /** Featured image for the two-column awareness block (wide, documentary tone). */
-    featureImageSrc: `${base}/idp-04.jpg`,
+    featureImageSrc: `${base}/idp-04.png`,
     featureImageAlt:
-      "Wide view of temporary shelters in a settlement, illustrating scale and living conditions in an IDP context.",
+      "Documentary view of pathways and clustered temporary shelters, illustrating scale and conditions in an IDP context.",
     cards: [
       { title: "Limited access to basic needs", description: "Water, nutrition, and essentials can remain inconsistent without sustained support." },
       { title: "Disrupted education", description: "Children and young adults often face interrupted learning and long commutes to schools." },
@@ -41,7 +41,7 @@ export const humanitarianProgramsContent = {
   idpTeaser: {
     title: "IDP camp awareness",
     body:
-      "See how we talk about displacement in camps and informal settlements: grounded facts, messaging that honors people, and help that shows up where it is needed.",
+      "Grounded context on camps and informal settlements, respectful language, and a clear path to the support we can help coordinate.",
     href: "/business-units/mogadishu-initiative/idp-camps",
     linkLabel: "Open the IDP camp page",
   },
@@ -85,11 +85,11 @@ export const humanitarianProgramsContent = {
   },
   /** Horizontal strip of field moments (documentary tone). */
   moments: [
-    { src: `${base}/idp-02.jpg`, alt: "Settlement pathways between temporary shelters in an IDP context." },
-    { src: `${base}/idp-06.jpg`, alt: "Community interaction during a humanitarian visit." },
+    { src: `${base}/idp-02.png`, alt: "Settlement pathways between temporary shelters in an IDP context." },
+    { src: `${base}/idp-06.png`, alt: "Elevated view across temporary shelters in a camp setting." },
     { src: `${base}/kogi-02.jpg`, alt: "Volunteers preparing outreach supplies." },
-    { src: `${base}/idp-07.jpg`, alt: "Residents near shelter structures during a field program." },
-    { src: `${base}/idp-08.jpg`, alt: "Broader view of shelter density across a camp area." },
+    { src: `${base}/idp-07.png`, alt: "Organized shelter rows and paths visible across a camp area." },
+    { src: `${base}/idp-08.png`, alt: "Community gathering on open ground in a settlement context." },
     { src: `${base}/kogi-04.jpg`, alt: "Coordinated distribution moment during Kogi outreach." },
   ],
   cta: {

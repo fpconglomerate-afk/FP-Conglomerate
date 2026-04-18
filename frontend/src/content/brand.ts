@@ -290,9 +290,9 @@ export const defaultSiteContent: SiteContent = {
         "Founded in 2026, the initiative was born from a careful desire to support humanity across Africa, with immediate concern for Nigeria. Programs include shelter, education, accommodation support, social justice advocacy, and community recognition initiatives.",
       heroImage: "/images/mia/humanitarian/hero.jpg",
       gallery: [
-        "/images/mia/humanitarian/idp-04.jpg",
+        "/images/mia/humanitarian/idp-04.png",
         "/images/mia/humanitarian/kogi-02.jpg",
-        "/images/mia/humanitarian/idp-06.jpg",
+        "/images/mia/humanitarian/idp-06.png",
       ],
       subPages: [
         {
@@ -311,7 +311,7 @@ export const defaultSiteContent: SiteContent = {
             "Straightforward context on life in camps and informal settlements, with support that always respects dignity.",
           content:
             "Mogadishu Initiative Response documents realities responsibly and channels resources toward shelter, essentials, and stability for displaced communities.",
-          image: "/images/mia/humanitarian/idp-03.jpg",
+          image: "/images/mia/humanitarian/idp-01.png",
         },
         {
           slug: "social-justice",
@@ -319,7 +319,7 @@ export const defaultSiteContent: SiteContent = {
           summary: "Advocacy that protects dignity and amplifies underserved voices.",
           content:
             "Mogadishu Initiative Response works with communities and partners to defend dignity, encourage social justice, and convert compassion into practical action.",
-          image: "/images/mia/humanitarian/idp-07.jpg",
+          image: "/images/mia/humanitarian/idp-07.png",
         },
       ],
     },

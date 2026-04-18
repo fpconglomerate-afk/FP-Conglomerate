@@ -9,7 +9,7 @@ import { useSiteContent } from "@/content/SiteContentContext";
 import { idpCampsBody, idpCampsPageContent, MIA_UNIT_ID } from "@/content/idpCampsContent";
 import RevealOnScroll from "@/components/humanitarian/RevealOnScroll";
 
-const { hero, gallery, cta } = idpCampsPageContent;
+const { hero, gallery, gallerySection, cta } = idpCampsPageContent;
 
 export default function IdpCampsPage() {
   const { content } = useSiteContent();
@@ -76,7 +76,7 @@ export default function IdpCampsPage() {
               <MediaAsset
                 src={idpCampsBody.featureImageSrc}
                 alt={idpCampsBody.featureImageAlt}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover dark:brightness-[0.92]"
               />
             </div>
           </div>
@@ -85,21 +85,21 @@ export default function IdpCampsPage() {
         <RevealOnScroll>
           <section aria-labelledby="idp-gallery-title" className="section-shell py-16 md:py-24">
             <h2 id="idp-gallery-title" className="font-editorial text-2xl md:text-3xl max-w-2xl">
-              Field perspectives
+              {gallerySection.title}
             </h2>
-            <p className="mt-3 text-sm text-muted-foreground max-w-2xl">
-              Documentary imagery from settlements and camps, shared without sensational framing.
+            <p className="mt-3 text-sm text-muted-foreground max-w-2xl leading-relaxed">
+              {gallerySection.description}
             </p>
-            <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
-              {gallery.map((item) => (
+            <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+              {gallery.map((item, index) => (
                 <figure
-                  key={item.src}
+                  key={`${item.src}-${index}`}
                   className="group overflow-hidden rounded-sm border border-border bg-muted/15 transition duration-300 hover:shadow-md"
                 >
                   <MediaAsset
                     src={item.src}
                     alt={item.alt}
-                    className="w-full aspect-[4/3] object-cover transition duration-500 group-hover:scale-[1.02]"
+                    className="w-full aspect-[4/3] object-cover transition duration-500 group-hover:scale-[1.02] dark:brightness-[0.9] dark:contrast-[0.98]"
                   />
                 </figure>
               ))}
