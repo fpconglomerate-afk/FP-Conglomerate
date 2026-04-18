@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { AlertCircle, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { normalizeItems, staffGet, staffPatch } from "@/lib/elevateApi";
 import type { SiteAdmin } from "@/lib/elevateApiTypes";
 import { toastRequestFailed } from "../lib/toastMessages.ts";
@@ -42,6 +44,8 @@ export default function SettingsPage() {
   const [sites, setSites] = useState<SiteAdmin[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [orgFeedback, setOrgFeedback] = useState<"idle" | "success" | "error">("idle");
+  const [orgErrorDetail, setOrgErrorDetail] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -69,32 +73,43 @@ export default function SettingsPage() {
 
   const saveOrg = async () => {
     setSaving(true);
+    setOrgFeedback("idle");
+    setOrgErrorDetail(null);
     try {
       await staffPatch("/v1/admin/organization", {
         leadsNotificationEmail: orgEmail.trim() || null,
       });
+      setOrgFeedback("success");
+      setOrgErrorDetail(null);
       toast.success("Notification email saved", {
+        id: "settings-org-email",
+        duration: 8000,
         description:
-          "This is the address that should receive alerts when someone submits your public contact form (when email delivery is enabled on your server).",
+          "New contact form submissions will be sent to this address when your server is set up to send email.",
       });
     } catch (e) {
-      toastRequestFailed("Couldn’t save notification email", e);
+      const detail = e instanceof Error ? e.message : "Something went wrong. Please try again.";
+      setOrgFeedback("error");
+      setOrgErrorDetail(detail);
+      toast.error("Couldn’t save notification email", {
+        id: "settings-org-email",
+        duration: 10000,
+        description: detail,
+      });
     } finally {
       setSaving(false);
     }
   };
 
   const saveSiteEmail = async (siteId: string, email: string) => {
-    try {
-      await staffPatch(`/v1/admin/sites/${siteId}`, {
-        leadsNotificationEmail: email.trim() || null,
-      });
-      toast.success("Website notification saved", {
-        description: "If you use more than one website, this inbox can receive alerts for this site instead of the main address.",
-      });
-    } catch (e) {
-      toastRequestFailed("Couldn’t save this website’s email", e);
-    }
+    await staffPatch(`/v1/admin/sites/${siteId}`, {
+      leadsNotificationEmail: email.trim() || null,
+    });
+    toast.success("Website notification saved", {
+      id: `settings-site-${siteId}`,
+      duration: 8000,
+      description: "This address can be used for that website when it differs from your main notification email.",
+    });
   };
 
   return (
@@ -127,13 +142,36 @@ export default function SettingsPage() {
                     id="org-email"
                     type="email"
                     value={orgEmail}
-                    onChange={(e) => setOrgEmail(e.target.value)}
+                    onChange={(e) => {
+                      setOrgEmail(e.target.value);
+                      setOrgFeedback("idle");
+                      setOrgErrorDetail(null);
+                    }}
                     placeholder="you@yourcompany.com"
                   />
                 </div>
                 <Button type="button" onClick={() => void saveOrg()} disabled={saving}>
-                  Save
+                  {saving ? "Saving…" : "Save"}
                 </Button>
+
+                {orgFeedback === "success" ? (
+                  <Alert className="border-emerald-500/40 bg-emerald-50/80 text-emerald-950 dark:bg-emerald-950/30 dark:text-emerald-50 dark:border-emerald-500/30">
+                    <CheckCircle2 className="h-4 w-4" />
+                    <AlertTitle>Saved</AlertTitle>
+                    <AlertDescription>
+                      Your notification email was updated. New form submissions will use this address (when email
+                      delivery is enabled on your server).
+                    </AlertDescription>
+                  </Alert>
+                ) : null}
+
+                {orgFeedback === "error" && orgErrorDetail ? (
+                  <Alert variant="destructive">
+                    <AlertCircle className="h-4 w-4" />
+                    <AlertTitle>Couldn’t save</AlertTitle>
+                    <AlertDescription>{orgErrorDetail}</AlertDescription>
+                  </Alert>
+                ) : null}
               </CardContent>
             </Card>
 
@@ -152,11 +190,7 @@ export default function SettingsPage() {
                   </p>
                 ) : (
                   sites.map((site) => (
-                    <SiteEmailRow
-                      key={site.id}
-                      site={site}
-                      onSave={(email) => void saveSiteEmail(site.id, email)}
-                    />
+                    <SiteEmailRow key={site.id} site={site} onSave={(email) => saveSiteEmail(site.id, email)} />
                   ))
                 )}
               </CardContent>
@@ -168,24 +202,69 @@ export default function SettingsPage() {
   );
 }
 
-function SiteEmailRow({ site, onSave }: { site: SiteAdmin; onSave: (email: string) => void }) {
+function SiteEmailRow({
+  site,
+  onSave,
+}: {
+  site: SiteAdmin;
+  onSave: (email: string) => Promise<void>;
+}) {
   const [val, setVal] = useState(site.leadsNotificationEmail ?? "");
+  const [saving, setSaving] = useState(false);
+  const [feedback, setFeedback] = useState<"idle" | "success" | "error">("idle");
+
   useEffect(() => {
     setVal(site.leadsNotificationEmail ?? "");
   }, [site.leadsNotificationEmail]);
 
+  const handleSave = async () => {
+    setFeedback("idle");
+    setSaving(true);
+    try {
+      await onSave(val);
+      setFeedback("success");
+    } catch (e) {
+      setFeedback("error");
+      toastRequestFailed("Couldn’t save this website’s email", e);
+    } finally {
+      setSaving(false);
+    }
+  };
+
   return (
-    <div className="rounded-lg border border-border/80 p-4 space-y-2">
+    <div className="rounded-lg border border-border/80 p-4 space-y-3">
       <p className="text-sm font-medium">{site.label ?? `Website ${site.id}`}</p>
       <div className="flex flex-col sm:flex-row gap-2 sm:items-end">
         <div className="flex-1 space-y-1">
           <Label className="text-xs text-muted-foreground">Notification email for this site</Label>
-          <Input type="email" value={val} onChange={(e) => setVal(e.target.value)} placeholder="Optional override" />
+          <Input
+            type="email"
+            value={val}
+            onChange={(e) => {
+              setVal(e.target.value);
+              setFeedback("idle");
+            }}
+            placeholder="Optional override"
+          />
         </div>
-        <Button type="button" variant="secondary" onClick={() => onSave(val)}>
-          Save
+        <Button type="button" variant="secondary" onClick={() => void handleSave()} disabled={saving}>
+          {saving ? "Saving…" : "Save"}
         </Button>
       </div>
+      {feedback === "success" ? (
+        <Alert className="border-emerald-500/40 bg-emerald-50/80 text-emerald-950 dark:bg-emerald-950/30 dark:text-emerald-50 dark:border-emerald-500/30 py-3">
+          <CheckCircle2 className="h-4 w-4" />
+          <AlertTitle>Saved</AlertTitle>
+          <AlertDescription>This website’s notification address was updated.</AlertDescription>
+        </Alert>
+      ) : null}
+      {feedback === "error" ? (
+        <Alert variant="destructive" className="py-3">
+          <AlertCircle className="h-4 w-4" />
+          <AlertTitle>Couldn’t save</AlertTitle>
+          <AlertDescription>See the toast above for details, or try again.</AlertDescription>
+        </Alert>
+      ) : null}
     </div>
   );
 }

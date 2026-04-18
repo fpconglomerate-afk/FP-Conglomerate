@@ -9,6 +9,35 @@ function pickFirst(row: Record<string, unknown>, keys: string[]): unknown {
   return undefined;
 }
 
+/** Stable id for API calls (delete, etc.). */
+export function getLeadId(row: Record<string, unknown>): string | null {
+  const v = row.id ?? row.leadId;
+  if (v == null || v === "") return null;
+  return String(v);
+}
+
+/** Short excerpt for list previews. */
+export function leadMessagePreview(row: Record<string, unknown>, maxChars: number): string {
+  const raw = pickFirst(row, ["message", "body", "notes"]);
+  if (raw == null || String(raw).trim() === "") {
+    return "No message text.";
+  }
+  const s = String(raw).replace(/\s+/g, " ").trim();
+  if (s.length <= maxChars) return s;
+  return `${s.slice(0, maxChars).trim()}…`;
+}
+
+/** One line for preview: email and date. */
+export function leadPreviewMeta(row: Record<string, unknown>): string {
+  const email = pickFirst(row, ["email"]);
+  const when = pickFirst(row, ["createdAt", "created_at", "submittedAt", "submitted_at"]);
+  const parts: string[] = [];
+  if (email != null && String(email).trim()) parts.push(String(email).trim());
+  const df = when != null ? formatLeadDate(when) : null;
+  if (df) parts.push(df);
+  return parts.join(" · ") || "—";
+}
+
 export function leadDisplayName(row: Record<string, unknown>): string {
   const v = pickFirst(row, ["fullName", "full_name", "name"]);
   if (v != null && String(v).trim()) return String(v).trim();
