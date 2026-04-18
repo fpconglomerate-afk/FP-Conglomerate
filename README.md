@@ -60,6 +60,7 @@ The API must list your **exact** marketing and admin **origins** in `CORS_ORIGIN
 | Contact form | `POST /v1/public/leads` | `X-Site-Key` |
 | Staff login | `POST /v1/auth/login` | `email`, `password`, `organizationSlug` |
 | Leads list | `GET /v1/leads` | `Authorization: Bearer <access_token>` |
+| Delete lead | `DELETE /v1/leads/:id` | Same JWT (**must exist on the API** — if missing, the admin UI gets **404**) |
 
 The **content dashboard** at `/content` uses **localStorage** only; it does not call the API.
 

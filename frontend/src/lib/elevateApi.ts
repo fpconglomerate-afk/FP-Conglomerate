@@ -14,6 +14,14 @@ async function readJsonError(res: Response): Promise<string> {
   }
 }
 
+/** Non-OK responses: status line plus API body when useful (avoids vague messages on 404/403). */
+async function readHttpError(res: Response): Promise<string> {
+  const detail = (await readJsonError(res)).trim();
+  const prefix = `${res.status} ${res.statusText}`.trim();
+  if (!detail || detail === res.statusText) return prefix;
+  return `${prefix} — ${detail}`;
+}
+
 /**
  * Same-origin `/v1/...` requests (hosting rewrites to Render — no browser CORS to the API).
  * - `true` when `VITE_PUBLIC_API_BASE_URL` is unset/empty (recommended for production with `vercel.json` / Netlify `_redirects`).
@@ -244,7 +252,7 @@ export async function postStaffLogin(body: StaffLoginBody): Promise<StaffLoginRe
 
 export async function staffJson<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await staffFetch(path, init);
-  if (!res.ok) throw new Error(await readJsonError(res));
+  if (!res.ok) throw new Error(await readHttpError(res));
   if (res.status === 204 || res.status === 205) return undefined as T;
   const text = await res.text();
   if (!text.trim()) return undefined as T;
@@ -269,7 +277,7 @@ export async function staffPatch<T>(path: string, body: unknown): Promise<T> {
 
 export async function staffDelete(path: string): Promise<void> {
   const res = await staffFetch(path, { method: "DELETE" });
-  if (!res.ok) throw new Error(await readJsonError(res));
+  if (!res.ok) throw new Error(await readHttpError(res));
 }
 
 export function decodeStaffJwtPayload(): { sub?: string; role?: string; org_id?: string } | null {

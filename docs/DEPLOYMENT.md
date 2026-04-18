@@ -134,6 +134,7 @@ Same idea: two sites, **Base directory** `frontend` or `admin`, build `npm run b
 1. Open marketing **Contact** page → submit → DevTools Network: `POST …/v1/public/leads` → **201**.
 2. With `VITE_PUBLIC_ORGANIZATION_SLUG` set, open **Blog**, **Careers**, or **Portfolio** → `GET …/v1/public/org/<slug>/…` → **200** (or fallback content if the API is unavailable).
 3. Open admin **/login** → sign in → **/leads** → `GET …/v1/leads` → **200** with `items`; **/settings** and **/cms/*** should load with staff JWT.
+4. **Delete inquiry:** `DELETE …/v1/leads/<uuid>` → **204** (or **200**). If you see **404**, the API build on Render likely does **not** register `DELETE /v1/leads/:id` yet — implement that route in the Elevate API (org-scoped, same auth as `GET /v1/leads`), deploy, and try again. A 404 can also mean the lead id is wrong or the row was already removed.
 
 If you see **CORS** errors, fix **`CORS_ORIGINS`** on the API. If **403** on leads POST, check **site `allowed_origins`** vs your marketing **Origin**.
 

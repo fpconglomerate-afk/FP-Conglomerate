@@ -108,7 +108,16 @@ export default function LeadsPage() {
       setDeleteOpen(false);
       closeDetail();
     } catch (e) {
-      toastRequestFailed("Couldn’t remove this inquiry", e);
+      const raw = e instanceof Error ? e.message : String(e);
+      const is404 = raw.trim().startsWith("404");
+      if (is404) {
+        toast.error("Couldn’t remove this inquiry (404)", {
+          description:
+            "The API has no DELETE handler for this URL, the route isn’t deployed yet, or this lead no longer exists. On the Elevate API, add and deploy DELETE /v1/leads/:id for org admins, then redeploy.",
+        });
+      } else {
+        toastRequestFailed("Couldn’t remove this inquiry", e);
+      }
     } finally {
       setDeleting(false);
     }

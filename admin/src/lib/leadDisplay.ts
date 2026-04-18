@@ -11,7 +11,7 @@ function pickFirst(row: Record<string, unknown>, keys: string[]): unknown {
 
 /** Stable id for API calls (delete, etc.). */
 export function getLeadId(row: Record<string, unknown>): string | null {
-  const v = row.id ?? row.leadId;
+  const v = row.id ?? row.leadId ?? row.uuid ?? row._id;
   if (v == null || v === "") return null;
   return String(v);
 }
