@@ -46,6 +46,19 @@ export default function BusinessUnitSubPage() {
             className="w-full h-[260px] md:h-[420px] object-cover mt-10 border border-border dark:brightness-75"
             priority
           />
+          {(subPage.gallery?.length ?? 0) > 0 && (
+            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {(subPage.gallery ?? []).map((src, index) => (
+                <figure key={`${src}-${index}`} className="overflow-hidden rounded-sm border border-border bg-muted/10">
+                  <MediaAsset
+                    src={src}
+                    alt={`${subPage.title}: supporting image ${index + 1}`}
+                    className="w-full aspect-[4/3] object-cover dark:brightness-[0.92]"
+                  />
+                </figure>
+              ))}
+            </div>
+          )}
         </section>
 
         <section className="section-shell py-20 md:py-24 grid grid-cols-1 lg:grid-cols-12 gap-8">

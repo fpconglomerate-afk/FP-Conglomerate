@@ -26,12 +26,28 @@ function normalizeContent(raw: Partial<SiteContent>): SiteContent {
       ...raw.hiring,
       roles: raw.hiring?.roles ?? base.hiring.roles,
     },
-    businessUnits: raw.businessUnits?.map((unit, index) => ({
-      ...base.businessUnits[index],
-      ...unit,
-      subPages: unit.subPages ?? base.businessUnits[index]?.subPages ?? [],
-      gallery: unit.gallery ?? base.businessUnits[index]?.gallery ?? [],
-    })) ?? base.businessUnits,
+    businessUnits: raw.businessUnits?.map((unit, index) => {
+      const baseUnit = base.businessUnits[index];
+      const baseSubs = baseUnit?.subPages ?? [];
+      const mergedSubPages =
+        unit.subPages == null
+          ? baseSubs
+          : baseSubs.map((baseSp, si) => {
+              const sp = unit.subPages?.[si];
+              if (!sp) return baseSp;
+              return {
+                ...baseSp,
+                ...sp,
+                gallery: sp.gallery ?? baseSp.gallery,
+              };
+            });
+      return {
+        ...baseUnit,
+        ...unit,
+        subPages: mergedSubPages,
+        gallery: unit.gallery ?? baseUnit?.gallery ?? [],
+      };
+    }) ?? base.businessUnits,
     serviceAreas: raw.serviceAreas?.map((item, index) => ({
       ...base.serviceAreas[index],
       ...item,

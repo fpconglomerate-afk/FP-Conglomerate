@@ -30,7 +30,10 @@ export type BusinessUnit = {
     title: string;
     summary: string;
     content: string;
+    /** Hero image; may be supplemented by `gallery` on the sub-page view */
     image: string;
+    /** Additional stock or field images shown below the hero */
+    gallery?: string[];
   }[];
 };
 
@@ -319,7 +322,15 @@ export const defaultSiteContent: SiteContent = {
           summary: "Advocacy that protects dignity and amplifies underserved voices.",
           content:
             "Mogadishu Initiative Response works with communities and partners to defend dignity, encourage social justice, and convert compassion into practical action.",
-          image: "/images/mia/humanitarian/idp-07.png",
+          image:
+            "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1400&q=80",
+          gallery: [
+            "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1400&q=80",
+            "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1400&q=80",
+            "https://images.unsplash.com/photo-1469571486292-b53601020acb?w=1400&q=80",
+            "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1400&q=80",
+            "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1400&q=80",
+          ],
         },
       ],
     },
