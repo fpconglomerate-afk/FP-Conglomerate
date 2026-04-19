@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Seo } from "@/components/Seo";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -43,6 +44,11 @@ export default function BlogPage() {
 
   return (
     <>
+      <Seo
+        title="Blog"
+        path="/blog"
+        description="News, field updates, and longer reads from FP Conglomerate: Abuja-based multi-sector group and MIA humanitarian programs."
+      />
       <Navbar />
       <main className="pt-32 pb-32 section-shell" ref={ref}>
         <div

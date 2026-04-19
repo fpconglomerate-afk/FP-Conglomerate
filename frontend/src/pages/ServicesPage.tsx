@@ -1,3 +1,4 @@
+import { Seo } from "@/components/Seo";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useSiteContent } from "@/content/SiteContentContext";
@@ -8,6 +9,11 @@ export default function ServicesPage() {
 
   return (
     <>
+      <Seo
+        title="Services"
+        path="/services"
+        description="Services and capabilities across FP Conglomerate: commercial delivery, ministry, construction, media, and humanitarian response coordinated from Abuja."
+      />
       <Navbar />
       <main className="pt-32 pb-28">
         <section className="section-shell">

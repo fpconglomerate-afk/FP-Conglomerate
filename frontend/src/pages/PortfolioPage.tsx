@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Seo } from "@/components/Seo";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -17,6 +18,11 @@ export default function PortfolioPage() {
   if (!orgCms) {
     return (
       <>
+        <Seo
+          title="Portfolio"
+          path="/portfolio"
+          description="Selected portfolio projects and programs from FP Conglomerate units (requires CMS connection for live listings)."
+        />
         <Navbar />
         <main className="section-shell pt-32 pb-24">
           <p className="eyebrow mb-4">Portfolio</p>
@@ -31,6 +37,11 @@ export default function PortfolioPage() {
 
   return (
     <>
+      <Seo
+        title="Portfolio"
+        path="/portfolio"
+        description="Selected work and programs across FP Conglomerate: portfolio highlights with summaries and contact for collaboration."
+      />
       <Navbar />
       <main className="pt-32 pb-32 section-shell" ref={ref}>
         <div

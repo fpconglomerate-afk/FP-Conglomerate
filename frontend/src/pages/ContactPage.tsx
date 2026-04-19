@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Loader2, Send } from "lucide-react";
+import { Seo } from "@/components/Seo";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -107,6 +108,12 @@ export default function ContactPage() {
 
   const messageLen = form.watch("message")?.length ?? 0;
   const phoneLink = telHref(content.brand.phone);
+  const mapQuery =
+    content.brand.mapsSearchQuery?.trim() ||
+    content.brand.location.replace(/^Interim office:\s*/i, "").trim();
+  const mapQueryEncoded = encodeURIComponent(mapQuery);
+  const mapsOpenUrl = `https://www.google.com/maps/search/?api=1&query=${mapQueryEncoded}`;
+  const mapsEmbedUrl = `https://maps.google.com/maps?q=${mapQueryEncoded}&z=16&output=embed`;
 
   const onSubmit = async (values: ContactFormValues) => {
     if (!isElevateConfigured()) {
@@ -140,6 +147,11 @@ export default function ContactPage() {
 
   return (
     <>
+      <Seo
+        title="Contact"
+        path="/contact"
+        description="Contact FP Conglomerate: interim Abuja office (Gwagwalada), email, phone, map, and partnership or media inquiries."
+      />
       <Navbar />
       <main className="pt-32 pb-32 section-shell" ref={ref}>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-12 xl:gap-16">
@@ -185,6 +197,31 @@ export default function ContactPage() {
               <div>
                 <p className="eyebrow mb-2">Office</p>
                 <p className="text-foreground">{content.brand.location}</p>
+              </div>
+              <div>
+                <p className="eyebrow mb-2">Map</p>
+                <p className="text-sm text-muted-foreground mb-3 max-w-md">
+                  Interim office (Abuja). The map pin is approximate—use{" "}
+                  <a
+                    href={mapsOpenUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-foreground underline-offset-4 hover:underline decoration-accent/60"
+                  >
+                    Open in Google Maps
+                  </a>{" "}
+                  for turn-by-turn directions.
+                </p>
+                <div className="relative w-full overflow-hidden rounded-md border border-border bg-muted/20 aspect-[16/10] max-w-lg">
+                  <iframe
+                    title="Map of FP Conglomerate interim office in Gwagwalada, Abuja"
+                    src={mapsEmbedUrl}
+                    className="absolute inset-0 h-full w-full border-0"
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    allowFullScreen
+                  />
+                </div>
               </div>
             </div>
 

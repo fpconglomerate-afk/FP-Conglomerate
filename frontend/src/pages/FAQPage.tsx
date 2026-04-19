@@ -1,3 +1,4 @@
+import { Seo } from "@/components/Seo";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Link } from "react-router-dom";
@@ -68,6 +69,11 @@ const faqs = [
 export default function FAQPage() {
   return (
     <>
+      <Seo
+        title="FAQ"
+        path="/faq"
+        description="Frequently asked questions about FP Conglomerate: business units, partnerships, careers, NGO work, and how to contact us."
+      />
       <Navbar />
       <main className="pt-32 pb-28">
         <section className="section-shell">

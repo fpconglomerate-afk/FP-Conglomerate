@@ -1,4 +1,5 @@
 import { Link, useLocation, useParams } from "react-router-dom";
+import { Seo, SEO_DEFAULT_DESCRIPTION } from "@/components/Seo";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useSiteContent } from "@/content/SiteContentContext";
@@ -15,6 +16,12 @@ export default function BusinessUnitDetailPage() {
   if (!unit) {
     return (
       <>
+        <Seo
+          title="Business unit not found"
+          path={`/business-units/${unitId ?? ""}`}
+          description={SEO_DEFAULT_DESCRIPTION}
+          noindex
+        />
         <Navbar />
         <main className="pt-32 pb-28 section-shell">
           <h1 className="font-editorial text-5xl">Business unit not found.</h1>
@@ -27,8 +34,12 @@ export default function BusinessUnitDetailPage() {
     );
   }
 
+  const metaDesc =
+    unit.statement.length > 155 ? `${unit.statement.slice(0, 152)}…` : unit.statement;
+
   return (
     <>
+      <Seo title={unit.name} path={`/business-units/${unit.id}`} description={metaDesc} />
       <Navbar />
       <main className="pt-32 pb-28">
         <section className="section-shell">

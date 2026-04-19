@@ -1,4 +1,5 @@
 import { Link, useParams } from "react-router-dom";
+import { Seo, SEO_DEFAULT_DESCRIPTION } from "@/components/Seo";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useSiteContent } from "@/content/SiteContentContext";
@@ -16,6 +17,12 @@ export default function BusinessUnitSubPage() {
   if (!unit || !subPage) {
     return (
       <>
+        <Seo
+          title="Page not found"
+          path={`/business-units/${unitId ?? ""}/${subPageSlug ?? ""}`}
+          description={SEO_DEFAULT_DESCRIPTION}
+          noindex
+        />
         <Navbar />
         <main className="pt-32 pb-28 section-shell">
           <h1 className="font-editorial text-5xl">Business page not found.</h1>
@@ -28,8 +35,16 @@ export default function BusinessUnitSubPage() {
     );
   }
 
+  const metaDesc =
+    subPage.summary.length > 160 ? `${subPage.summary.slice(0, 157)}…` : subPage.summary;
+
   return (
     <>
+      <Seo
+        title={subPage.title}
+        path={`/business-units/${unit.id}/${subPage.slug}`}
+        description={metaDesc}
+      />
       <Navbar />
       <main className="pt-32 pb-28">
         <section className="section-shell">

@@ -3,7 +3,10 @@ export type Brand = {
   tagline: string;
   contactEmail: string;
   phone: string;
+  /** Shown in Footer, Contact — include interim office wording if applicable */
   location: string;
+  /** Plain text for Google Maps search / embed (interim office) */
+  mapsSearchQuery?: string;
 };
 
 export type HeroContent = {
@@ -100,7 +103,9 @@ export const defaultSiteContent: SiteContent = {
     tagline: "Trust, Integrity, Service Excellence",
     contactEmail: "contactelgreen@gmail.com",
     phone: "+234 806 019 7012",
-    location: "Lagos, Nigeria",
+    location:
+      "Interim office: Plot 78/79, Dagiri Layout, Gwagwalada, Abuja, Nigeria",
+    mapsSearchQuery: "Plot 78/79, Dagiri Layout, Gwagwalada, Abuja, Nigeria",
   },
   hero: {
     headline: "One Group.",
@@ -112,18 +117,18 @@ export const defaultSiteContent: SiteContent = {
   aboutLeadership: {
     name: "Anuhi Victor Anate",
     title: "Founder & Group Principal",
-    tagline: "Stewarding a multi-sector group with one standard—from Lagos outward.",
+    tagline: "Stewarding a multi-sector group with one standard—from our Abuja interim base outward.",
     bio: [
       "FP Conglomerate is held under the ownership and direction of Anuhi Victor Anate, who sets the tone for how the group shows up: clear accountability, disciplined execution, and care for the communities we serve.",
       "From faith expression and media to electronics, hospitality, and humanitarian programs, the intent is the same—close the trust gap with service people can feel. That mandate runs from the parent group through each operating unit.",
       "Alongside commercial work, the group invests in humanitarian and community-facing initiatives—supporting people and institutions where durability matters as much as headlines. The aim is institution-building, not one-off gestures.",
-      "Based in Lagos, Nigeria, the group’s footprint is anchored in local relationships and regional ambition: trusted delivery today, and structures that can scale responsibly across Africa.",
+      "With an interim office in Abuja, Nigeria, the group’s footprint is anchored in local relationships and regional ambition: trusted delivery today, and structures that can scale responsibly across Africa.",
     ],
     highlights: [
       "Sole ownership and group-wide governance standard",
       "Multi-sector stewardship: ministry, commerce, media, hospitality, programs",
       "Humanitarian and community investment as part of group purpose",
-      "Lagos, Nigeria operational anchor with an Africa-facing vision",
+      "Abuja, Nigeria interim base with an Africa-facing vision",
     ],
     portraitSrc: "/images/about/anuhi-victor-anate.png",
     portraitAlt: "Anuhi Victor Anate, Founder and Group Principal, FP Conglomerate",

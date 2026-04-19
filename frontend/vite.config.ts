@@ -54,11 +54,24 @@ function seoPlugin(): Plugin {
         name: "FP Conglomerate",
         description:
           "Multi-sector African business group spanning faith, commerce, construction, real estate, humanitarian programs, and appliances.",
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: "Plot 78/79, Dagiri Layout",
+          addressLocality: "Gwagwalada",
+          addressRegion: "Abuja",
+          addressCountry: "NG",
+        },
+        areaServed: [{ "@type": "Country", name: "Nigeria" }, { "@type": "Place", name: "Africa" }],
         subOrganization: [
           { "@type": "Organization", name: "Ordained Believers Army (OBA)" },
           { "@type": "Organization", name: "Anate Grand Empire Solutions (AGE)" },
           { "@type": "Organization", name: "Boys Sterling Company Limited (BSC)" },
-          { "@type": "Organization", name: "Mogadishu Initiative Response (MIA)" },
+          {
+            "@type": "Organization",
+            name: "Mogadishu Initiative Response (MIA)",
+            description:
+              "Humanitarian and NGO-oriented programs: field response, IDP support, and social impact aligned with FP Conglomerate standards.",
+          },
         ],
       },
       {

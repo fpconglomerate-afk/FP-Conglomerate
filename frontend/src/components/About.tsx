@@ -27,7 +27,9 @@ export default function About() {
           <div className="space-y-8 text-muted-foreground text-[1.03rem] leading-[1.85]">
             <p>
               FP Conglomerate exists because people deserve services they can actually
-              rely on. Our units serve different markets, but we hold one bar for
+              rely on. We are built out of Abuja with a multi-sector footprint—commerce,
+              ministry, media, hospitality, and humanitarian work through our NGO-oriented
+              programs—yet our units serve different markets under one bar for
               accountability and quality.
             </p>
             <p>

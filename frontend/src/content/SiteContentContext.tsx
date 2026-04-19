@@ -12,7 +12,11 @@ function normalizeContent(raw: Partial<SiteContent>): SiteContent {
   return {
     ...base,
     ...raw,
-    brand: { ...base.brand, ...raw.brand },
+    brand: {
+      ...base.brand,
+      ...raw.brand,
+      mapsSearchQuery: raw.brand?.mapsSearchQuery ?? base.brand.mapsSearchQuery,
+    },
     hero: { ...base.hero, ...raw.hero },
     aboutLeadership: {
       ...base.aboutLeadership,

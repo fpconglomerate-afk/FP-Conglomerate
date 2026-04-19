@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Seo } from "@/components/Seo";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageBackButton from "@/components/PageBackButton";
@@ -17,6 +18,11 @@ export default function HumanitarianProgramsPage() {
 
   return (
     <>
+      <Seo
+        title="Humanitarian programs"
+        path="/business-units/mogadishu-initiative/humanitarian-programs"
+        description="MIA humanitarian programs: field response, shelter, education, and dignity-first support aligned with FP Conglomerate (Abuja-based)."
+      />
       <Navbar />
       <main className="pb-24 md:pb-28">
         {/* Hero */}

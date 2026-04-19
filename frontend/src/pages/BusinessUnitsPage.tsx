@@ -1,3 +1,4 @@
+import { Seo } from "@/components/Seo";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Link, useLocation } from "react-router-dom";
@@ -11,6 +12,11 @@ export default function BusinessUnitsPage() {
 
   return (
     <>
+      <Seo
+        title="Business Units"
+        path="/business-units"
+        description="Explore FP Conglomerate business units: OBA, AGE, BSC, parent governance, and MIA humanitarian NGO programs from our Abuja base."
+      />
       <Navbar />
       <main className="pt-32 pb-28">
         <section className="section-shell">

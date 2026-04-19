@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Seo } from "@/components/Seo";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useSiteContent } from "@/content/SiteContentContext";
@@ -13,6 +14,11 @@ export default function AboutPage() {
 
   return (
     <>
+      <Seo
+        title="About"
+        path="/about"
+        description="About FP Conglomerate: Abuja-based multi-sector group, founder story, values, and units including MIA humanitarian NGO programs."
+      />
       <Navbar />
       <main className="pt-32 pb-28">
         <section className="section-shell">

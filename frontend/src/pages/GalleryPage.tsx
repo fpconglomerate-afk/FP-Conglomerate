@@ -1,3 +1,4 @@
+import { Seo } from "@/components/Seo";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useSiteContent } from "@/content/SiteContentContext";
@@ -8,6 +9,11 @@ export default function GalleryPage() {
 
   return (
     <>
+      <Seo
+        title="Gallery"
+        path="/gallery"
+        description="Photo gallery: projects, events, and impact across FP Conglomerate business units and programs."
+      />
       <Navbar />
       <main className="pt-32 pb-28">
         <section className="section-shell">

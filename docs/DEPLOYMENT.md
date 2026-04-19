@@ -41,7 +41,7 @@ Set these in **`frontend/.env`** locally and in **hosting “Environment variabl
 | `VITE_PUBLIC_LEAD_INDUSTRY_VERTICAL` | Recommended | Must be one of: `construction`, `real_estate`, `ngo`, `hospital`, `marketing`, `other`. |
 | `VITE_PUBLIC_LEAD_SOURCE_SYSTEM` | Optional | Default `marketing-site` if unset. |
 | `VITE_PUBLIC_LEAD_FORM_ID` | Optional | Default `contact-main` if unset. |
-| `VITE_SITE_URL` | Recommended in prod | Canonical marketing URL for sitemap/SEO (no trailing slash). |
+| `VITE_SITE_URL` | Recommended in prod | **Canonical site origin** (no trailing slash). Used at **build time** for `sitemap.xml`, `robots.txt` Sitemap line, homepage `link rel="canonical"` / `og:url` in `index.html`, and Organization/WebSite JSON-LD `url` fields. At **runtime**, the SPA sets per-route `<title>`, meta descriptions, canonicals, and Open Graph tags via `react-helmet-async` — those also read `import.meta.env.VITE_SITE_URL`. If unset, sitemap/canonical/OG URLs are omitted until you set it and rebuild. `VERCEL_URL` is a fallback in the Vite plugin for preview builds only. |
 | `VITE_PUBLIC_ORGANIZATION_SLUG` | Optional | **Hybrid CMS:** org slug for public reads (`GET /v1/public/org/:slug/...`). No `X-Site-Key` on these requests. When unset or on error, blog/careers/portfolio use local [`SiteContent`](../frontend/src/content/SiteContentContext.tsx) data. |
 
 For **`admin/`**, set at least:

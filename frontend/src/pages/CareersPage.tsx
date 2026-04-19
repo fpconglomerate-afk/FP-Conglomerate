@@ -1,3 +1,4 @@
+import { Seo } from "@/components/Seo";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useSiteContent } from "@/content/SiteContentContext";
@@ -16,6 +17,11 @@ export default function CareersPage() {
 
   return (
     <>
+      <Seo
+        title="Careers"
+        path="/careers"
+        description="Careers at FP Conglomerate: open roles, how to apply, and what we look for across our Abuja-based group and units."
+      />
       <Navbar />
       <main className="pt-32 pb-28">
         <section className="section-shell">

@@ -21,6 +21,20 @@ export default function BusinessEcosystem() {
         <h2 className="font-editorial text-4xl md:text-6xl text-foreground max-w-4xl">
           Distinct institutions aligned by one <span className="brand-purple">trust</span> framework.
         </h2>
+        <p className="mt-6 text-muted-foreground leading-relaxed max-w-3xl">
+          FP Conglomerate operates from an interim base in{" "}
+          <span className="text-foreground font-medium">Abuja</span> (Gwagwalada). The parent brand
+          coordinates{" "}
+          <span className="text-foreground font-medium">Ordained Believers Army (OBA)</span> for faith
+          expression,{" "}
+          <span className="text-foreground font-medium">Anate Grand Empire Solutions (AGE)</span> for
+          multi-sector services,{" "}
+          <span className="text-foreground font-medium">Boys Sterling Company Limited (BSC)</span> for real
+          estate and support services, and{" "}
+          <span className="text-foreground font-medium">Mogadishu Initiative Response (MIA)</span>—our{" "}
+          <span className="text-foreground font-medium">humanitarian NGO-oriented</span> arm for relief,
+          IDP awareness, and advocacy.
+        </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6">

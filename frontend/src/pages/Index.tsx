@@ -1,3 +1,4 @@
+import { Seo, SEO_DEFAULT_DESCRIPTION } from "@/components/Seo";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import BusinessEcosystem from "@/components/BusinessEcosystem";
@@ -11,6 +12,7 @@ import Footer from "@/components/Footer";
 const Index = () => {
   return (
     <>
+      <Seo title="Home" path="/" description={SEO_DEFAULT_DESCRIPTION} />
       <Navbar />
       <Hero />
       <BusinessEcosystem />

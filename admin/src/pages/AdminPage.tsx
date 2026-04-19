@@ -195,6 +195,35 @@ export default function AdminPage({ publicSiteFallback = "http://localhost:8080"
                         placeholder="Phone"
                       />
                     </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="brand-location">Office / location</Label>
+                      <Textarea
+                        id="brand-location"
+                        value={draft.brand.location}
+                        onChange={(e) =>
+                          setDraft({ ...draft, brand: { ...draft.brand, location: e.target.value } })
+                        }
+                        placeholder="Interim office: Plot 78/79, Dagiri Layout, Gwagwalada, Abuja, Nigeria"
+                        className="min-h-[72px]"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="brand-maps-query">Maps search query (optional)</Label>
+                      <Input
+                        id="brand-maps-query"
+                        value={draft.brand.mapsSearchQuery ?? ""}
+                        onChange={(e) =>
+                          setDraft({
+                            ...draft,
+                            brand: { ...draft.brand, mapsSearchQuery: e.target.value || undefined },
+                          })
+                        }
+                        placeholder="Plot 78/79, Dagiri Layout, Gwagwalada, Abuja, Nigeria"
+                      />
+                      <p className="text-xs text-muted-foreground">
+                        Used for the Contact page map. If empty, the office address line above is used.
+                      </p>
+                    </div>
                   </CardContent>
                 </Card>
 

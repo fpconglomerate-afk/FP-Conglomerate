@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { Seo } from "@/components/Seo";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageBackButton from "@/components/PageBackButton";
@@ -12,11 +13,17 @@ import RevealOnScroll from "@/components/humanitarian/RevealOnScroll";
 const { hero, gallery, gallerySection, cta } = idpCampsPageContent;
 
 export default function IdpCampsPage() {
+  const { pathname } = useLocation();
   const { content } = useSiteContent();
   const unit = content.businessUnits.find((u) => u.id === MIA_UNIT_ID);
 
   return (
     <>
+      <Seo
+        title="IDP camps"
+        path={pathname}
+        description="MIA IDP camp support: dignified shelter, basic services, and pathways toward stability—part of FP Conglomerate humanitarian work."
+      />
       <Navbar />
       <main className="pb-24 md:pb-28">
         <section aria-labelledby="idp-hero-heading" className="relative min-h-[min(65vh,480px)] flex flex-col justify-end overflow-hidden">
