@@ -27,7 +27,7 @@ export default function GalleryPage() {
           <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 space-y-5">
             {content.galleryItems.map((item, index) => (
               <figure
-                key={item.caption}
+                key={`${item.src}-${index}`}
                 className={`break-inside-avoid border border-border overflow-hidden ${
                   index % 3 === 1 ? "lg:translate-y-10" : ""
                 }`}

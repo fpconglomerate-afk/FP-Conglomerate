@@ -23,7 +23,7 @@ export default function Gallery() {
       <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 space-y-5">
         {content.galleryItems.slice(0, 6).map((img, i) => (
           <div
-            key={img.caption}
+            key={`${img.src}-${i}`}
             className={`relative overflow-hidden group break-inside-avoid transition-all duration-700 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
             }`}

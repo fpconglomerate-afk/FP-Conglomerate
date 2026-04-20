@@ -378,40 +378,72 @@ export const defaultSiteContent: SiteContent = {
   ],
   galleryItems: [
     {
-      src: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80",
-      caption: "Executive strategy session",
+      src: "/images/projects/gwarinpa-mall/05.png",
+      caption: "Gwarinpa Mall: storefront glazing and facade progress",
     },
     {
-      src: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=80",
-      caption: "Urban real estate delivery",
+      src: "/images/mia/humanitarian/kogi-01.png",
+      caption: "Community program — field documentation (Kogi)",
     },
     {
-      src: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1200&q=80",
-      caption: "Technology and operations hub",
+      src: "/images/projects/gwarinpa-mall/01.png",
+      caption: "Gwarinpa Mall: approach to the structural shell",
     },
     {
-      src: "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=1200&q=80",
-      caption: "Humanitarian response and outreach",
+      src: "/images/mia/humanitarian/idp-01.png",
+      caption: "Mogadishu Initiative — displaced-persons support, on-site",
     },
     {
-      src: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=1200&q=80",
-      caption: "Media and storytelling production",
+      src: "/images/projects/gwarinpa-mall/03.png",
+      caption: "Gwarinpa Mall: corner massing and scaffolding",
     },
     {
-      src: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1200&q=80",
-      caption: "Partnership and governance meetings",
+      src: "/images/mia/humanitarian/kogi-08.png",
+      caption: "Humanitarian outreach — Kogi field visit",
     },
     {
-      src: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1200&q=80",
-      caption: "Leadership consultations",
+      src: "/images/projects/gwarinpa-mall/02.png",
+      caption: "Gwarinpa Mall: exterior finish and access review",
     },
     {
-      src: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=1200&q=80",
-      caption: "Corporate advisory sessions",
+      src: "/images/projects/gwarinpa-mall/04.png",
+      caption: "Gwarinpa Mall: interior shell walk-through",
     },
     {
-      src: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1200&q=80",
-      caption: "Service quality review",
+      src: "/images/projects/gwarinpa-mall/06.png",
+      caption: "Gwarinpa Mall: perimeter and staging documentation",
+    },
+    {
+      src: "/images/projects/gwarinpa-mall/07.png",
+      caption: "Gwarinpa Mall: courtyard elevation under construction",
+    },
+    {
+      src: "/images/projects/gwarinpa-mall/08.png",
+      caption: "Gwarinpa Mall: overall L-shaped block progress",
+    },
+    {
+      src: "/images/projects/gwarinpa-mall/09.png",
+      caption: "Gwarinpa Mall: scaffolding and wall plane inspection",
+    },
+    {
+      src: "/images/mia/humanitarian/kogi-02.png",
+      caption: "Community engagement — Kogi program",
+    },
+    {
+      src: "/images/mia/humanitarian/kogi-04.png",
+      caption: "Field program documentation (Kogi)",
+    },
+    {
+      src: "/images/mia/humanitarian/kogi-12.png",
+      caption: "Humanitarian program — community moments",
+    },
+    {
+      src: "/images/mia/humanitarian/idp-04.png",
+      caption: "IDP support — field documentation",
+    },
+    {
+      src: "/images/mia/humanitarian/kogi-15.png",
+      caption: "Outreach visit — Kogi",
     },
   ],
   blogPosts: [

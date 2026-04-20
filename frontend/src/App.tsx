@@ -25,6 +25,7 @@ const BlogPostPage = lazy(() => import("./pages/BlogPostPage.tsx"));
 const PortfolioPage = lazy(() => import("./pages/PortfolioPage.tsx"));
 const ContactPage = lazy(() => import("./pages/ContactPage.tsx"));
 const FAQPage = lazy(() => import("./pages/FAQPage.tsx"));
+const GwarinpaMallPage = lazy(() => import("./pages/GwarinpaMallPage.tsx"));
 
 const queryClient = new QueryClient();
 
@@ -75,6 +76,7 @@ const App = () => (
                 <Route path="/portfolio" element={<PortfolioPage />} />
                 <Route path="/contact" element={<ContactPage />} />
                 <Route path="/faq" element={<FAQPage />} />
+                <Route path="/projects/gwarinpa-mall" element={<GwarinpaMallPage />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
               </div>

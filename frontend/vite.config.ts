@@ -27,6 +27,7 @@ const SITEMAP_PATHS: string[] = (() => {
     "/portfolio",
     "/contact",
     "/faq",
+    "/projects/gwarinpa-mall",
   ];
   const units: { id: string; subs: string[] }[] = [
     { id: "fp-parent", subs: ["governance", "strategy"] },
