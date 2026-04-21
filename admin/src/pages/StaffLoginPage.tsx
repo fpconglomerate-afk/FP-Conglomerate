@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { getPublicApiBaseUrl, getStaffToken, postStaffLogin, setStaffToken } from "@/lib/elevateApi";
+import { getStaffToken, isApiBaseConfigured, postStaffLogin, setStaffToken } from "@/lib/elevateApi";
 import { getPublicMarketingSiteUrl } from "../lib/publicSite.ts";
 import { toast } from "sonner";
 
@@ -23,7 +23,7 @@ export default function StaffLoginPage() {
     return <Navigate to="/leads" replace />;
   }
 
-  const apiConfigured = Boolean(getPublicApiBaseUrl());
+  const apiConfigured = isApiBaseConfigured();
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

@@ -10,10 +10,8 @@ import { toast } from "sonner";
 
 const routeTitles: Record<string, string> = {
   "/leads": "Inquiries",
-  "/settings": "Notifications",
   "/cms/marketing": "Marketing content",
   "/cms/portfolio": "Portfolio",
-  "/content": "Site content",
 };
 
 export default function AdminDashboardShell() {
