@@ -19,7 +19,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { getPublicApiBaseUrl, getStaffToken, staffDelete, staffFetch } from "@/lib/elevateApi";
+import { getStaffToken, isApiBaseConfigured, staffDelete, staffFetch } from "@/lib/elevateApi";
 import {
   getLeadId,
   leadDisplayName,
@@ -52,7 +52,7 @@ export default function LeadsPage() {
   const [deleting, setDeleting] = useState(false);
 
   const token = getStaffToken();
-  const apiConfigured = Boolean(getPublicApiBaseUrl());
+  const apiConfigured = isApiBaseConfigured();
 
   const load = useCallback(async () => {
     if (!token || !apiConfigured) return;
