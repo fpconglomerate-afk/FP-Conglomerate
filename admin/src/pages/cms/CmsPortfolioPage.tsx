@@ -23,7 +23,8 @@ import {
   staffPost,
 } from "@/lib/elevateApi";
 import type { PortfolioProjectAdmin } from "@/lib/elevateApiTypes";
-import { toastRequestFailed } from "../../lib/toastMessages.ts";
+import { toastCmsDeleted, toastCmsSaved, toastRequestFailed } from "../../lib/toastMessages.ts";
+import { toast } from "sonner";
 
 export default function CmsPortfolioPage() {
   const qc = useQueryClient();
@@ -44,6 +45,7 @@ export default function CmsPortfolioPage() {
   const [imageMediaAssetId, setImageMediaAssetId] = useState<string | undefined>();
   const [isPublished, setIsPublished] = useState(true);
   const [sortOrder, setSortOrder] = useState(0);
+  const [saving, setSaving] = useState(false);
 
   const reset = () => {
     setEditing(null);
@@ -60,8 +62,14 @@ export default function CmsPortfolioPage() {
     setTitle(String(r.title ?? ""));
     setSummary(String(r.summary ?? ""));
     setBody(String(r.body ?? ""));
-    setImageMediaAssetId(typeof r.imageMediaAssetId === "string" ? r.imageMediaAssetId : undefined);
     const raw = r as Record<string, unknown>;
+    const imageId =
+      typeof r.imageMediaAssetId === "string"
+        ? r.imageMediaAssetId
+        : typeof raw.image_media_asset_id === "string"
+          ? raw.image_media_asset_id
+          : undefined;
+    setImageMediaAssetId(imageId);
     setIsPublished(Boolean(r.isPublished ?? raw.is_published ?? true));
     const so = r.sortOrder ?? raw.sort_order;
     setSortOrder(typeof so === "number" && !Number.isNaN(so) ? so : 0);
@@ -70,6 +78,12 @@ export default function CmsPortfolioPage() {
 
   const save = async () => {
     if (!canWrite) return;
+    if (!title.trim()) {
+      toast.error("Project title is required", {
+        description: "Enter a project title before saving.",
+      });
+      return;
+    }
     const payload: Record<string, unknown> = {
       title: title.trim(),
       summary: summary.trim() || null,
@@ -78,19 +92,26 @@ export default function CmsPortfolioPage() {
       isPublished,
       sortOrder,
     };
+    setSaving(true);
     try {
       if (editing?.id) {
         await staffPatch(`/v1/admin/portfolio-projects/${editing.id}`, payload);
-        toast.success("Updated");
+        toastCmsSaved("Portfolio project", false);
       } else {
         await staffPost("/v1/admin/portfolio-projects", payload);
-        toast.success("Created");
+        toastCmsSaved("Portfolio project", true);
       }
       setOpen(false);
       reset();
       await qc.invalidateQueries({ queryKey: ["admin", "portfolio-projects"] });
     } catch (e) {
-      toastRequestFailed("Couldn’t save this project", e);
+      toastRequestFailed(
+        "Couldn’t save this project",
+        e,
+        "We could not save this portfolio project. Check required fields and try again.",
+      );
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -99,10 +120,14 @@ export default function CmsPortfolioPage() {
     if (!confirm("Delete?")) return;
     try {
       await staffDelete(`/v1/admin/portfolio-projects/${id}`);
-      toast.success("Deleted");
+      toastCmsDeleted("Portfolio project");
       await qc.invalidateQueries({ queryKey: ["admin", "portfolio-projects"] });
     } catch (e) {
-      toastRequestFailed("Couldn’t delete this project", e);
+      toastRequestFailed(
+        "Couldn’t delete this project",
+        e,
+        "We could not delete this project right now. Please refresh and try again.",
+      );
     }
   };
 
@@ -193,6 +218,11 @@ export default function CmsPortfolioPage() {
             <div className="space-y-1">
               <Label>Image</Label>
               <CloudinaryImageField onAssetId={setImageMediaAssetId} context="portfolio" />
+              {imageMediaAssetId ? (
+                <p className="text-xs font-mono text-muted-foreground">imageMediaAssetId: {imageMediaAssetId}</p>
+              ) : (
+                <p className="text-xs text-muted-foreground">No image selected for this project.</p>
+              )}
             </div>
             <div className="flex items-center gap-2">
               <Checkbox
@@ -221,8 +251,8 @@ export default function CmsPortfolioPage() {
               Cancel
             </Button>
             {canWrite ? (
-              <Button type="button" onClick={() => void save()}>
-                Save
+              <Button type="button" disabled={saving} onClick={() => void save()}>
+                {saving ? "Saving..." : "Save"}
               </Button>
             ) : null}
           </DialogFooter>

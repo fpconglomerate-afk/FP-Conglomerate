@@ -365,6 +365,8 @@ export async function uploadStaffImageAndRegister(
       ? reg.id
       : typeof reg.mediaAssetId === "string"
         ? reg.mediaAssetId
+        : typeof reg.media_asset_id === "string"
+          ? reg.media_asset_id
         : undefined;
   return { mediaAssetId: id, secureUrl, publicId };
 }

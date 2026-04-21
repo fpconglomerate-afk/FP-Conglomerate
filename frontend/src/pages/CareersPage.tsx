@@ -31,11 +31,13 @@ export default function CareersPage() {
           {orgCms && isLoading && (
             <p className="mt-4 text-sm text-muted-foreground">Loading open roles…</p>
           )}
-          <MediaAsset
-            src={content.hiring.heroImage || content.galleryItems[0]?.src}
-            alt="Hiring"
-            className="w-full h-[240px] md:h-[380px] object-cover mt-10 border border-border dark:brightness-75"
-          />
+          {content.hiring.heroImage ? (
+            <MediaAsset
+              src={content.hiring.heroImage}
+              alt="Hiring"
+              className="w-full h-[240px] md:h-[380px] object-cover mt-10 border border-border dark:brightness-75"
+            />
+          ) : null}
         </section>
 
         <section className="section-shell py-20 md:py-24">
@@ -80,13 +82,7 @@ export default function CareersPage() {
                         alt={role.title}
                         className="w-full h-40 object-cover border border-border mt-6 dark:brightness-75"
                       />
-                    ) : (
-                      <MediaAsset
-                        src={content.galleryItems[0]?.src ?? ""}
-                        alt={role.title}
-                        className="w-full h-40 object-cover border border-border mt-6 dark:brightness-75"
-                      />
-                    )}
+                    ) : null}
                   </article>
                   );
                 })
@@ -104,11 +100,13 @@ export default function CareersPage() {
                     <p className="text-sm text-muted-foreground mt-6">
                       To apply, send your CV and a short statement of fit to {content.brand.contactEmail}.
                     </p>
-                    <MediaAsset
-                      src={role.image || content.galleryItems[0]?.src}
-                      alt={role.title}
-                      className="w-full h-40 object-cover border border-border mt-6 dark:brightness-75"
-                    />
+                    {role.image ? (
+                      <MediaAsset
+                        src={role.image}
+                        alt={role.title}
+                        className="w-full h-40 object-cover border border-border mt-6 dark:brightness-75"
+                      />
+                    ) : null}
                   </article>
                 ))}
           </div>

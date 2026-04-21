@@ -34,8 +34,8 @@ export default function BlogPage() {
     orgCms && isSuccess && !isError && publishedFromApi.length === 0 && staticPosts.length > 0;
 
   const featuredImage = useApi
-    ? (featured as BlogPostPublic).coverUrl || content.galleryItems[0]?.src
-    : (featured as (typeof staticPosts)[0]).image || content.galleryItems[0]?.src;
+    ? (featured as BlogPostPublic).coverUrl
+    : (featured as (typeof staticPosts)[0]).image;
   const featuredTitle = (featured as { title: string }).title;
   const featuredExcerpt = (featured as { excerpt?: string }).excerpt ?? "";
   const featuredDate = useApi
@@ -82,12 +82,14 @@ export default function BlogPage() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          <MediaAsset
-            src={featuredImage || ""}
-            alt={featuredTitle}
-            className="w-full h-[240px] md:h-[360px] object-cover border border-border mb-8 dark:brightness-75"
-            priority
-          />
+          {featuredImage ? (
+            <MediaAsset
+              src={featuredImage}
+              alt={featuredTitle}
+              className="w-full h-[240px] md:h-[360px] object-cover border border-border mb-8 dark:brightness-75"
+              priority
+            />
+          ) : null}
           <p className="text-xs text-muted-foreground tracking-wide mb-4">{featuredDate}</p>
           <h2 className="font-editorial text-3xl md:text-5xl text-foreground mb-6 leading-tight max-w-4xl">{featuredTitle}</h2>
           <p className="text-muted-foreground max-w-2xl leading-relaxed mb-8">{featuredExcerpt}</p>
@@ -112,8 +114,8 @@ export default function BlogPage() {
               ? formatDate((post as BlogPostPublic).publishedAt ?? (post as BlogPostPublic).createdAt)
               : (post as (typeof staticPosts)[0]).date;
             const img = isApiPost
-              ? (post as BlogPostPublic).coverUrl || content.galleryItems[0]?.src
-              : (post as (typeof staticPosts)[0]).image || content.galleryItems[0]?.src;
+              ? (post as BlogPostPublic).coverUrl
+              : (post as (typeof staticPosts)[0]).image;
             const slug = isApiPost ? (post as BlogPostPublic).slug : null;
 
             return (
@@ -140,11 +142,13 @@ export default function BlogPage() {
                     )}
                     <p className="text-sm text-muted-foreground mt-2 max-w-xl">{excerpt}</p>
                   </div>
-                  <MediaAsset
-                    src={img || ""}
-                    alt={title}
-                    className="w-full md:w-40 h-28 object-cover border border-border dark:brightness-75"
-                  />
+                  {img ? (
+                    <MediaAsset
+                      src={img}
+                      alt={title}
+                      className="w-full md:w-40 h-28 object-cover border border-border dark:brightness-75"
+                    />
+                  ) : null}
                   {slug ? (
                     <Link
                       to={`/blog/${encodeURIComponent(slug)}`}

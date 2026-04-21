@@ -29,7 +29,7 @@ import {
   staffPost,
 } from "@/lib/elevateApi";
 import type { BlogPostAdmin } from "@/lib/elevateApiTypes";
-import { toastRequestFailed } from "../../lib/toastMessages.ts";
+import { toastCmsDeleted, toastCmsSaved, toastRequestFailed } from "../../lib/toastMessages.ts";
 import { toast } from "sonner";
 
 const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -82,7 +82,14 @@ export default function CmsBlogPage({ embedded = false }: CmsBlogPageProps) {
     setExcerpt(String(p.excerpt ?? ""));
     setBody(String(p.body ?? ""));
     setStatus(String(p.status ?? "draft"));
-    setCoverMediaAssetId(typeof p.coverMediaAssetId === "string" ? p.coverMediaAssetId : undefined);
+    const raw = p as Record<string, unknown>;
+    const coverId =
+      typeof p.coverMediaAssetId === "string"
+        ? p.coverMediaAssetId
+        : typeof raw.cover_media_asset_id === "string"
+          ? raw.cover_media_asset_id
+          : undefined;
+    setCoverMediaAssetId(coverId);
     setOpen(true);
   };
 
@@ -91,19 +98,26 @@ export default function CmsBlogPage({ embedded = false }: CmsBlogPageProps) {
     const s = slug.trim();
     if (!SLUG_RE.test(s)) {
       toast.error("Check the web address (slug)", {
-        description: "Use only lowercase letters, numbers, and hyphens.",
+        description: "Use only lowercase letters, numbers, and hyphens (example: my-first-post).",
+      });
+      return;
+    }
+    const titleText = title.trim();
+    if (titleText.length < 1) {
+      toast.error("Post title is required", {
+        description: "Enter a post title so readers can find this article.",
       });
       return;
     }
     const bodyText = body.trim();
     if (bodyText.length < 1) {
       toast.error("Body is required", {
-        description: "The API requires at least one character in the post body.",
+        description: "Add the post content before saving.",
       });
       return;
     }
     const payload: Record<string, unknown> = {
-      title: title.trim(),
+      title: titleText,
       slug: s,
       excerpt: excerpt.trim() || null,
       body: bodyText,
@@ -119,24 +133,21 @@ export default function CmsBlogPage({ embedded = false }: CmsBlogPageProps) {
     setSaving(true);
     try {
       if (editing?.id) {
-        const updated = await staffPatch<BlogPostAdmin>(`/v1/admin/blog-posts/${editing.id}`, payload);
-        const label = String(updated?.title ?? title.trim() ?? "Post");
-        toast.success("Post updated", {
-          description: `Saved “${label}”. The marketing site will show it after it refetches (published posts only).`,
-        });
+        await staffPatch<BlogPostAdmin>(`/v1/admin/blog-posts/${editing.id}`, payload);
+        toastCmsSaved("Blog post", false, "Published posts will appear on the public blog shortly.");
       } else {
-        const created = await staffPost<BlogPostAdmin>("/v1/admin/blog-posts", payload);
-        const label = String(created?.title ?? title.trim() ?? "Post");
-        const outSlug = String(created?.slug ?? s);
-        toast.success("Post created", {
-          description: `Saved “${label}” (slug: ${outSlug}). Set status to published for it to appear on the public blog.`,
-        });
+        await staffPost<BlogPostAdmin>("/v1/admin/blog-posts", payload);
+        toastCmsSaved("Blog post", true, "Set status to published for it to appear on the public blog.");
       }
       setOpen(false);
       resetForm();
       await qc.invalidateQueries({ queryKey: ["admin", "blog-posts"] });
     } catch (e) {
-      toastRequestFailed("Couldn’t save this post", e);
+      toastRequestFailed(
+        "Couldn’t save this post",
+        e,
+        "We could not save this blog post. Please check the form and try again.",
+      );
     } finally {
       setSaving(false);
     }
@@ -147,10 +158,14 @@ export default function CmsBlogPage({ embedded = false }: CmsBlogPageProps) {
     if (!confirm("Delete this post?")) return;
     try {
       await staffDelete(`/v1/admin/blog-posts/${id}`);
-      toast.success("Deleted");
+      toastCmsDeleted("Blog post");
       await qc.invalidateQueries({ queryKey: ["admin", "blog-posts"] });
     } catch (e) {
-      toastRequestFailed("Couldn’t delete this post", e);
+      toastRequestFailed(
+        "Couldn’t delete this post",
+        e,
+        "We could not delete this blog post right now. Please refresh and try again.",
+      );
     }
   };
 

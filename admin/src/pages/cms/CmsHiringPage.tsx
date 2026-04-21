@@ -22,7 +22,7 @@ import {
   staffPost,
 } from "@/lib/elevateApi";
 import type { HiringPositionAdmin } from "@/lib/elevateApiTypes";
-import { toastRequestFailed } from "../../lib/toastMessages.ts";
+import { toastCmsDeleted, toastCmsSaved, toastRequestFailed } from "../../lib/toastMessages.ts";
 import { toast } from "sonner";
 
 type CmsHiringPageProps = {
@@ -48,6 +48,7 @@ export default function CmsHiringPage({ embedded = false }: CmsHiringPageProps) 
   const [applicationUrl, setApplicationUrl] = useState("");
   const [isPublished, setIsPublished] = useState(true);
   const [sortOrder, setSortOrder] = useState(0);
+  const [saving, setSaving] = useState(false);
 
   const reset = () => {
     setEditing(null);
@@ -74,10 +75,17 @@ export default function CmsHiringPage({ embedded = false }: CmsHiringPageProps) 
 
   const save = async () => {
     if (!canWrite) return;
+    const titleText = title.trim();
+    if (titleText.length < 1) {
+      toast.error("Role title is required", {
+        description: "Enter the role title before saving.",
+      });
+      return;
+    }
     const desc = description.trim();
     if (desc.length < 1) {
       toast.error("Description is required", {
-        description: "The API requires a non-empty description for each role.",
+        description: "Add a short description so candidates understand this role.",
       });
       return;
     }
@@ -93,26 +101,33 @@ export default function CmsHiringPage({ embedded = false }: CmsHiringPageProps) 
       }
     }
     const payload: Record<string, unknown> = {
-      title: title.trim(),
+      title: titleText,
       description: desc,
       location: location.trim() || null,
       applicationUrl: app || null,
       isPublished,
       sortOrder,
     };
+    setSaving(true);
     try {
       if (editing?.id) {
         await staffPatch(`/v1/admin/hiring-positions/${editing.id}`, payload);
-        toast.success("Updated");
+        toastCmsSaved("Hiring role", false);
       } else {
         await staffPost("/v1/admin/hiring-positions", payload);
-        toast.success("Created");
+        toastCmsSaved("Hiring role", true);
       }
       setOpen(false);
       reset();
       await qc.invalidateQueries({ queryKey: ["admin", "hiring-positions"] });
     } catch (e) {
-      toastRequestFailed("Couldn’t save this role", e);
+      toastRequestFailed(
+        "Couldn’t save this role",
+        e,
+        "We could not save this hiring role. Please check the fields and try again.",
+      );
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -121,10 +136,14 @@ export default function CmsHiringPage({ embedded = false }: CmsHiringPageProps) 
     if (!confirm("Delete?")) return;
     try {
       await staffDelete(`/v1/admin/hiring-positions/${id}`);
-      toast.success("Deleted");
+      toastCmsDeleted("Hiring role");
       await qc.invalidateQueries({ queryKey: ["admin", "hiring-positions"] });
     } catch (e) {
-      toastRequestFailed("Couldn’t delete this role", e);
+      toastRequestFailed(
+        "Couldn’t delete this role",
+        e,
+        "We could not delete this hiring role right now. Please refresh and try again.",
+      );
     }
   };
 
@@ -275,8 +294,8 @@ export default function CmsHiringPage({ embedded = false }: CmsHiringPageProps) 
               Cancel
             </Button>
             {canWrite ? (
-              <Button type="button" onClick={() => void save()}>
-                Save
+              <Button type="button" disabled={saving} onClick={() => void save()}>
+                {saving ? "Saving..." : "Save"}
               </Button>
             ) : null}
           </DialogFooter>
