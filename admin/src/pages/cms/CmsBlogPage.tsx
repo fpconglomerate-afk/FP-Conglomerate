@@ -123,6 +123,7 @@ export default function CmsBlogPage({ embedded = false }: CmsBlogPageProps) {
       body: bodyText,
       status,
       coverMediaAssetId: coverMediaAssetId ?? null,
+      cover_media_asset_id: coverMediaAssetId ?? null,
     };
     if (status === "published") {
       payload.publishedAt =
@@ -240,6 +241,9 @@ export default function CmsBlogPage({ embedded = false }: CmsBlogPageProps) {
             <div className="space-y-2">
               <Label htmlFor="slug">Slug</Label>
               <Input id="slug" value={slug} onChange={(e) => setSlug(e.target.value)} placeholder="my-post" />
+              <p className="text-xs text-muted-foreground">
+                Use only small letters (a-z), numbers, and hyphens. Capital letters are not allowed.
+              </p>
             </div>
             <div className="space-y-2">
               <Label htmlFor="excerpt">Excerpt</Label>

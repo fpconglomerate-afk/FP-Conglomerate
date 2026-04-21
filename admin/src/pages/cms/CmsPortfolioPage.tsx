@@ -89,6 +89,7 @@ export default function CmsPortfolioPage() {
       summary: summary.trim() || null,
       body: body.trim() || null,
       imageMediaAssetId: imageMediaAssetId ?? null,
+      image_media_asset_id: imageMediaAssetId ?? null,
       isPublished,
       sortOrder,
     };

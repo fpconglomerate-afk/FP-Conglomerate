@@ -18,6 +18,13 @@ export default function CloudinaryImageField({ onAssetId, context, label = "Uplo
     setUploading(true);
     try {
       const { mediaAssetId } = await uploadStaffImageAndRegister(file, { context });
+      if (!mediaAssetId) {
+        toast.error("Image upload did not finish", {
+          description:
+            "The file uploaded but the API did not return an image ID. Please try again. If this continues, ask your developer to check Cloudinary asset registration on the backend.",
+        });
+        return;
+      }
       onAssetId(mediaAssetId);
       toast.success("Image registered");
     } catch (err) {
