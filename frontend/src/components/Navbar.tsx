@@ -27,7 +27,10 @@ const endLinks = [{ label: "FAQ", href: "/faq" }];
 
 function linkClass(active: boolean) {
   return cn(
-    "whitespace-nowrap text-[0.8125rem] xl:text-sm tracking-wide transition-colors duration-300 ease-out",
+    "inline-flex items-center justify-center shrink-0 whitespace-nowrap",
+    "text-[0.8125rem] xl:text-sm leading-normal tracking-wide",
+    "min-h-9 px-0.5 sm:min-h-0 sm:px-0",
+    "transition-colors duration-300 ease-out",
     active ? "text-foreground" : "text-muted-foreground hover:text-foreground",
   );
 }
@@ -89,11 +92,7 @@ export default function Navbar() {
         </Link>
 
         <div className="hidden min-w-0 flex-1 items-center justify-end overflow-visible lg:flex">
-          <div className="flex max-w-full min-w-0 flex-nowrap items-center justify-end gap-x-1 overflow-x-auto overscroll-x-contain [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden min-[1080px]:gap-x-2 xl:gap-x-3 2xl:gap-x-5">
-            <Link to="/" className={linkClass(path === "/" || path === "")}>
-              Home
-            </Link>
-
+          <div className="flex max-w-full min-w-0 flex-nowrap items-center justify-end gap-x-2 min-[1100px]:gap-x-3 xl:gap-x-4 2xl:gap-x-5 overflow-x-auto overscroll-x-contain [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
             {companyLinks.map((link) => (
               <Link key={link.href} to={link.href} className={linkClass(path === link.href)}>
                 {link.label}
@@ -109,7 +108,7 @@ export default function Navbar() {
             >
               <DropdownMenuTrigger
                 className={cn(
-                  "inline-flex shrink-0 items-center gap-0.5 rounded-sm outline-none ring-offset-background transition-transform duration-200 ease-out data-[state=open]:scale-[0.98] focus-visible:ring-2 focus-visible:ring-ring xl:gap-1",
+                  "inline-flex shrink-0 items-center justify-center gap-1 rounded-sm outline-none ring-offset-background transition-transform duration-200 ease-out data-[state=open]:scale-[0.98] focus-visible:ring-2 focus-visible:ring-ring min-h-9 px-0.5 sm:min-h-0 sm:px-0",
                   linkClass(buActive),
                 )}
               >
@@ -188,7 +187,8 @@ export default function Navbar() {
             <Link
               to="/contact"
               className={cn(
-                "inline-flex shrink-0 items-center rounded-sm border border-accent bg-accent px-2 py-1.5 text-[0.8125rem] font-medium text-accent-foreground xl:px-3.5 xl:py-2 xl:text-sm",
+                "inline-flex shrink-0 items-center justify-center rounded-sm border border-accent bg-accent",
+                "px-2.5 py-2 text-[0.8125rem] font-medium leading-normal text-accent-foreground xl:px-3.5 xl:py-2 xl:text-sm",
                 "transition-all duration-300 hover:opacity-90 hover:-translate-y-0.5",
                 path === "/contact" && "ring-2 ring-accent/40 ring-offset-2 ring-offset-background",
               )}
@@ -203,7 +203,7 @@ export default function Navbar() {
           </div>
         </div>
 
-        <div className="lg:hidden flex items-center gap-2 sm:gap-3">
+        <div className="lg:hidden flex items-center gap-2.5 sm:gap-3">
           <button
             type="button"
             onClick={() => setMobileOpen(!mobileOpen)}
@@ -219,21 +219,17 @@ export default function Navbar() {
 
       {mobileOpen ? (
         <div
-          className="lg:hidden border-t border-border bg-background/98 backdrop-blur-md max-h-[calc(100dvh-5rem)] overflow-y-auto overscroll-contain px-4 sm:px-6 py-6 sm:py-8 space-y-6 sm:space-y-8 pb-[max(1.5rem,env(safe-area-inset-bottom))] animate-in fade-in slide-in-from-top-2 duration-300 ease-out motion-reduce:duration-75 motion-reduce:animate-none"
+          className="lg:hidden border-t border-border bg-background/98 backdrop-blur-md max-h-[calc(100dvh-5rem)] overflow-y-auto overscroll-contain px-4 sm:px-6 py-6 sm:py-8 space-y-8 sm:space-y-10 pb-[max(1.5rem,env(safe-area-inset-bottom))] animate-in fade-in slide-in-from-top-2 duration-300 ease-out motion-reduce:duration-75 motion-reduce:animate-none"
         >
-          <div className="space-y-2 sm:space-y-3">
-            <p className="text-xs uppercase tracking-widest text-muted-foreground">Site</p>
-            <Link
-              to="/"
-              className="block rounded-sm px-2 py-2 text-base sm:text-lg text-foreground transition-colors duration-200 hover:bg-secondary/35 hover:text-accent"
-            >
-              Home
-            </Link>
+          <div className="space-y-1">
+            <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3 sm:mb-4 leading-normal">
+              Site
+            </p>
             {companyLinks.map((link) => (
               <Link
                 key={link.href}
                 to={link.href}
-                className="block rounded-sm px-2 py-2 text-base sm:text-lg text-foreground transition-colors duration-200 hover:bg-secondary/35 hover:text-accent"
+                className="block rounded-sm px-2 py-2.5 text-base sm:text-[1.0625rem] leading-snug text-foreground transition-colors duration-200 hover:bg-secondary/35 hover:text-accent"
               >
                 {link.label}
               </Link>
@@ -242,7 +238,7 @@ export default function Navbar() {
               <Link
                 key={link.label}
                 to={link.href}
-                className="block rounded-sm px-2 py-2 text-base sm:text-lg text-foreground transition-colors duration-200 hover:bg-secondary/35 hover:text-accent"
+                className="block rounded-sm px-2 py-2.5 text-base sm:text-[1.0625rem] leading-snug text-foreground transition-colors duration-200 hover:bg-secondary/35 hover:text-accent"
               >
                 {link.label}
               </Link>
@@ -251,7 +247,7 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 to={link.href}
-                className="block rounded-sm px-2 py-2 text-base sm:text-lg text-foreground transition-colors duration-200 hover:bg-secondary/35 hover:text-accent"
+                className="block rounded-sm px-2 py-2.5 text-base sm:text-[1.0625rem] leading-snug text-foreground transition-colors duration-200 hover:bg-secondary/35 hover:text-accent"
               >
                 {link.label}
               </Link>
@@ -267,8 +263,10 @@ export default function Navbar() {
             </Link>
           </div>
 
-          <div className="space-y-3">
-            <p className="text-xs uppercase tracking-widest text-muted-foreground">Business Units</p>
+          <div className="space-y-3 sm:space-y-4">
+            <p className="text-xs uppercase tracking-widest text-muted-foreground leading-normal mb-1 sm:mb-2">
+              Business Units
+            </p>
             <Link
               to="/business-units"
               className="block text-base sm:text-lg text-foreground py-1 transition-colors duration-200 hover:text-accent"
