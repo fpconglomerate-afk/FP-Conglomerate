@@ -23,47 +23,47 @@ const GWARINPA_VIDEOS: { src: string; title: string }[] = [
 
 const GWARINPA_IMAGES: { src: string; caption: string }[] = [
   {
-    src: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1400&q=80",
+    src: "/images/projects/gwarinpa-mall/01.png",
     caption:
       "Approaching the Gwarinpa Mall site: multi-story shell with bamboo scaffolding and partial glazing along the approach.",
   },
   {
-    src: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1400&q=80",
+    src: "/images/projects/gwarinpa-mall/02.png",
     caption:
       "On-site review of exterior plaster and scaffolding: checking access and finish lines before the next envelope stage.",
   },
   {
-    src: "https://images.unsplash.com/photo-1550009158-9ebf69173e03?auto=format&fit=crop&w=1400&q=80",
+    src: "/images/projects/gwarinpa-mall/03.png",
     caption:
       "Corner perspective of the concrete frame: large shopfront openings, traditional pole scaffolding, and roofing progress.",
   },
   {
-    src: "https://images.unsplash.com/photo-1498049794561-7780e7231661?auto=format&fit=crop&w=1400&q=80",
+    src: "/images/projects/gwarinpa-mall/04.png",
     caption:
       "Interior walk-through of the raw shell: columns, blockwork, and circulation paths ahead of MEP and finishes.",
   },
   {
-    src: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1400&q=80",
+    src: "/images/projects/gwarinpa-mall/05.png",
     caption:
       "Facade with curtain-wall glazing underway: scale of the retail frontage against the active construction yard.",
   },
   {
-    src: "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?auto=format&fit=crop&w=1400&q=80",
+    src: "/images/projects/gwarinpa-mall/06.png",
     caption:
       "Perimeter pass: documenting the building line, temporary works, and staging areas on the ground plane.",
   },
   {
-    src: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=1400&q=80",
+    src: "/images/projects/gwarinpa-mall/07.png",
     caption:
       "Courtyard-facing elevation: dense scaffolding grid, open bays, and on-site materials in the foreground.",
   },
   {
-    src: "https://images.unsplash.com/photo-1581092160607-ee22731a0f71?auto=format&fit=crop&w=1400&q=80",
+    src: "/images/projects/gwarinpa-mall/08.png",
     caption:
       "Overall massing of the L-shaped block: plastered shell, roof line, and landscaping-to-be around the slab edge.",
   },
   {
-    src: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1400&q=80",
+    src: "/images/projects/gwarinpa-mall/09.png",
     caption:
       "Close inspection of scaffolding ties and wall plane: verifying safe access and alignment with the design intent.",
   },

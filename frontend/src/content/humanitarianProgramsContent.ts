@@ -1,6 +1,6 @@
 /**
- * Copy and external stock image set for the Mogadishu Initiative Humanitarian Programs page.
- * URLs are intentionally fixed (non-random) to reduce broken-image risk.
+ * Mogadishu Initiative Humanitarian Programs page.
+ * Field photography is restored from `/images/mia/humanitarian/*`; external URLs are not used here.
  */
 
 export const MIA_UNIT_ID = "mogadishu-initiative" as const;
@@ -10,8 +10,7 @@ export const humanitarianProgramsContent = {
     headline: "Humanitarian Programs That Restore Dignity",
     subtext:
       "Honest relief work in the field, open communication with communities, and delivery that keeps people at the center. We aim to meet real needs across Nigeria in line with FP Conglomerate standards for trust and accountability.",
-    imageSrc:
-      "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&q=80",
+    imageSrc: "/images/mia/humanitarian/kogi-01.png",
     imageAlt:
       "Humanitarian field context: community support and coordinated outreach in Nigeria.",
     exploreWorkHref: "#kogi-outreach",
@@ -27,8 +26,7 @@ export const humanitarianProgramsContent = {
       "We document conditions carefully, collaborate where it strengthens outcomes, and channel attention toward shelter, essentials, and steadier footing—not performative crisis imagery.",
     ],
     /** Featured image for the two-column awareness block (wide, documentary tone). */
-    featureImageSrc:
-      "https://images.unsplash.com/photo-1469571486292-b53601020acb?auto=format&fit=crop&w=1600&q=80",
+    featureImageSrc: "/images/mia/humanitarian/idp-01.png",
     featureImageAlt:
       "Documentary view of pathways and clustered temporary shelters, illustrating scale and conditions in an IDP context.",
     cards: [
@@ -55,23 +53,23 @@ export const humanitarianProgramsContent = {
     galleryNote:
       "Field documentation from outreach days in Kogi—shared to show real delivery, not sensationalize hardship.",
     gallery: [
-      { src: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1400&q=80", alt: "Outdoor distribution: outreach team and community members gathered on unpaved ground near modest structures." },
-      { src: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1400&q=80", alt: "Volunteers and residents during a supply handoff beside weathered corrugated shelters." },
-      { src: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1400&q=80", alt: "Aid items being shared with seated community members in an informal settlement setting." },
-      { src: "https://images.unsplash.com/photo-1469571486292-b53601020acb?auto=format&fit=crop&w=1400&q=80", alt: "Team members distributing supplies from bags during a community visit." },
-      { src: "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1400&q=80", alt: "Residents receiving support during an outdoor outreach session." },
-      { src: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1400&q=80", alt: "Conversation and coordination between outreach workers and local community members." },
-      { src: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1400&q=80", alt: "Distribution moment with supplies passed hand to hand in a camp-like environment." },
-      { src: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1400&q=80", alt: "Volunteers engaging with women and children during blanket and essentials outreach." },
-      { src: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1400&q=80", alt: "Field team members preparing to hand over packaged essentials to residents." },
-      { src: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1400&q=80", alt: "Community gathering during relief distribution between makeshift buildings." },
-      { src: "https://images.unsplash.com/photo-1469571486292-b53601020acb?auto=format&fit=crop&w=1400&q=80", alt: "Outreach workers and residents in discussion during a distribution pause." },
-      { src: "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1400&q=80", alt: "Supplies carried through a narrow outdoor lane between shelters." },
-      { src: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1400&q=80", alt: "Residents lining up or receiving items during a structured distribution." },
-      { src: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1400&q=80", alt: "Elderly and younger community members present during an essentials handoff." },
-      { src: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1400", alt: "Wider view of outreach activity across a dusty common area." },
-      { src: "https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg?auto=compress&cs=tinysrgb&w=1400", alt: "Volunteer leaning to pass supplies to a seated community member." },
-      { src: "https://images.pexels.com/photos/3184357/pexels-photo-3184357.jpeg?auto=compress&cs=tinysrgb&w=1400", alt: "Closing moments of outreach with residents and field team still engaged." },
+      { src: "/images/mia/humanitarian/kogi-01.png", alt: "Outdoor distribution: outreach team and community members gathered on unpaved ground near modest structures." },
+      { src: "/images/mia/humanitarian/kogi-02.png", alt: "Volunteers and residents during a supply handoff beside weathered corrugated shelters." },
+      { src: "/images/mia/humanitarian/kogi-03.png", alt: "Aid items being shared with seated community members in an informal settlement setting." },
+      { src: "/images/mia/humanitarian/kogi-04.png", alt: "Team members distributing supplies from bags during a community visit." },
+      { src: "/images/mia/humanitarian/kogi-05.png", alt: "Residents receiving support during an outdoor outreach session." },
+      { src: "/images/mia/humanitarian/kogi-06.png", alt: "Conversation and coordination between outreach workers and local community members." },
+      { src: "/images/mia/humanitarian/kogi-07.png", alt: "Distribution moment with supplies passed hand to hand in a camp-like environment." },
+      { src: "/images/mia/humanitarian/kogi-08.png", alt: "Volunteers engaging with women and children during blanket and essentials outreach." },
+      { src: "/images/mia/humanitarian/kogi-09.png", alt: "Field team members preparing to hand over packaged essentials to residents." },
+      { src: "/images/mia/humanitarian/kogi-10.png", alt: "Community gathering during relief distribution between makeshift buildings." },
+      { src: "/images/mia/humanitarian/kogi-11.png", alt: "Outreach workers and residents in discussion during a distribution pause." },
+      { src: "/images/mia/humanitarian/kogi-12.png", alt: "Supplies carried through a narrow outdoor lane between shelters." },
+      { src: "/images/mia/humanitarian/kogi-13.png", alt: "Residents lining up or receiving items during a structured distribution." },
+      { src: "/images/mia/humanitarian/kogi-14.png", alt: "Elderly and younger community members present during an essentials handoff." },
+      { src: "/images/mia/humanitarian/kogi-15.png", alt: "Wider view of outreach activity across a dusty common area." },
+      { src: "/images/mia/humanitarian/kogi-16.png", alt: "Volunteer leaning to pass supplies to a seated community member." },
+      { src: "/images/mia/humanitarian/kogi-17.png", alt: "Closing moments of outreach with residents and field team still engaged." },
     ],
     impact: [
       { label: "Location", value: "Kogi State" },
@@ -98,12 +96,12 @@ export const humanitarianProgramsContent = {
   },
   /** Horizontal strip of field moments (documentary tone). */
   moments: [
-    { src: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=80", alt: "Settlement pathways between temporary shelters in an IDP context." },
-    { src: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80", alt: "Elevated view across temporary shelters in a camp setting." },
-    { src: "https://images.unsplash.com/photo-1469571486292-b53601020acb?auto=format&fit=crop&w=1200&q=80", alt: "Volunteers preparing outreach supplies." },
-    { src: "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1200&q=80", alt: "Organized shelter rows and paths visible across a camp area." },
-    { src: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1200&q=80", alt: "Community gathering on open ground in a settlement context." },
-    { src: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1200&q=80", alt: "Coordinated distribution moment during Kogi outreach." },
+    { src: "/images/mia/humanitarian/idp-02.png", alt: "Settlement pathways between temporary shelters in an IDP context." },
+    { src: "/images/mia/humanitarian/idp-03.png", alt: "Elevated view across temporary shelters in a camp setting." },
+    { src: "/images/mia/humanitarian/kogi-03.png", alt: "Volunteers preparing outreach supplies." },
+    { src: "/images/mia/humanitarian/idp-04.png", alt: "Organized shelter rows and paths visible across a camp area." },
+    { src: "/images/mia/humanitarian/kogi-05.png", alt: "Community gathering on open ground in a settlement context." },
+    { src: "/images/mia/humanitarian/idp-05.png", alt: "Coordinated distribution moment during Kogi outreach." },
   ],
   cta: {
     title: "Be Part of the Impact",
