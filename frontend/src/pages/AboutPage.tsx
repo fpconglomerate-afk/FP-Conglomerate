@@ -7,10 +7,19 @@ import MediaAsset from "@/components/MediaAsset";
 import RevealOnScroll from "@/components/humanitarian/RevealOnScroll";
 
 const values = ["Trust", "Excellence", "Integrity", "Service"];
+const sourceTypeLabel = {
+  web: "Web source",
+  "founder-provided": "Founder-provided",
+} as const;
 
 export default function AboutPage() {
   const { content } = useSiteContent();
   const L = content.aboutLeadership;
+  const founderFacts = L.quickFacts ?? [];
+  const founderJourney = L.journeyTimeline ?? [];
+  const founderGallery = L.gallery ?? [];
+  const founderVideos = L.videoHighlights ?? [];
+  const founderReferences = L.references ?? [];
 
   return (
     <>
@@ -133,6 +142,146 @@ export default function AboutPage() {
                   ))}
                 </ul>
               </div>
+            </div>
+          </section>
+        </RevealOnScroll>
+
+        <RevealOnScroll>
+          <section id="founder-profile" className="section-shell pb-20 md:pb-24">
+            <p className="eyebrow mb-3">Founder profile</p>
+            <h2 className="font-editorial text-4xl md:text-5xl max-w-3xl">
+              Discipline. Trust. Accountability.
+            </h2>
+            <p className="mt-4 text-muted-foreground max-w-3xl">
+              A modern executive profile of {L.name}: military-shaped leadership, strategic
+              execution, and institution-first enterprise delivery.
+            </p>
+
+            <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
+              <div className="lg:col-span-7 border border-border bg-card/40 p-6 md:p-8">
+                <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">
+                  Executive snapshot
+                </p>
+                <div className="space-y-4 text-muted-foreground leading-relaxed">
+                  <p>
+                    As a former military officer and strategist, {L.name} leads with operational
+                    discipline and clear accountability standards that are measurable across teams.
+                  </p>
+                  <p>
+                    The leadership approach combines service reliability, people-centered execution,
+                    and long-horizon institution building across sectors and communities.
+                  </p>
+                </div>
+              </div>
+              <div className="lg:col-span-5">
+                <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  Credentials
+                </p>
+                <ul className="grid gap-3">
+                  {founderFacts.map((fact) => (
+                    <li
+                      key={`${fact.label}-${fact.value}`}
+                      className="border border-border bg-background/80 px-4 py-3 md:px-5 md:py-4"
+                    >
+                      <p className="text-xs uppercase tracking-wide text-muted-foreground">
+                        {fact.label}
+                      </p>
+                      <p className="mt-1 text-sm text-foreground">{fact.value}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div className="mt-12">
+              <p className="mb-5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                Military-to-enterprise journey
+              </p>
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                {founderJourney.map((step) => (
+                  <article
+                    key={`${step.period}-${step.title}`}
+                    className="border border-border bg-secondary/20 p-5"
+                  >
+                    <p className="text-xs uppercase tracking-wide text-muted-foreground">
+                      {step.period}
+                    </p>
+                    <h3 className="mt-2 font-medium text-foreground">{step.title}</h3>
+                    <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+                      {step.summary}
+                    </p>
+                  </article>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-12">
+              <p className="mb-5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                Visual portfolio
+              </p>
+              <div className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-4">
+                {founderGallery.map((item) => (
+                  <figure key={`${item.src}-${item.caption}`} className="group">
+                    <MediaAsset
+                      src={item.src}
+                      alt={item.caption}
+                      className="h-52 w-full object-cover border border-border"
+                    />
+                    <figcaption className="mt-2 text-xs text-muted-foreground leading-relaxed">
+                      {item.caption}
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-12">
+              <p className="mb-5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                Video highlights
+              </p>
+              <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
+                {founderVideos.map((video) => (
+                  <article key={video.src} className="border border-border bg-card/40 p-3">
+                    <MediaAsset
+                      src={video.src}
+                      alt={video.title}
+                      className="aspect-[4/5] w-full object-cover"
+                    />
+                    <p className="mt-3 text-sm text-foreground">{video.title}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-12 border border-border p-6 md:p-8">
+              <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                References &amp; sources
+              </p>
+              <ul className="mt-4 grid gap-3">
+                {founderReferences.map((reference) => (
+                  <li
+                    key={`${reference.title}-${reference.url}-${reference.sourceType}`}
+                    className="border border-border/70 bg-background/80 px-4 py-3"
+                  >
+                    {reference.url === "#" ? (
+                      <p className="text-sm text-foreground">{reference.title}</p>
+                    ) : (
+                      <a
+                        href={reference.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-sm text-foreground border-b border-foreground/30 pb-0.5 hover:border-foreground"
+                      >
+                        {reference.title}
+                      </a>
+                    )}
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      {sourceTypeLabel[reference.sourceType]}
+                      {reference.note ? ` — ${reference.note}` : ""}
+                    </p>
+                  </li>
+                ))}
+              </ul>
             </div>
           </section>
         </RevealOnScroll>

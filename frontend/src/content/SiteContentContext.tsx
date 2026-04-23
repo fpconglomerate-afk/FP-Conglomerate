@@ -23,6 +23,13 @@ function normalizeContent(raw: Partial<SiteContent>): SiteContent {
       ...raw.aboutLeadership,
       bio: raw.aboutLeadership?.bio ?? base.aboutLeadership.bio,
       highlights: raw.aboutLeadership?.highlights ?? base.aboutLeadership.highlights,
+      quickFacts: raw.aboutLeadership?.quickFacts ?? base.aboutLeadership.quickFacts,
+      journeyTimeline:
+        raw.aboutLeadership?.journeyTimeline ?? base.aboutLeadership.journeyTimeline,
+      gallery: raw.aboutLeadership?.gallery ?? base.aboutLeadership.gallery,
+      videoHighlights:
+        raw.aboutLeadership?.videoHighlights ?? base.aboutLeadership.videoHighlights,
+      references: raw.aboutLeadership?.references ?? base.aboutLeadership.references,
     },
     pageImages: { ...base.pageImages, ...raw.pageImages },
     hiring: {

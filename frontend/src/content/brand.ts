@@ -87,6 +87,16 @@ export type AboutLeadership = {
   tagline: string;
   bio: string[];
   highlights: string[];
+  quickFacts?: { label: string; value: string }[];
+  journeyTimeline?: { period: string; title: string; summary: string }[];
+  gallery?: { src: string; caption: string }[];
+  videoHighlights?: { src: string; title: string }[];
+  references?: {
+    title: string;
+    url: string;
+    sourceType: "web" | "founder-provided";
+    note?: string;
+  }[];
   portraitSrc: string;
   portraitAlt: string;
 };
@@ -135,18 +145,163 @@ export const defaultSiteContent: SiteContent = {
   aboutLeadership: {
     name: "Anuhi Victor Anate",
     title: "Founder & Group Principal",
-    tagline: "Stewarding a multi-sector group with one standard—from our Abuja interim base outward.",
+    tagline:
+      "Former military officer and strategist building institution-grade businesses anchored in discipline, trust, and accountability.",
     bio: [
-      "FP Conglomerate is held under the ownership and direction of Anuhi Victor Anate, who sets the tone for how the group shows up: clear accountability, disciplined execution, and care for the communities we serve.",
-      "From faith expression and media to electronics, hospitality, and humanitarian programs, the intent is the same—close the trust gap with service people can feel. That mandate runs from the parent group through each operating unit.",
-      "Alongside commercial work, the group invests in humanitarian and community-facing initiatives—supporting people and institutions where durability matters as much as headlines. The aim is institution-building, not one-off gestures.",
-      "With an interim office in Abuja, Nigeria, the group’s footprint is anchored in local relationships and regional ambition: trusted delivery today, and structures that can scale responsibly across Africa.",
+      "Born in 1987 and shaped by military formation in Nigeria, Anuhi Victor Anate leads FP Conglomerate with a service doctrine rooted in discipline, strategic clarity, and accountability.",
+      "A former military officer with over 21 years of military experience, he translates field-tested leadership principles into enterprise execution across commerce, ministry expression, media, hospitality, and humanitarian impact.",
+      "As Group Principal, his operating philosophy is straightforward: trust must be earned through consistent delivery, measurable standards, and transparent responsibility at every unit level.",
+      "Beyond executive leadership, he is an author with over seven books to his name, including founder-cited works such as 'Sunset in North East Nigeria' and 'Mirror of a Sterling Infantryman', and is also active in movie script writing and music.",
+      "From the Abuja base outward, his focus remains institution-building over publicity cycles, combining long-horizon strategy with practical service outcomes that people, partners, and communities can verify.",
     ],
     highlights: [
-      "Sole ownership and group-wide governance standard",
-      "Multi-sector stewardship: ministry, commerce, media, hospitality, programs",
-      "Humanitarian and community investment as part of group purpose",
-      "Abuja, Nigeria interim base with an Africa-facing vision",
+      "Over 21 years of military experience applied to civilian enterprise leadership",
+      "Former military officer and strategist focused on disciplined execution",
+      "Founder-led multi-sector stewardship across service and impact institutions",
+      "Author, script writer, and music artist with a culture-shaping creative footprint",
+      "Abuja-based operations with an Africa-facing expansion vision",
+    ],
+    quickFacts: [
+      { label: "Born", value: "1987" },
+      { label: "State of Origin", value: "Kogi State, Nigeria" },
+      { label: "Education", value: "Nigerian Military School, Zaria" },
+      { label: "Experience", value: "21+ years military and strategic leadership" },
+      { label: "Books", value: "7+ titles (founder-provided bibliography)" },
+    ],
+    journeyTimeline: [
+      {
+        period: "1987",
+        title: "Early beginnings",
+        summary:
+          "Born in 1987, with formative years that shaped a duty-first leadership mindset.",
+      },
+      {
+        period: "Foundational years",
+        title: "Military schooling",
+        summary:
+          "Attended Nigerian Military School, Zaria, building discipline, structure, and service ethics.",
+      },
+      {
+        period: "21+ years",
+        title: "Military service and strategy",
+        summary:
+          "Served as a military officer and strategist, developing operational rigor and accountability culture.",
+      },
+      {
+        period: "Current era",
+        title: "Enterprise and institution building",
+        summary:
+          "Leads FP Conglomerate as Founder & Group Principal, scaling trusted service delivery across sectors.",
+      },
+    ],
+    gallery: [
+      {
+        src: "/images/about/founder-white-01.png",
+        caption: "Founder portrait session — signature white executive look.",
+      },
+      {
+        src: "/images/about/founder-white-02.png",
+        caption: "Leadership portrait — confident posture, service-first identity.",
+      },
+      {
+        src: "/images/about/founder-white-03.png",
+        caption: "Full-length profile — discipline and composure in visual form.",
+      },
+      {
+        src: "/images/about/founder-stripe-01.png",
+        caption: "Pinstripe editorial set — strategic and classic executive tone.",
+      },
+      {
+        src: "/images/about/founder-stripe-02.png",
+        caption: "Side profile composition — presence with precise styling.",
+      },
+      {
+        src: "/images/about/founder-stripe-03.png",
+        caption: "Studio stance — confidence and control.",
+      },
+      {
+        src: "/images/about/founder-stripe-04.png",
+        caption: "Movement shot — modern personal-brand storytelling.",
+      },
+      {
+        src: "/images/about/founder-gray-01.png",
+        caption: "Field candid by vehicle — practical leadership in motion.",
+      },
+      {
+        src: "/images/about/founder-gray-02.png",
+        caption: "Close-up detail — branded cap and executive styling.",
+      },
+      {
+        src: "/images/about/founder-gray-03.png",
+        caption: "Outdoor candid — transition from formal pose to field context.",
+      },
+      {
+        src: "/images/about/founder-gray-04.png",
+        caption: "Corridor walk shot — leadership beyond studio environments.",
+      },
+      {
+        src: "/images/about/founder-white-04.png",
+        caption: "Expressive studio shot — personality and composure combined.",
+      },
+    ],
+    videoHighlights: [
+      {
+        src: "/videos/about/founder-profile-01.mp4",
+        title: "Founder profile reel — styled editorial sequence",
+      },
+      {
+        src: "/videos/about/founder-profile-02.mp4",
+        title: "Founder in motion — executive lifestyle clip",
+      },
+      {
+        src: "/videos/about/founder-profile-03.mp4",
+        title: "Behind-the-scenes short video",
+      },
+    ],
+    references: [
+      {
+        title: "Nigerian Military School (Official Website)",
+        url: "https://www.nms1954.sch.ng/",
+        sourceType: "web",
+      },
+      {
+        title: "Nigerian Military School — About",
+        url: "https://www.nms1954.sch.ng/about-us/",
+        sourceType: "web",
+      },
+      {
+        title: "Nigerian Military School (Background listing)",
+        url: "https://en.wikipedia.org/wiki/Nigerian_Military_School",
+        sourceType: "web",
+        note: "Used as supplementary public context.",
+      },
+      {
+        title: "Sunset at Dawn: A Novel of the Biafran War (catalog record)",
+        url: "https://books.google.com/books/about/Sunset_at_Dawn.html?id=W7VUAQAACAAJ",
+        sourceType: "web",
+        note: "Title surfaced during source discovery near founder-cited bibliography.",
+      },
+      {
+        title: "Sunset at Dawn (African Books Collective listing)",
+        url: "https://africanbookscollective.com/books/sunset-at-dawn/",
+        sourceType: "web",
+      },
+      {
+        title: "Founder-provided claim: born 1987; former military officer; 21+ years experience",
+        url: "#",
+        sourceType: "founder-provided",
+      },
+      {
+        title:
+          "Founder-provided bibliography: 'Sunset in North East Nigeria' and 'Mirror of a Sterling Infantryman' among 7+ books",
+        url: "#",
+        sourceType: "founder-provided",
+      },
+      {
+        title: "Founder-provided profile note: movie script writing and music artist work",
+        url: "#",
+        sourceType: "founder-provided",
+      },
     ],
     portraitSrc: "/images/about/anuhi-victor-anate.png",
     portraitAlt: "Anuhi Victor Anate, Founder and Group Principal, FP Conglomerate",
