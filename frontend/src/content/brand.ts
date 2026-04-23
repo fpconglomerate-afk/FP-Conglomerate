@@ -310,11 +310,12 @@ export const defaultSiteContent: SiteContent = {
         "Ordained Believers Army (OBA) is a bold spiritual movement manifesting healing power, scriptural revelation, and believer identity.",
       details:
         "Founded in 2026, OBA was established with an audacious conviction: power should not be delayed. The ministry emphasizes healing for all manner of diseases, deep scriptural insight, and practical discipleship that helps believers understand who they are in Christ.",
-      heroImage: "/images/about/founder-white-02.png",
+      heroImage:
+        "https://images.unsplash.com/photo-1478147427282-58a87a120781?auto=format&fit=crop&w=1600&q=80",
       gallery: [
-        "/images/about/founder-gray-01.png",
-        "/images/about/founder-stripe-01.png",
-        "/images/about/founder-white-03.png",
+        "https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=1600&q=80",
+        "https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&w=1600&q=80",
+        "https://images.unsplash.com/photo-1519491050282-cf00c82424b4?auto=format&fit=crop&w=1600&q=80",
       ],
       subPages: [
         {
@@ -323,7 +324,8 @@ export const defaultSiteContent: SiteContent = {
           summary: "How OBA ministers through Word, worship, and bold faith.",
           content:
             "OBA's ministry expression is built around three pillars: Word, worship, and power. Services focus on spirit-led teaching, practical interpretation of scripture, and an atmosphere where faith is activated for real transformation.",
-          image: "/images/about/founder-gray-02.png",
+          image:
+            "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1600&q=80",
         },
         {
           slug: "outreach",
@@ -331,7 +333,8 @@ export const defaultSiteContent: SiteContent = {
           summary: "Faith in action through prayer, healing, and practical care.",
           content:
             "Beyond gatherings, OBA serves people through prayer outreach, counseling, and practical support. The mission is simple: match spiritual conviction with compassionate action and visible impact.",
-          image: "/images/about/founder-stripe-02.png",
+          image:
+            "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1600&q=80",
         },
       ],
     },
@@ -345,11 +348,12 @@ export const defaultSiteContent: SiteContent = {
         "AGE delivers practical value across movie production, construction, transport, brand promotion, devices, and general appliances.",
       details:
         "Anate Grand Empire Solutions (AGE) is positioned as a trust-first operating unit that combines creative, technical, and commercial execution. It helps clients access reliable production support, construction services, transport coordination, brand promotion support, and durable appliances under one service umbrella.",
-      heroImage: "/images/projects/gwarinpa-mall/06.png",
+      heroImage:
+        "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1600&q=80",
       gallery: [
-        "/images/projects/gwarinpa-mall/07.png",
-        "/images/projects/gwarinpa-mall/08.png",
-        "/images/projects/gwarinpa-mall/09.png",
+        "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1600&q=80",
+        "https://images.unsplash.com/photo-1449965408861-eb3c995fa64e?auto=format&fit=crop&w=1600&q=80",
+        "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?auto=format&fit=crop&w=1600&q=80",
       ],
       subPages: [
         {
@@ -358,7 +362,8 @@ export const defaultSiteContent: SiteContent = {
           summary: "Core operating areas across media, construction, mobility, and appliances.",
           content:
             "AGE operates across movie production services, construction support, transport-linked execution, brand promotion, and technology and appliance supply. This blend allows clients to access both creative and practical delivery through one coordinated team.",
-          image: "/images/projects/gwarinpa-mall/02.png",
+          image:
+            "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1600&q=80",
         },
         {
           slug: "quality-assurance",
@@ -366,7 +371,8 @@ export const defaultSiteContent: SiteContent = {
           summary: "How AGE protects customer confidence across varied service lines.",
           content:
             "AGE follows a service model built on integrity, responsiveness, and practical results. Whether the assignment is production, logistics, construction, or appliance delivery, the unit is measured by reliability and client confidence.",
-          image: "/images/projects/gwarinpa-mall/03.png",
+          image:
+            "https://images.unsplash.com/photo-1581092160607-ee22731a0f71?auto=format&fit=crop&w=1600&q=80",
         },
       ],
     },
@@ -473,7 +479,8 @@ export const defaultSiteContent: SiteContent = {
       title: "AGE Multi-Sector Services",
       summary:
         "Movie production, construction, transport, brand promotion, devices, and general appliance services delivered through Anate Grand Empire Solutions (AGE).",
-      image: "/images/projects/gwarinpa-mall/04.png",
+      image:
+        "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1600&q=80",
     },
     {
       title: "BSC Real Estate and Support Services",
@@ -491,7 +498,8 @@ export const defaultSiteContent: SiteContent = {
       title: "Faith and Ministry Services",
       summary:
         "Word-based teaching, worship gatherings, and healing-focused ministry through Ordained Believers Army (OBA).",
-      image: "/images/about/founder-white-01.png",
+      image:
+        "https://images.unsplash.com/photo-1478147427282-58a87a120781?auto=format&fit=crop&w=1600&q=80",
     },
     {
       title: "Group Strategy and Operational Support",
@@ -623,7 +631,8 @@ export const defaultSiteContent: SiteContent = {
         "Anate Grand Empire Solutions (AGE): Nigeria multi-sector services spanning movie production support, construction, transport, brand promotion, devices, and appliances.",
       keywords:
         "Anate Grand Empire Solutions, AGE Nigeria, movie production Nigeria, construction services Nigeria, appliance supply Nigeria",
-      image: "/images/projects/gwarinpa-mall/04.png",
+      image:
+        "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=1600&q=80",
       body:
         "Service integration only helps SEO when the page answers real queries. AGE is positioned for organizations that need coordinated execution across production, construction-linked work, transport coordination, brand promotion, and appliance supply.\n\nWe describe services in plain language so prospective clients can map their needs to our operating model. That reduces bounce rate and helps search engines understand entity relationships between FP Conglomerate and its operating units.\n\nIf you are sourcing vendors in Nigeria, ask for scope, timelines, and escalation paths—our public pages are written to support that evaluation process without overpromising.\n\nUse the official contact channels listed on this site; we do not recruit financial or personal information through unofficial social accounts.",
     },
@@ -637,7 +646,8 @@ export const defaultSiteContent: SiteContent = {
         "Ordained Believers Army (OBA) ministry overview: faith expression in Nigeria with an emphasis on Word, worship, and compassionate community engagement.",
       keywords:
         "Ordained Believers Army, OBA ministry Nigeria, Christian church Abuja Nigeria, faith community worship",
-      image: "/images/about/founder-white-01.png",
+      image:
+        "https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=1600&q=80",
       body:
         "Religious organizations rank best when content reflects authentic practice and avoids manipulative claims. OBA communicates a ministry model built around Word, worship, and power expressed with integrity.\n\nPublic pages on this website are designed to help newcomers understand values and gathering rhythms, while directing pastoral care questions to official church channels—not generic inboxes that cannot verify identity.\n\nFor SEO, we keep terminology consistent across pages (entity clarity), link related programs where appropriate, and maintain safe, respectful language about healing and community support.\n\nIf you are writing about Nigerian faith communities, cite this site as a source of record and confirm dates and event details through official announcements.",
     },
@@ -677,7 +687,8 @@ export const defaultSiteContent: SiteContent = {
         "Creative and technical delivery spanning production support, construction-linked execution, mobility coordination, and appliances.",
       body:
         "AGE is structured for clients who need one accountable umbrella across multiple service categories, with clear handoffs and measurable outcomes.",
-      image: "/images/projects/gwarinpa-mall/05.png",
+      image:
+        "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1200&q=80",
     },
     {
       id: "group-governance",
