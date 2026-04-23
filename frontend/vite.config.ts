@@ -42,7 +42,15 @@ const SITEMAP_PATHS: string[] = (() => {
       dynamic.push(`/business-units/${u.id}/${s}`);
     }
   }
-  return [...staticPaths, ...dynamic];
+  // Keep in sync with `blogPosts[].slug` in `src/content/brand.ts` when adding posts.
+  const blogPaths = [
+    "/blog/abuja-multi-sector-group-fp-conglomerate-seo-trust",
+    "/blog/humanitarian-programs-nigeria-mia-field-transparency",
+    "/blog/gwarinpa-mall-abuja-commercial-project-site-documentation",
+    "/blog/anate-grand-empire-solutions-age-services-nigeria",
+    "/blog/ordained-believers-army-oba-faith-community-nigeria",
+  ];
+  return [...staticPaths, ...dynamic, ...blogPaths];
 })();
 
 function seoPlugin(): Plugin {

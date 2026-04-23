@@ -51,6 +51,7 @@ export function Seo({
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />
       {canonical ? <meta property="og:url" content={canonical} /> : null}
+      <meta property="og:site_name" content={SITE_NAME} />
       <meta property="og:type" content={ogType} />
       {ogImage ? <meta property="og:image" content={ogImage} /> : null}
       <meta name="twitter:card" content="summary_large_image" />

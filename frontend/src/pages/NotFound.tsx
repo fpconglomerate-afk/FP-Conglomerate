@@ -13,7 +13,7 @@ const NotFound = () => {
     <>
       <Seo
         title="Page not found"
-        path={location.pathname || "/"}
+        path="/404"
         description={SEO_DEFAULT_DESCRIPTION}
         noindex
       />
