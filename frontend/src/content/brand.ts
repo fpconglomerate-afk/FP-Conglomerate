@@ -352,7 +352,7 @@ export const defaultSiteContent: SiteContent = {
         "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1600&q=80",
       gallery: [
         "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1600&q=80",
-        "https://images.unsplash.com/photo-1449965408861-eb3c995fa64e?auto=format&fit=crop&w=1600&q=80",
+        "https://images.pexels.com/photos/262353/pexels-photo-262353.jpeg?auto=compress&cs=tinysrgb&w=1600",
         "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?auto=format&fit=crop&w=1600&q=80",
       ],
       subPages: [
