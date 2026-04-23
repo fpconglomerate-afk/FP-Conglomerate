@@ -310,12 +310,11 @@ export const defaultSiteContent: SiteContent = {
         "Ordained Believers Army (OBA) is a bold spiritual movement manifesting healing power, scriptural revelation, and believer identity.",
       details:
         "Founded in 2026, OBA was established with an audacious conviction: power should not be delayed. The ministry emphasizes healing for all manner of diseases, deep scriptural insight, and practical discipleship that helps believers understand who they are in Christ.",
-      heroImage:
-        "https://images.unsplash.com/photo-1598890777032-bb81482d1200?auto=format&fit=crop&w=1600&q=80",
+      heroImage: "/images/about/founder-white-02.png",
       gallery: [
-        "https://images.unsplash.com/photo-1529074963764-98f45c47344b?auto=format&fit=crop&w=1600&q=80",
-        "https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=1600&q=80",
-        "https://images.unsplash.com/photo-1478147427282-58a87a120781?auto=format&fit=crop&w=1600&q=80",
+        "/images/about/founder-gray-01.png",
+        "/images/about/founder-stripe-01.png",
+        "/images/about/founder-white-03.png",
       ],
       subPages: [
         {
@@ -324,8 +323,7 @@ export const defaultSiteContent: SiteContent = {
           summary: "How OBA ministers through Word, worship, and bold faith.",
           content:
             "OBA's ministry expression is built around three pillars: Word, worship, and power. Services focus on spirit-led teaching, practical interpretation of scripture, and an atmosphere where faith is activated for real transformation.",
-          image:
-            "https://images.unsplash.com/photo-1478147427282-58a87a120781?auto=format&fit=crop&w=1600&q=80",
+          image: "/images/about/founder-gray-02.png",
         },
         {
           slug: "outreach",
@@ -333,8 +331,7 @@ export const defaultSiteContent: SiteContent = {
           summary: "Faith in action through prayer, healing, and practical care.",
           content:
             "Beyond gatherings, OBA serves people through prayer outreach, counseling, and practical support. The mission is simple: match spiritual conviction with compassionate action and visible impact.",
-          image:
-            "https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=1600&q=80",
+          image: "/images/about/founder-stripe-02.png",
         },
       ],
     },
@@ -494,8 +491,7 @@ export const defaultSiteContent: SiteContent = {
       title: "Faith and Ministry Services",
       summary:
         "Word-based teaching, worship gatherings, and healing-focused ministry through Ordained Believers Army (OBA).",
-      image:
-        "https://images.unsplash.com/photo-1598890777032-bb81482d1200?auto=format&fit=crop&w=1600&q=80",
+      image: "/images/about/founder-white-01.png",
     },
     {
       title: "Group Strategy and Operational Support",
@@ -641,8 +637,7 @@ export const defaultSiteContent: SiteContent = {
         "Ordained Believers Army (OBA) ministry overview: faith expression in Nigeria with an emphasis on Word, worship, and compassionate community engagement.",
       keywords:
         "Ordained Believers Army, OBA ministry Nigeria, Christian church Abuja Nigeria, faith community worship",
-      image:
-        "https://images.unsplash.com/photo-1478147427282-58a87a120781?auto=format&fit=crop&w=1600&q=80",
+      image: "/images/about/founder-white-01.png",
       body:
         "Religious organizations rank best when content reflects authentic practice and avoids manipulative claims. OBA communicates a ministry model built around Word, worship, and power expressed with integrity.\n\nPublic pages on this website are designed to help newcomers understand values and gathering rhythms, while directing pastoral care questions to official church channels—not generic inboxes that cannot verify identity.\n\nFor SEO, we keep terminology consistent across pages (entity clarity), link related programs where appropriate, and maintain safe, respectful language about healing and community support.\n\nIf you are writing about Nigerian faith communities, cite this site as a source of record and confirm dates and event details through official announcements.",
     },
