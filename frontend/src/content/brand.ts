@@ -275,11 +275,11 @@ export const defaultSiteContent: SiteContent = {
         "A multi-sector parent company established in 2026 to bridge the trust gap in service delivery across Africa.",
       details:
         "We coordinate independent business units with one group-wide framework for integrity, consistency, and measurable execution. Our commitment is clear: target-driven delivery with trust at the center of every engagement.",
-      heroImage: "https://source.unsplash.com/1600x900/?Abuja,Nigeria,business,district",
+      heroImage: "/images/projects/gwarinpa-mall/05.png",
       gallery: [
-        "https://source.unsplash.com/1600x900/?Nigeria,business,meeting,African",
-        "https://source.unsplash.com/1600x900/?Abuja,office,workspace,Nigeria",
-        "https://source.unsplash.com/1600x900/?African,corporate,team,office",
+        "/images/projects/gwarinpa-mall/01.png",
+        "/images/projects/gwarinpa-mall/02.png",
+        "/images/about/founder-stripe-03.png",
       ],
       subPages: [
         {
@@ -288,7 +288,7 @@ export const defaultSiteContent: SiteContent = {
           summary: "How standards, oversight, and accountability work across all units.",
           content:
             "FP Conglomerate runs a simple governance model: clear mandates, transparent expectations, and regular performance reviews. Each unit executes independently but remains accountable to shared group standards on service, ethics, and client trust.",
-          image: "https://source.unsplash.com/1600x900/?Abuja,Nigeria,business,district",
+          image: "/images/projects/gwarinpa-mall/05.png",
         },
         {
           slug: "strategy",
@@ -296,7 +296,7 @@ export const defaultSiteContent: SiteContent = {
           summary: "How the group builds and scales institutions for long-term relevance.",
           content:
             "Our strategy is to build businesses that solve practical needs while preserving credibility. New initiatives are selected based on social value, durability of demand, and our ability to deliver with excellence over time.",
-          image: "https://source.unsplash.com/1600x900/?strategy,planning,African,business",
+          image: "/images/about/founder-stripe-01.png",
         },
       ],
     },
@@ -310,11 +310,11 @@ export const defaultSiteContent: SiteContent = {
         "Ordained Believers Army (OBA) is a bold spiritual movement manifesting healing power, scriptural revelation, and believer identity.",
       details:
         "Founded in 2026, OBA was established with an audacious conviction: power should not be delayed. The ministry emphasizes healing for all manner of diseases, deep scriptural insight, and practical discipleship that helps believers understand who they are in Christ.",
-      heroImage: "https://source.unsplash.com/1600x900/?Nigeria,church,congregation,worship",
+      heroImage: "/images/about/founder-white-01.png",
       gallery: [
-        "https://source.unsplash.com/1600x900/?church,worship,Africa,Nigeria",
-        "https://source.unsplash.com/1600x900/?Bible,study,church,Nigeria",
-        "https://source.unsplash.com/1600x900/?community,outreach,Nigeria,Africa",
+        "/images/about/founder-white-02.png",
+        "/images/mia/humanitarian/kogi-02.png",
+        "/images/mia/humanitarian/kogi-04.png",
       ],
       subPages: [
         {
@@ -323,7 +323,7 @@ export const defaultSiteContent: SiteContent = {
           summary: "How OBA ministers through Word, worship, and bold faith.",
           content:
             "OBA's ministry expression is built around three pillars: Word, worship, and power. Services focus on spirit-led teaching, practical interpretation of scripture, and an atmosphere where faith is activated for real transformation.",
-          image: "https://source.unsplash.com/1600x900/?church,worship,Africa,Nigeria",
+          image: "/images/about/founder-white-03.png",
         },
         {
           slug: "outreach",
@@ -331,7 +331,7 @@ export const defaultSiteContent: SiteContent = {
           summary: "Faith in action through prayer, healing, and practical care.",
           content:
             "Beyond gatherings, OBA serves people through prayer outreach, counseling, and practical support. The mission is simple: match spiritual conviction with compassionate action and visible impact.",
-          image: "https://source.unsplash.com/1600x900/?charity,volunteers,Nigeria",
+          image: "/images/mia/humanitarian/kogi-08.png",
         },
       ],
     },
@@ -345,11 +345,11 @@ export const defaultSiteContent: SiteContent = {
         "AGE delivers practical value across movie production, construction, transport, brand promotion, devices, and general appliances.",
       details:
         "Anate Grand Empire Solutions (AGE) is positioned as a trust-first operating unit that combines creative, technical, and commercial execution. It helps clients access reliable production support, construction services, transport coordination, brand promotion support, and durable appliances under one service umbrella.",
-      heroImage: "https://source.unsplash.com/1600x900/?Nigeria,technology,business,entrepreneur",
+      heroImage: "/images/projects/gwarinpa-mall/03.png",
       gallery: [
-        "https://source.unsplash.com/1600x900/?electronics,store,Nigeria",
-        "https://source.unsplash.com/1600x900/?devices,technology,Africa",
-        "https://source.unsplash.com/1600x900/?appliances,retail,Nigeria",
+        "/images/projects/gwarinpa-mall/04.png",
+        "/images/projects/gwarinpa-mall/06.png",
+        "/images/projects/gwarinpa-mall/07.png",
       ],
       subPages: [
         {
@@ -358,7 +358,7 @@ export const defaultSiteContent: SiteContent = {
           summary: "Core operating areas across media, construction, mobility, and appliances.",
           content:
             "AGE operates across movie production services, construction support, transport-linked execution, brand promotion, and technology and appliance supply. This blend allows clients to access both creative and practical delivery through one coordinated team.",
-          image: "https://source.unsplash.com/1600x900/?electronics,store,Nigeria",
+          image: "/images/projects/gwarinpa-mall/04.png",
         },
         {
           slug: "quality-assurance",
@@ -366,7 +366,7 @@ export const defaultSiteContent: SiteContent = {
           summary: "How AGE protects customer confidence across varied service lines.",
           content:
             "AGE follows a service model built on integrity, responsiveness, and practical results. Whether the assignment is production, logistics, construction, or appliance delivery, the unit is measured by reliability and client confidence.",
-          image: "https://source.unsplash.com/1600x900/?engineering,quality,inspection,Nigeria",
+          image: "/images/projects/gwarinpa-mall/08.png",
         },
       ],
     },
@@ -380,11 +380,11 @@ export const defaultSiteContent: SiteContent = {
         "BSC delivers practical value across real estate, hospitality, counseling, construction, building maintenance, and brand promotion.",
       details:
         "Boys Sterling Company Limited (BSC) was established in 2020 with a service promise built on dependable execution. The unit is designed to help clients feel secure in every engagement by combining care, technical delivery, and maintenance discipline.",
-      heroImage: "https://source.unsplash.com/1600x900/?Abuja,real,estate,development",
+      heroImage: "/images/projects/gwarinpa-mall/09.png",
       gallery: [
-        "https://source.unsplash.com/1600x900/?Nigeria,real,estate,housing",
-        "https://source.unsplash.com/1600x900/?hospitality,hotel,lobby,Africa",
-        "https://source.unsplash.com/1600x900/?interior,apartment,Nigeria",
+        "/images/projects/gwarinpa-mall/05.png",
+        "/images/projects/gwarinpa-mall/06.png",
+        "/images/projects/gwarinpa-mall/08.png",
       ],
       subPages: [
         {
@@ -402,7 +402,7 @@ export const defaultSiteContent: SiteContent = {
           summary: "Property and hospitality services delivered with disciplined execution.",
           content:
             "BSC supports property and hospitality projects with a practical approach to planning, delivery, and client support. Every engagement is managed for long-term usability and service confidence.",
-          image: "https://source.unsplash.com/1600x900/?Nigeria,real,estate,housing",
+          image: "/images/projects/gwarinpa-mall/05.png",
         },
         {
           slug: "media-entertainment",
@@ -410,7 +410,7 @@ export const defaultSiteContent: SiteContent = {
           summary: "People support and technical services for stable operations.",
           content:
             "Beyond property and hospitality, BSC delivers counseling support, construction execution, building maintenance, and brand promotion services. This integrated model helps clients maintain both functional spaces and healthy service outcomes over time.",
-          image: "https://source.unsplash.com/1600x900/?counseling,community,support,Africa",
+          image: "/images/about/founder-gray-03.png",
         },
       ],
     },
@@ -425,7 +425,7 @@ export const defaultSiteContent: SiteContent = {
         "Mogadishu Initiative Response serves vulnerable communities through sincere aid, practical relief, and justice-focused support.",
       details:
         "Founded in 2026, the initiative was born from a careful desire to support humanity across Africa, with immediate concern for Nigeria. Programs include shelter, education, accommodation support, social justice advocacy, and community recognition initiatives.",
-      heroImage: "/images/mia/humanitarian/hero.jpg",
+      heroImage: "/images/mia/humanitarian/kogi-01.png",
       gallery: [
         "/images/mia/humanitarian/idp-04.png",
         "/images/mia/humanitarian/kogi-02.png",
@@ -456,13 +456,13 @@ export const defaultSiteContent: SiteContent = {
           summary: "Advocacy that protects dignity and amplifies underserved voices.",
           content:
             "Mogadishu Initiative Response works with communities and partners to defend dignity, encourage social justice, and convert compassion into practical action.",
-          image: "https://source.unsplash.com/1600x900/?social,justice,Africa,community",
+          image: "/images/mia/humanitarian/kogi-12.png",
           gallery: [
-            "https://source.unsplash.com/1600x900/?african,youth,community",
-            "https://source.unsplash.com/1600x900/?advocacy,meeting,Africa",
-            "https://source.unsplash.com/1600x900/?community,outreach,Nigeria,Africa",
-            "https://source.unsplash.com/1600x900/?community,rights,Nigeria",
-            "https://source.unsplash.com/1600x900/?teamwork,office,Africa",
+            "/images/mia/humanitarian/kogi-02.png",
+            "/images/mia/humanitarian/kogi-05.png",
+            "/images/mia/humanitarian/kogi-08.png",
+            "/images/mia/humanitarian/kogi-11.png",
+            "/images/mia/humanitarian/kogi-15.png",
           ],
         },
       ],
@@ -473,31 +473,31 @@ export const defaultSiteContent: SiteContent = {
       title: "AGE Multi-Sector Services",
       summary:
         "Movie production, construction, transport, brand promotion, devices, and general appliance services delivered through Anate Grand Empire Solutions (AGE).",
-      image: "https://source.unsplash.com/1600x900/?electronics,store,Nigeria",
+      image: "/images/projects/gwarinpa-mall/04.png",
     },
     {
       title: "BSC Real Estate and Support Services",
       summary:
         "Real estate, hospitality, counseling, construction, building maintenance, and brand promotion services delivered through Boys Sterling Company Limited (BSC).",
-      image: "https://source.unsplash.com/1600x900/?Abuja,real,estate,development",
+      image: "/images/projects/gwarinpa-mall/09.png",
     },
     {
       title: "Humanitarian and Justice Programs",
       summary:
         "Shelter, education, accommodation support, and social justice interventions through Mogadishu Initiative Response.",
-      image: "/images/mia/humanitarian/hero.jpg",
+      image: "/images/mia/humanitarian/kogi-01.png",
     },
     {
       title: "Faith and Ministry Services",
       summary:
         "Word-based teaching, worship gatherings, and healing-focused ministry through Ordained Believers Army (OBA).",
-      image: "https://source.unsplash.com/1600x900/?church,worship,Africa,Nigeria",
+      image: "/images/about/founder-white-03.png",
     },
     {
       title: "Group Strategy and Operational Support",
       summary:
         "Shared strategic direction, leadership alignment, and accountability systems coordinated by FP Conglomerate.",
-      image: "https://source.unsplash.com/1600x900/?Abuja,Nigeria,business,district",
+      image: "/images/projects/gwarinpa-mall/05.png",
     },
   ],
   galleryItems: [
@@ -623,7 +623,7 @@ export const defaultSiteContent: SiteContent = {
         "Anate Grand Empire Solutions (AGE): Nigeria multi-sector services spanning movie production support, construction, transport, brand promotion, devices, and appliances.",
       keywords:
         "Anate Grand Empire Solutions, AGE Nigeria, movie production Nigeria, construction services Nigeria, appliance supply Nigeria",
-      image: "https://source.unsplash.com/1600x900/?electronics,store,Nigeria",
+      image: "/images/projects/gwarinpa-mall/04.png",
       body:
         "Service integration only helps SEO when the page answers real queries. AGE is positioned for organizations that need coordinated execution across production, construction-linked work, transport coordination, brand promotion, and appliance supply.\n\nWe describe services in plain language so prospective clients can map their needs to our operating model. That reduces bounce rate and helps search engines understand entity relationships between FP Conglomerate and its operating units.\n\nIf you are sourcing vendors in Nigeria, ask for scope, timelines, and escalation paths—our public pages are written to support that evaluation process without overpromising.\n\nUse the official contact channels listed on this site; we do not recruit financial or personal information through unofficial social accounts.",
     },
@@ -637,7 +637,7 @@ export const defaultSiteContent: SiteContent = {
         "Ordained Believers Army (OBA) ministry overview: faith expression in Nigeria with an emphasis on Word, worship, and compassionate community engagement.",
       keywords:
         "Ordained Believers Army, OBA ministry Nigeria, Christian church Abuja Nigeria, faith community worship",
-      image: "https://source.unsplash.com/1600x900/?church,worship,Africa,Nigeria",
+      image: "/images/about/founder-white-03.png",
       body:
         "Religious organizations rank best when content reflects authentic practice and avoids manipulative claims. OBA communicates a ministry model built around Word, worship, and power expressed with integrity.\n\nPublic pages on this website are designed to help newcomers understand values and gathering rhythms, while directing pastoral care questions to official church channels—not generic inboxes that cannot verify identity.\n\nFor SEO, we keep terminology consistent across pages (entity clarity), link related programs where appropriate, and maintain safe, respectful language about healing and community support.\n\nIf you are writing about Nigerian faith communities, cite this site as a source of record and confirm dates and event details through official announcements.",
     },
@@ -677,7 +677,7 @@ export const defaultSiteContent: SiteContent = {
         "Creative and technical delivery spanning production support, construction-linked execution, mobility coordination, and appliances.",
       body:
         "AGE is structured for clients who need one accountable umbrella across multiple service categories, with clear handoffs and measurable outcomes.",
-      image: "https://source.unsplash.com/1200x800/?devices,technology,Africa",
+      image: "/images/projects/gwarinpa-mall/06.png",
     },
     {
       id: "group-governance",
@@ -686,7 +686,7 @@ export const defaultSiteContent: SiteContent = {
         "Shared accountability, performance discipline, and cross-unit alignment for long-term institutional strength.",
       body:
         "Governance content highlights how standards propagate across units without diluting unit-level expertise—important for partners evaluating risk and reliability.",
-      image: "https://source.unsplash.com/1200x800/?Abuja,Nigeria,business,district",
+      image: "/images/projects/gwarinpa-mall/05.png",
     },
   ],
   hiring: {

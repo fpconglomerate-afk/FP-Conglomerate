@@ -12,7 +12,7 @@ export const humanitarianProgramsContent = {
     headline: "Humanitarian Programs That Restore Dignity",
     subtext:
       "Honest relief work in the field, open communication with communities, and delivery that keeps people at the center. We aim to meet real needs across Nigeria in line with FP Conglomerate standards for trust and accountability.",
-    imageSrc: `${base}/hero.jpg`,
+    imageSrc: `${base}/kogi-01.png`,
     imageAlt:
       "Humanitarian field context: community support and coordinated outreach in Nigeria.",
     exploreWorkHref: "#kogi-outreach",
