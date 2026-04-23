@@ -28,6 +28,10 @@ Allow: /
 User-agent: LinkedInBot
 Allow: /
 
+# Common Crawl (used by many research and AI datasets; opt-in to broader discovery)
+User-agent: CCBot
+Allow: /
+
 # AI / LLM crawlers (opt-in to being cited in assistants; adjust if you need to restrict)
 User-agent: GPTBot
 Allow: /

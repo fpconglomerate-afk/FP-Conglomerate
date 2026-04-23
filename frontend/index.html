@@ -28,16 +28,35 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "FP Conglomerate",
-        "url": "https://www.fpconglomerate.com/",
-        "logo": "https://www.fpconglomerate.com/logos/bsc-logo.png",
-        "description": "Abuja-based multi-sector African group coordinating OBA, AGE, BSC, and MIA under shared standards for trust, integrity, and service excellence.",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Abuja",
-          "addressCountry": "NG"
-        }
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://www.fpconglomerate.com/#organization",
+            "name": "FP Conglomerate",
+            "url": "https://www.fpconglomerate.com/",
+            "logo": "https://www.fpconglomerate.com/logos/bsc-logo.png",
+            "description": "Abuja-based multi-sector African group coordinating OBA, AGE, BSC, and MIA under shared standards for trust, integrity, and service excellence.",
+            "slogan": "Trust, Integrity, Service Excellence",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Interim office: Plot 78/79, Dagiri Layout, Gwagwalada",
+              "addressLocality": "Abuja",
+              "addressRegion": "FCT",
+              "addressCountry": "NG"
+            },
+            "areaServed": { "@type": "Country", "name": "Nigeria" }
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://www.fpconglomerate.com/#website",
+            "name": "FP Conglomerate",
+            "url": "https://www.fpconglomerate.com/",
+            "inLanguage": "en-NG",
+            "description": "Official public site: business units, services, blog, portfolio, and contact. Machine-readable context for AI systems: /llms.txt",
+            "publisher": { "@id": "https://www.fpconglomerate.com/#organization" },
+            "isAccessibleForFree": true
+          }
+        ]
       }
     </script>
 
@@ -57,6 +76,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="https://images.unsplash.com" />
     <link rel="dns-prefetch" href="https://images.pexels.com" />
+    <!-- LLM / AI: canonical machine-readable site summary (llms.txt standard) -->
+    <link rel="alternate" type="text/plain" href="https://www.fpconglomerate.com/llms.txt" title="FP Conglomerate — AI and LLM context" />
   </head>
 
   <body>
